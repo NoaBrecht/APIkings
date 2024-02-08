@@ -38,23 +38,6 @@ Sprint1	11/2	26/2	Student1	10
 - [Noa](https://www.github.com/NoaBrecht)
 
 
-## Roadmap
-
-- Additional browser support
-
-- Add more integrations
-
-
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
-
-## Deployment
-
-To deploy this project run
-
-```bash
-  npm run deploy
-```
 
 ## Color Reference
 
