@@ -4,11 +4,15 @@
   --colour-tertiary: #f9f9f9;
   --colour-quaternary: #f9f9f9;
 }
+@media (min-width: 769px) {
+  body.login-main {
+    grid-template-areas: "waves waves login";
+  }
+}
 body.login-main {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-areas: "waves waves login";
   height: 100vh;
   overflow: hidden;
 }
@@ -27,11 +31,19 @@ body.login-main {
   align-items: center;
 }
 .login-form {
-  background-color: lightgrey;
+  background-color: #ababab85;
   border-radius: 2vh;
   padding: 2vw;
 }
 .login-form h1 {
   text-align: center;
   margin-bottom: 2vh;
+}
+@media (max-width: 768px) {
+  .login-form {
+    box-shadow: 0 0 5px 0;
+    background: inherit;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 }
