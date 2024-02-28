@@ -4,3 +4,18 @@
   --colour-tertiary: #f9f9f9;
   --colour-quaternary: #f9f9f9;
 }
+body.login-main {
+  display: grid;
+  grid-template-areas: "waves waves waves login";
+  height: 100vh;
+}
+.waves {
+  grid-area: waves;
+  background-color: #5284be;
+  width: auto;
+}
+.login {
+  grid-area: login;
+  padding: 1vw;
+  align-items: center;
+}
