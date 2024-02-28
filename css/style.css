@@ -10,11 +10,14 @@ body.login-main {
   display: grid;
   grid-template-areas: "waves waves login";
   height: 100vh;
+  overflow: hidden;
 }
 .waves {
   grid-area: waves;
   background-color: #5284be;
   width: auto;
+  padding: 0;
+  margin: 0;
 }
 .login {
   grid-area: login;
