@@ -17,9 +17,31 @@
 
 <body class="login-main">
     <section class="waves">
+        <section class="wave-left">
+            <svg width="888" height="931" viewBox="0 0 888 931" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_174_37)">
+                    <path
+                        d="M25 45C25 45 212.11 90.1 233 336.69C260.37 455.25 293.21 495.99 481.12 565.61C760.42 676.38 614.84 836.25 842.7 905.25H25V45Z"
+                        fill="#588DCC" />
+                </g>
+                <defs>
+                    <filter id="filter0_d_174_37" x="0" y="0" width="887.7" height="930.25" filterUnits="userSpaceOnUse"
+                        color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha" />
+                        <feOffset dx="10" dy="-10" />
+                        <feGaussianBlur stdDeviation="17.5" />
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" />
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_174_37" />
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_174_37" result="shape" />
+                    </filter>
+                </defs>
+            </svg>
+        </section>
     </section>
     <section class="login">
-        <form action="">
+        <form class="login-form" action="">
             <div class="mb-3">
                 <label for="loginUsername" class="form-label">Gebruikersnaam</label>
                 <input type="text" class="form-control" id="loginUsername">
@@ -34,7 +56,10 @@
                     Remember me
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+            </div>
+
         </form>
     </section>
 </body>

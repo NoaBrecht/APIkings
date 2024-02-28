@@ -17,5 +17,12 @@ body.login-main {
 .login {
   grid-area: login;
   padding: 1vw;
+  display: flex;
+  justify-content: center;
   align-items: center;
+}
+.login-form {
+  background-color: lightgrey;
+  border-radius: 2vh;
+  padding: 2vw;
 }
