@@ -6,21 +6,56 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/landingpagina.css" />
   </head>
+  <style>
+    body {
+      background: rgb(0, 18, 32);
+      background: linear-gradient(
+        126deg,
+        rgba(0, 18, 32, 1) 0%,
+        rgba(72, 33, 39, 1) 36%,
+        rgba(74, 34, 39, 1) 60%,
+        rgba(124, 44, 44, 1) 100%
+      );
+    }
 
+    .container button {
+      width: 200px;
+      height: 300px;
+      text-align: center;
+      margin: 80px;
+      flex: 1 0 35%;
+    }
+
+    .container {
+      display: flex;
+
+      flex-wrap: wrap;
+    }
+    .login button {
+      width: 1000px;
+      height: 50px;
+      text-align: center;
+      margin: 40px;
+    }
+
+    .login {
+      text-align: center;
+      margin-top: 40px;
+    }
+  </style>
   <body>
     <h1>Welkom bij De PokemonWebsite</h1>
 
     <div class="container overflow-hidden text-center">
-      <button type="button" class="btn btn-dark btn-square-md">Button</button>
-      <button type="button" class="btn btn-dark btn-square-md">Button</button>
-      <button type="button" class="btn btn-dark btn-square-md">Button</button>
-      <button type="button" class="btn btn-dark btn-square-md">Button</button>
+      <button type="button" class="btn btn-dark btn-square-md">Project1</button>
+      <button type="button" class="btn btn-dark btn-square-md">Project2</button>
+      <button type="button" class="btn btn-dark btn-square-md">Project3</button>
+      <button type="button" class="btn btn-dark btn-square-md">Project4</button>
     </div>
 
     <div class="login">
-      <button type="button" class="btn btn-secondary">Secondary</button>
+      <button type="button" class="btn btn-secondary">Login</button>
     </div>
   </body>
 </html>
