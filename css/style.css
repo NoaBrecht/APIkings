@@ -46,4 +46,8 @@ body.login-main {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
+  label,
+  H1 {
+    color: white;
+  }
 }
