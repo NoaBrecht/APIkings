@@ -50,4 +50,8 @@ body.login-main {
   H1 {
     color: white;
   }
+  .toggle-password {
+    color: black;
+    background-color: #ababab85;
+  }
 }
