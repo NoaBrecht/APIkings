@@ -1,8 +1,6 @@
 :root {
-  --colour-primary: blue;
-  --colour-secondary: #f9f9f9;
-  --colour-tertiary: #f9f9f9;
-  --colour-quaternary: #f9f9f9;
+  --colour-wave: #588dcc;
+  --colour-wave-background: #5284be;
 }
 @media (min-width: 769px) {
   body.login-main {
@@ -18,7 +16,7 @@ body.login-main {
 }
 .waves {
   grid-area: waves;
-  background-color: #5284be;
+  background-color: var(--colour-wave-background);
   width: auto;
   padding: 0;
   margin: 0;
@@ -54,4 +52,13 @@ body.login-main {
     color: black;
     background-color: #ababab85;
   }
+}
+.cls-1 {
+  fill: url(#linear-gradient);
+}
+
+.cls-1,
+.cls-2 {
+  stroke-width: 0px;
+  fill: var(--colour-wave);
 }
