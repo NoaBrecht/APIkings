@@ -6,6 +6,10 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.cdnfonts.com/css/pokemon-solid"
+      rel="stylesheet"
+    />
   </head>
   <style>
     body {
@@ -24,38 +28,149 @@
       height: 300px;
       text-align: center;
       margin: 80px;
-      flex: 1 0 35%;
+      flex: 4 0 35%;
     }
 
     .container {
       display: flex;
-
       flex-wrap: wrap;
     }
+
     .login button {
       width: 1000px;
       height: 50px;
       text-align: center;
-      margin: 40px;
+      margin: 10px auto 50px;
+    }
+
+    .login button:hover {
+      background-color: #040faa;
+      color: white;
     }
 
     .login {
       text-align: center;
-      margin-top: 40px;
+    }
+
+    .pokeballbody {
+      width: 25em;
+      height: 25em;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      margin: auto;
+    }
+
+    .pokeball {
+      position: relative;
+      width: 42.5%;
+      height: 42.5%;
+      border-radius: 50%;
+      border: 7px #111 solid;
+      background: linear-gradient(
+        0deg,
+        #fff 0%,
+        #fff 50%,
+        #876f74 50%,
+        #fb0d3e 100%
+      );
+    }
+
+    .pokeball .btn {
+      background: #fff;
+      width: 5.5em;
+      height: 5.5em;
+      border-radius: 50%;
+      border: 15px solid #111;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pokeball .btn::before {
+      content: "";
+      width: 4em;
+      height: 4em;
+      border: 5px #111 solid;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pokeball::before {
+      content: "";
+      width: 10.3em;
+      background: #111;
+      height: 2em;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pokeball::after {
+      content: "";
+      background: #fff;
+      position: absolute;
+      top: 1em;
+      left: 2em;
+      width: 1em;
+      height: 2.5em;
+      border-radius: 50%;
+      transform: rotate(45deg);
+    }
+    .square-container {
+      width: 1600px;
+      height: 50px;
+      background-color: lightgray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 80px auto;
+      margin-top: 0px;
+    }
+    .square-text {
+      font-family: "Pokemon Solid", sans-serif;
+      font-size: larger;
+    }
+
+    .page {
+      margin-top: 50px;
     }
   </style>
   <body>
-    <h1>Welkom bij De PokemonWebsite</h1>
-
-    <div class="container overflow-hidden text-center">
-      <button type="button" class="btn btn-dark btn-square-md">Project1</button>
-      <button type="button" class="btn btn-dark btn-square-md">Project2</button>
-      <button type="button" class="btn btn-dark btn-square-md">Project3</button>
-      <button type="button" class="btn btn-dark btn-square-md">Project4</button>
+    <div class="square-container">
+      <span class="square-text">Welkom!</span>
     </div>
+    <div class="page">
+      <div class="container overflow-hidden text-center">
+        <button type="button" class="btn btn-dark btn-square-md">
+          Project1
+        </button>
+        <button type="button" class="btn btn-dark btn-square-md">
+          Project2
+        </button>
+        <button type="button" class="btn btn-dark btn-square-md">
+          Project3
+        </button>
+        <button type="button" class="btn btn-dark btn-square-md">
+          Project4
+        </button>
+      </div>
 
-    <div class="login">
-      <button type="button" class="btn btn-secondary">Login</button>
+      <div class="pokeballbody">
+        <div class="pokeball">
+          <div class="btn"></div>
+        </div>
+      </div>
+
+      <div class="login">
+        <button type="button" class="btn btn-secondary">Login</button>
+      </div>
     </div>
   </body>
 </html>
