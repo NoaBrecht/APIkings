@@ -1,11 +1,9 @@
 :root {
   --colour-wave: #588dcc;
   --colour-wave-background: #5284be;
-}
-@media (min-width: 769px) {
-  body.login-main {
-    grid-template-areas: "waves waves login";
-  }
+  --colour-wave-light: #6e9ed6;
+  --colour-wave-dark: #4a6e9e;
+  --colour-wave-darker: #3a4e6e;
 }
 body.login-main {
   padding: 0;
@@ -13,13 +11,6 @@ body.login-main {
   display: grid;
   height: 100vh;
   overflow: hidden;
-}
-.waves {
-  grid-area: waves;
-  background-color: var(--colour-wave-background);
-  width: auto;
-  padding: 0;
-  margin: 0;
 }
 .login {
   grid-area: login;
@@ -37,6 +28,34 @@ body.login-main {
   text-align: center;
   margin-bottom: 2vh;
 }
+.waves {
+  grid-area: waves;
+  background-color: var(--colour-wave-background);
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+.wave-1,
+.wave-2 {
+  stroke-width: 0px;
+  fill: var(--colour-wave);
+}
+.btn-login {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--colour-wave-background);
+  --bs-btn-border-color: var(--colour-wave-background);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--colour-wave);
+  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--colour-wave-light);
+  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--colour-wave-darker);
+  --bs-btn-disabled-border-color: var(--colour-wave-dark);
+}
 @media (max-width: 768px) {
   .login-form {
     box-shadow: 0 0 5px 0;
@@ -53,12 +72,8 @@ body.login-main {
     background-color: #ababab85;
   }
 }
-.cls-1 {
-  fill: url(#linear-gradient);
-}
-
-.cls-1,
-.cls-2 {
-  stroke-width: 0px;
-  fill: var(--colour-wave);
+@media (min-width: 769px) {
+  body.login-main {
+    grid-template-areas: "waves waves login";
+  }
 }
