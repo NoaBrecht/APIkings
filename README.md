@@ -1,7 +1,7 @@
 # APIkings
 # Projectbeschrijving
 ## Projectinhoud
-Gemeenschappelijk 
+Gemeenschappelijk
 
 De gebruiker komt op de webpagina terecht en ziet een overzicht van al de projecten op de landing page. Deze projecten hebben een afbeelding, een naam. Verder heeft deze pagina geen andere inhoud voor duidelijkheid. De gebruiker kiest dan uit een van de voorgemaakte projecten.  Is die gebruiker nog niet ingelogd dan krijgt die een melding. Die melding komt via een kleine textbox onder het project die niet te storend is voor de gebruiker maar duidelijk genoeg voor de melding voort te brengen.  
 
