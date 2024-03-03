@@ -5,24 +5,12 @@
   --colour-wave-dark: #4a6e9e;
   --colour-wave-darker: #3a4e6e;
 }
-@media (min-width: 769px) {
-  body.login-main {
-    grid-template-areas: "waves waves login";
-  }
-}
 body.login-main {
   padding: 0;
   margin: 0;
   display: grid;
   height: 100vh;
   overflow: hidden;
-}
-.waves {
-  grid-area: waves;
-  background-color: var(--colour-wave-background);
-  width: auto;
-  padding: 0;
-  margin: 0;
 }
 .login {
   grid-area: login;
@@ -39,6 +27,18 @@ body.login-main {
 .login-form h1 {
   text-align: center;
   margin-bottom: 2vh;
+}
+.waves {
+  grid-area: waves;
+  background-color: var(--colour-wave-background);
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+.wave-1,
+.wave-2 {
+  stroke-width: 0px;
+  fill: var(--colour-wave);
 }
 .btn-login {
   --bs-btn-color: #fff;
@@ -72,8 +72,8 @@ body.login-main {
     background-color: #ababab85;
   }
 }
-.cls-1,
-.cls-2 {
-  stroke-width: 0px;
-  fill: var(--colour-wave);
+@media (min-width: 769px) {
+  body.login-main {
+    grid-template-areas: "waves waves login";
+  }
 }
