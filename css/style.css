@@ -53,10 +53,6 @@ body.login-main {
     background-color: #ababab85;
   }
 }
-.cls-1 {
-  fill: url(#linear-gradient);
-}
-
 .cls-1,
 .cls-2 {
   stroke-width: 0px;
