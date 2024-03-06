@@ -5,6 +5,7 @@
   --colour-wave-dark: #4a6e9e;
   --colour-wave-darker: #3a4e6e;
 }
+/** Login Pagina */
 body.login-main {
   padding: 0;
   margin: 0;
@@ -31,6 +32,8 @@ body.login-main {
 .waves {
   grid-area: waves;
   background-color: var(--colour-wave-background);
+  background-image: url(../assets/squirtle.png);
+  background-size: cover;
   width: auto;
   padding: 0;
   margin: 0;
@@ -39,6 +42,16 @@ body.login-main {
 .wave-2 {
   stroke-width: 0px;
   fill: var(--colour-wave);
+}
+
+.waves-red {
+  background-color: #8b0000;
+  background-image: url(../assets/charmander.png);
+}
+.waves-red .wave-1,
+.waves-red .wave-2 {
+  stroke-width: 0px;
+  fill: #b80000;
 }
 .btn-login {
   --bs-btn-color: #fff;
@@ -93,7 +106,7 @@ body.login-main {
     grid-template-areas: "waves waves login";
   }
 }
-
+/** Landings pagina */
 body.landingpage {
   background: rgb(0, 18, 32);
   background: linear-gradient(
@@ -222,4 +235,16 @@ body.landingpage {
 
 .landingpage .page {
   margin-top: 50px;
+}
+
+/** Al mijn pokemon weergeven */
+body.allPoke {
+  background: rgb(0, 18, 32);
+  background: linear-gradient(
+    126deg,
+    rgba(0, 18, 32, 1) 0%,
+    rgba(72, 33, 39, 1) 36%,
+    rgba(74, 34, 39, 1) 60%,
+    rgba(124, 44, 44, 1) 100%
+  );
 }
