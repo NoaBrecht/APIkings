@@ -1,16 +1,10 @@
-
-
-html,
-body {
+.vergelijk html,
+.vergelijken body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 
-body {
-  padding-top: 56px;
-}
-
 @media (max-width: 767.98px) {
-  .offcanvas-collapse {
+  .vergelijken .offcanvas-collapse {
     position: fixed;
     top: 56px; /* Height of navbar */
     bottom: 0;
@@ -20,47 +14,55 @@ body {
     padding-left: 1rem;
     overflow-y: auto;
     visibility: hidden;
-    background-color: #343a40;
     transition: transform .3s ease-in-out, visibility .3s ease-in-out;
   }
-  .offcanvas-collapse.open {
+  .vergelijken .offcanvas-collapse.open {
     visibility: visible;
     transform: translateX(-100%);
   }
 }
-
-.nav-scroller .nav {
-  color: rgba(255, 255, 255, .75);
+.vergelijken nav{
+  background-color: red;
+}
+.vergelijken h1{
+  margin-left: 2rem;
+  color: white;
+}
+.vergelijken .nav-link{
+  margin-right: 2rem;
+  color: white;
 }
 
-.nav-scroller .nav-link {
+.vergelijken .nav-scroller .nav-link {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: .875rem;
-  color: #6c757d;
 }
 
-.nav-scroller .nav-link:hover {
+.vergelijken .nav-scroller .nav-link:hover {
   color: #007bff;
 }
 
-.nav-scroller .active {
+.vergelijken .nav-scroller .active {
   font-weight: 500;
-  color: #343a40;
 }
 
-#fluids {
+.vergelijk .btn {
+  color: white;
+}
+
+.vergelijken article {
     display: flex;
     flex-wrap: wrap;
 }
 
-.border {
+.vergelijken .border {
     width: 25%;
     margin-top: 10rem;
     margin-left: 5rem;
     margin-right: 15%;
 }
 
-img {
+.vergelijken img {
     height: 15rem;
-}
+} 
