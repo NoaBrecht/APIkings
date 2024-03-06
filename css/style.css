@@ -1,6 +1,225 @@
 :root {
-  --colour-primary: #f9f9f9;
-  --colour-secondary: #f9f9f9;
-  --colour-tertiary: #f9f9f9;
-  --colour-quaternary: #f9f9f9;
+  --colour-wave: #588dcc;
+  --colour-wave-background: #5284be;
+  --colour-wave-light: #6e9ed6;
+  --colour-wave-dark: #4a6e9e;
+  --colour-wave-darker: #3a4e6e;
+}
+body.login-main {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  height: 100vh;
+  overflow: hidden;
+}
+.login {
+  grid-area: login;
+  padding: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-form {
+  background-color: #ababab85;
+  border-radius: 2vh;
+  padding: 2vw;
+}
+.login-form h1 {
+  text-align: center;
+  margin-bottom: 2vh;
+}
+.waves {
+  grid-area: waves;
+  background-color: var(--colour-wave-background);
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+.wave-1,
+.wave-2 {
+  stroke-width: 0px;
+  fill: var(--colour-wave);
+}
+.btn-login {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--colour-wave-background);
+  --bs-btn-border-color: var(--colour-wave-background);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--colour-wave);
+  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--colour-wave-light);
+  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--colour-wave-darker);
+  --bs-btn-disabled-border-color: var(--colour-wave-dark);
+}
+@media (max-width: 768px) {
+  .login-form {
+    box-shadow: 0 0 5px 0;
+    background: inherit;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  label,
+  H1 {
+    color: white;
+  }
+  .toggle-password {
+    color: black;
+    background-color: #ababab85;
+  }
+  .btn-login {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #6c757d;
+    --bs-btn-border-color: #6c757d;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #5c636a;
+    --bs-btn-hover-border-color: #565e64;
+    --bs-btn-focus-shadow-rgb: 130, 138, 145;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #565e64;
+    --bs-btn-active-border-color: #51585e;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #6c757d;
+    --bs-btn-disabled-border-color: #6c757d;
+  }
+}
+@media (min-width: 769px) {
+  body.login-main {
+    grid-template-areas: "waves waves login";
+  }
+}
+
+body.landingpage {
+  background: rgb(0, 18, 32);
+  background: linear-gradient(
+    126deg,
+    rgba(0, 18, 32, 1) 0%,
+    rgba(72, 33, 39, 1) 36%,
+    rgba(74, 34, 39, 1) 60%,
+    rgba(124, 44, 44, 1) 100%
+  );
+}
+
+.landingpage .container button {
+  width: 200px;
+  height: 300px;
+  text-align: center;
+  margin: 80px;
+  flex: 4 0 35%;
+}
+
+.landingpage .container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.landingpage .login button {
+  width: 1000px;
+  height: 50px;
+  text-align: center;
+  margin: 10px auto 50px;
+}
+
+.landingpage .login button:hover {
+  background-color: #040faa;
+  color: white;
+}
+
+.landingpage .login {
+  text-align: center;
+}
+
+.landingpage .pokeballbody {
+  width: 25em;
+  height: 25em;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+}
+
+.landingpage .pokeball {
+  position: relative;
+  width: 42.5%;
+  height: 42.5%;
+  border-radius: 50%;
+  border: 7px #111 solid;
+  background: linear-gradient(
+    0deg,
+    #fff 0%,
+    #fff 50%,
+    #876f74 50%,
+    #fb0d3e 100%
+  );
+}
+
+.landingpage .pokeball .btn {
+  background: #fff;
+  width: 5.5em;
+  height: 5.5em;
+  border-radius: 50%;
+  border: 15px solid #111;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.landingpage .pokeball .btn::before {
+  content: "";
+  width: 4em;
+  height: 4em;
+  border: 5px #111 solid;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.landingpage .pokeball::before {
+  content: "";
+  width: 10.3em;
+  background: #111;
+  height: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.landingpage .pokeball::after {
+  content: "";
+  background: #fff;
+  position: absolute;
+  top: 1em;
+  left: 2em;
+  width: 1em;
+  height: 2.5em;
+  border-radius: 50%;
+  transform: rotate(45deg);
+}
+.landingpage .square-container {
+  width: 1600px;
+  height: 50px;
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 80px auto;
+  margin-top: 0px;
+}
+.landingpage .square-text {
+  font-family: "Pokemon Solid", sans-serif;
+  font-size: larger;
+}
+
+.landingpage .page {
+  margin-top: 50px;
 }
