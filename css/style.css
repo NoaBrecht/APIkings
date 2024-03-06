@@ -223,3 +223,20 @@ body.landingpage {
 .landingpage .page {
   margin-top: 50px;
 }
+.vergelijk html,
+.vergelijken body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+.vergelijken article {
+    display: flex;
+    flex-wrap: wrap;
+}
+.vergelijken .border {
+    width: 25%;
+    margin-top: 10rem;
+    margin-left: 5rem;
+    margin-right: 15%;
+}
+.vergelijken img {
+    height: 15rem;
+} 
