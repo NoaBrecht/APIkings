@@ -5,6 +5,52 @@
   --colour-wave-dark: #4a6e9e;
   --colour-wave-darker: #3a4e6e;
 }
+body {
+  padding-top: 13vh;
+}
+/** Nav */
+
+@media (max-width: 767.98px) {
+  .offcanvas-collapse {
+    position: fixed;
+    top: 56px; /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  .offcanvas-collapse.open {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+}
+nav {
+  background-color: red;
+}
+.nav-link {
+  margin-right: 2rem;
+  color: white;
+}
+
+.nav-scroller .nav-link {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.nav-scroller .nav-link:hover {
+  color: #007bff;
+}
+
+.nav-scroller .active {
+  font-weight: 500;
+}
+
+/** Login Pagina */
 body.login-main {
   padding: 0;
   margin: 0;
@@ -31,6 +77,8 @@ body.login-main {
 .waves {
   grid-area: waves;
   background-color: var(--colour-wave-background);
+  background-image: url(../assets/squirtle.png);
+  background-size: cover;
   width: auto;
   padding: 0;
   margin: 0;
@@ -39,6 +87,16 @@ body.login-main {
 .wave-2 {
   stroke-width: 0px;
   fill: var(--colour-wave);
+}
+
+.waves-red {
+  background-color: #8b0000;
+  background-image: url(../assets/charmander.png);
+}
+.waves-red .wave-1,
+.waves-red .wave-2 {
+  stroke-width: 0px;
+  fill: #b80000;
 }
 .btn-login {
   --bs-btn-color: #fff;
@@ -93,7 +151,7 @@ body.login-main {
     grid-template-areas: "waves waves login";
   }
 }
-
+/** Landings pagina */
 body.landingpage {
   background: rgb(0, 18, 32);
   background: linear-gradient(
@@ -181,4 +239,165 @@ body.landingpage {
   background-image: url("https://images.ctfassets.net/s5n2t79q9icq/114xMnrR6RiLD15UxL8LYZ/ca73ec9fe59f654a150b543e05979181/Meta-Homepage.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+
+/** Al mijn pokemon weergeven */
+body.allPoke {
+  padding-top: 13vh;
+}
+.allPoke .card {
+  margin: 10px;
+  width: 18rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  padding-bottom: 10px;
+}
+
+.allPoke .card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+.allPoke .card.fire {
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 0, 0, 0),
+    rgba(255, 0, 0, 1)
+  );
+}
+
+.allPoke .card.water {
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 255, 0),
+    rgba(0, 0, 255, 1)
+  );
+}
+
+.allPoke .card.grass {
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 255, 0, 0),
+    rgba(0, 255, 0, 1)
+  );
+}
+
+.allPoke .card.electric {
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 0, 0),
+    rgba(255, 255, 0, 1)
+  );
+}
+
+.allPoke .card.psychic {
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 0, 255, 0),
+    rgba(255, 0, 255, 1)
+  );
+}
+
+.allPoke .card.ice {
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 255, 255, 0),
+    rgba(0, 255, 255, 1)
+  );
+}
+
+.allPoke .card.dragon {
+  background: linear-gradient(
+    to bottom right,
+    rgba(128, 0, 128, 0),
+    rgba(128, 0, 128, 1)
+  );
+}
+
+.allPoke .card.dark {
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1)
+  );
+}
+
+.allPoke .card.fairy {
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 192, 203, 0),
+    rgba(255, 192, 203, 1)
+  );
+}
+
+.allPoke .card.normal {
+  background: linear-gradient(
+    to bottom right,
+    rgba(192, 192, 192, 0),
+    rgba(192, 192, 192, 1)
+  );
+}
+
+.allPoke .card.fighting {
+  background: linear-gradient(
+    to bottom right,
+    rgba(139, 69, 19, 0),
+    rgba(139, 69, 19, 1)
+  );
+}
+
+.allPoke .card.poison {
+  background: linear-gradient(
+    to bottom right,
+    rgba(147, 112, 219, 0),
+    rgba(80, 200, 120, 1)
+  );
+}
+
+.allPoke .card.ground {
+  background: linear-gradient(
+    to bottom right,
+    rgba(210, 105, 30, 0),
+    rgba(210, 105, 30, 1)
+  );
+}
+
+.allPoke .card.flying {
+  background: linear-gradient(
+    to bottom right,
+    rgba(135, 206, 235, 0),
+    rgba(135, 206, 235, 1)
+  );
+}
+
+.allPoke .card.bug {
+  background: linear-gradient(
+    to bottom right,
+    rgba(107, 142, 35, 0),
+    rgba(107, 142, 35, 1)
+  );
+}
+
+.allPoke .card.rock {
+  background: linear-gradient(
+    to bottom right,
+    rgba(119, 136, 153, 0),
+    rgba(119, 136, 153, 1)
+  );
+}
+
+.allPoke .card.ghost {
+  background: linear-gradient(
+    to bottom right,
+    rgba(106, 90, 205, 0),
+    rgba(106, 90, 205, 1)
+  );
+}
+
+.allPoke .card.steel {
+  background: linear-gradient(
+    to bottom right,
+    rgba(70, 130, 180, 0),
+    rgba(70, 130, 180, 1)
+  );
 }
