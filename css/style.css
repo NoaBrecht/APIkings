@@ -401,3 +401,40 @@ body.allPoke {
     rgba(70, 130, 180, 1)
   );
 }
+
+.whothat .container-fluid {
+  /* width: max-content;*/
+}
+
+.whothat .container-body {
+}
+
+.whothat .card-img-top {
+  height: 400px;
+  width: auto;
+  margin: 0 auto;
+}
+
+.whothat {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.whothat .card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(39, 187, 245, 0.8),
+    rgba(241, 39, 39, 0.8)
+  );
+}
+.whothat .form-group {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
