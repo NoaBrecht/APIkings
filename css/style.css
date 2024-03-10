@@ -281,23 +281,42 @@ body.landingpage {
 .landingpage .page {
   margin-top: 50px;
 }
-.vergelijk html,
+.vergelijken html,
 .vergelijken body {
-  overflow-x: hidden; /* Prevent scroll on narrow devices */
+  overflow-x: hidden;
+  background-image: url("../assets/backVerg.png");
 }
+
 .vergelijken article {
+    margin-top: 5rem;
     display: flex;
     flex-wrap: wrap;
 }
 .vergelijken .border {
     width: 25%;
-    margin-top: 10rem;
     margin-left: 5rem;
     margin-right: 15%;
 }
 .vergelijken img {
     height: 15rem;
 } 
+.vergelijken .vergOther{
+  float: right;
+}
+.vergelijken span {
+  text-align: center;
+}
+.vergelijken .vergSearch {
+  width: 75%;
+}
+.vergelijken .vergBut {
+  width: 25%;
+}
+@media (max-width: 768px) {
+  .vergelijken .border {
+    width: 100%;
+  }
+}
 
 /** Al mijn pokemon weergeven */
 body.allPoke {
