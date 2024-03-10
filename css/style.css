@@ -4,13 +4,14 @@
   --colour-wave-light: #6e9ed6;
   --colour-wave-dark: #4a6e9e;
   --colour-wave-darker: #3a4e6e;
+  --bs-nav-mobile: #87c3ce;
 }
+/** NAV */
 body {
   padding-top: 13vh;
 }
-/** Nav */
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
     top: 56px; /* Height of navbar */
@@ -21,6 +22,7 @@ body {
     padding-left: 1rem;
     overflow-y: auto;
     visibility: hidden;
+    background-color: var(--bs-nav-mobile);
     transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
   .offcanvas-collapse.open {
@@ -28,18 +30,16 @@ body {
     transform: translateX(-100%);
   }
 }
-nav {
-  background-color: red;
-}
-.nav-link {
-  margin-right: 2rem;
-  color: white;
+
+.nav-scroller .nav {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .nav-scroller .nav-link {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-size: 0.875rem;
+  color: #6c757d;
 }
 
 .nav-scroller .nav-link:hover {
@@ -48,6 +48,7 @@ nav {
 
 .nav-scroller .active {
   font-weight: 500;
+  color: #343a40;
 }
 
 /** Login Pagina */
@@ -118,8 +119,8 @@ body.login-main {
   .login-form {
     box-shadow: 0 0 5px 0;
     background: inherit;
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
   label,
   H1 {
@@ -192,77 +193,6 @@ body.landingpage {
   text-align: center;
 }
 
-.landingpage .pokeballbody {
-  width: 25em;
-  height: 25em;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: auto;
-}
-
-.landingpage .pokeball {
-  position: relative;
-  width: 42.5%;
-  height: 42.5%;
-  border-radius: 50%;
-  border: 7px #111 solid;
-  background: linear-gradient(
-    0deg,
-    #fff 0%,
-    #fff 50%,
-    #876f74 50%,
-    #fb0d3e 100%
-  );
-}
-
-.landingpage .pokeball .btn {
-  background: #fff;
-  width: 5.5em;
-  height: 5.5em;
-  border-radius: 50%;
-  border: 15px solid #111;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.landingpage .pokeball .btn::before {
-  content: "";
-  width: 4em;
-  height: 4em;
-  border: 5px #111 solid;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.landingpage .pokeball::before {
-  content: "";
-  width: 10.3em;
-  background: #111;
-  height: 2em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.landingpage .pokeball::after {
-  content: "";
-  background: #fff;
-  position: absolute;
-  top: 1em;
-  left: 2em;
-  width: 1em;
-  height: 2.5em;
-  border-radius: 50%;
-  transform: rotate(45deg);
-}
 .landingpage .square-container {
   width: 1600px;
   height: 50px;
@@ -274,8 +204,8 @@ body.landingpage {
   margin-top: 0px;
 }
 .landingpage .square-text {
-  font-family: "Pokemon Solid", sans-serif;
   font-size: larger;
+  font-weight: 600;
 }
 
 .landingpage .page {
@@ -319,9 +249,6 @@ body.landingpage {
 }
 
 /** Al mijn pokemon weergeven */
-body.allPoke {
-  padding-top: 13vh;
-}
 .allPoke .card {
   margin: 10px;
   width: 18rem;
@@ -477,4 +404,56 @@ body.allPoke {
     rgba(70, 130, 180, 0),
     rgba(70, 130, 180, 1)
   );
+}
+
+.whothat .card-img-top {
+  height: 400px;
+  width: auto;
+  margin: 0 auto;
+}
+
+.whothat {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.whothat .card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(39, 187, 245, 0.8),
+    rgba(241, 39, 39, 0.8)
+  );
+}
+.whothat .form-group {
+  width: 100%;
+  max-width: 400px;
+  margin: -100px;
+  height: 100px;
+}
+.whothat {
+  background-color: rgb(170, 164, 164);
+}
+.whothat .form-control {
+  background-color: rgb(225, 215, 215);
+  margin: 0 auto;
+}
+/** Vergelijken */
+.vergelijken article {
+  display: flex;
+  flex-wrap: wrap;
+}
+.vergelijken .border {
+  width: 25%;
+  margin-top: 10rem;
+  margin-left: 5rem;
+  margin-right: 15%;
+}
+.vergelijken img {
+  height: 15rem;
 }
