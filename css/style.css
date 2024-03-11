@@ -447,3 +447,39 @@ body.allPoke {
   background-color: rgb(225, 215, 215);
   margin: 0 auto;
 }
+.battler img {
+  height: 20rem;
+}
+.battler #battleYou {
+  margin-top: 12rem;
+  margin-left: 20%;
+}
+.battler section {
+  display: flex;
+}
+.battler #battleOp {
+  margin-top: 4rem;
+  margin-left: 25%;
+}
+.battler .attack {
+  width: 15rem;
+  margin-left: 45%;
+}
+.battler .border {
+  background-color: white;
+}
+.battler {
+  background-color: lightgreen;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../assets/battler.png");
+}
+@media (max-width: 769px) {
+  .battler .attack {
+    margin: 0;
+    width: 100%;
+  }
+  .battler #battleYou {
+    margin-left: 5%;
+  }
+}
