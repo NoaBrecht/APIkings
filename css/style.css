@@ -215,6 +215,35 @@ body.landingpage {
 .vergelijken body {
   overflow-x: hidden;
   background-image: url("../assets/backVerg.png");
+.landingpage .pikachu-btn {
+  background-image: url("https://i.pinimg.com/550x/cb/33/49/cb3349b86ca661ca61ae9a36d88d70d4.jpg");
+}
+
+.landingpage .btn:nth-child(2) {
+  background-image: url("https://ftw.usatoday.com/wp-content/uploads/sites/90/2023/07/EA-Sports-FC-24-cover.jpg?w=640");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.landingpage .btn:nth-child(3) {
+  background-image: url("https://wallpapers.com/images/featured/fortnite-pictures-b5kfcchwazwiz3cs.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.landingpage .btn:nth-child(4) {
+  background-image: url("https://m.media-amazon.com/images/M/MV5BYjM0ZGJhYTYtZjUyMi00MWZmLTg0MTQtNDRiM2U3Yzk2ZGNhXkEyXkFqcGdeQXVyMzkyOTQ0NzY@._V1_.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.landingpage .btn:nth-child(5) {
+  background-image: url("https://m.media-amazon.com/images/S/pv-target-images/06b3a88bd674980e8dfab3347c9d991379ba476b024a3a4a64556ebff88c8191._SX1080_FMjpg_.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.landingpage .btn:nth-child(6) {
+  background-image: url("https://images.ctfassets.net/s5n2t79q9icq/114xMnrR6RiLD15UxL8LYZ/ca73ec9fe59f654a150b543e05979181/Meta-Homepage.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .vergelijken article {
@@ -405,7 +434,6 @@ body.landingpage {
     rgba(70, 130, 180, 1)
   );
 }
-
 .whothat .card-img-top {
   height: 400px;
   width: auto;
@@ -443,6 +471,7 @@ body.landingpage {
   background-color: rgb(225, 215, 215);
   margin: 0 auto;
 }
+
 /** Vergelijken */
 .vergelijken article {
   display: flex;
@@ -456,4 +485,40 @@ body.landingpage {
 }
 .vergelijken img {
   height: 15rem;
+}
+.battler img {
+  height: 20rem;
+}
+.battler #battleYou {
+  margin-top: 12rem;
+  margin-left: 20%;
+}
+.battler section {
+  display: flex;
+}
+.battler #battleOp {
+  margin-top: 4rem;
+  margin-left: 25%;
+}
+.battler .attack {
+  width: 15rem;
+  margin-left: 45%;
+}
+.battler .border {
+  background-color: white;
+}
+.battler {
+  background-color: lightgreen;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../assets/battler.png");
+}
+@media (max-width: 769px) {
+  .battler .attack {
+    margin: 0;
+    width: 100%;
+  }
+  .battler #battleYou {
+    margin-left: 5%;
+  }
 }
