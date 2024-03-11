@@ -5,6 +5,7 @@
   --colour-wave-dark: #4a6e9e;
   --colour-wave-darker: #3a4e6e;
   --bs-nav-mobile: #87c3ce;
+  --colour-text: #fff;
 }
 /** NAV */
 body {
@@ -119,8 +120,8 @@ body.login-main {
   .login-form {
     box-shadow: 0 0 5px 0;
     background: inherit;
-    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
   label,
   H1 {
@@ -211,10 +212,6 @@ body.landingpage {
 .landingpage .page {
   margin-top: 50px;
 }
-.vergelijken html,
-.vergelijken body {
-  overflow-x: hidden;
-  background-image: url("../assets/backVerg.png");
 .landingpage .pikachu-btn {
   background-image: url("https://i.pinimg.com/550x/cb/33/49/cb3349b86ca661ca61ae9a36d88d70d4.jpg");
 }
@@ -246,38 +243,10 @@ body.landingpage {
   background-repeat: no-repeat;
 }
 
-.vergelijken article {
-    margin-top: 5rem;
-    display: flex;
-    flex-wrap: wrap;
-}
-.vergelijken .border {
-    width: 25%;
-    margin-left: 5rem;
-    margin-right: 15%;
-}
-.vergelijken img {
-    height: 15rem;
-} 
-.vergelijken .vergOther{
-  float: right;
-}
-.vergelijken span {
-  text-align: center;
-}
-.vergelijken .vergSearch {
-  width: 75%;
-}
-.vergelijken .vergBut {
-  width: 25%;
-}
-@media (max-width: 768px) {
-  .vergelijken .border {
-    width: 100%;
-  }
-}
-
 /** Al mijn pokemon weergeven */
+body.allPoke {
+  padding-top: 13vh;
+}
 .allPoke .card {
   margin: 10px;
   width: 18rem;
@@ -434,6 +403,14 @@ body.landingpage {
     rgba(70, 130, 180, 1)
   );
 }
+
+.whothat .container-fluid {
+  /* width: max-content;*/
+}
+
+.whothat .container-body {
+}
+
 .whothat .card-img-top {
   height: 400px;
   width: auto;
@@ -471,21 +448,6 @@ body.landingpage {
   background-color: rgb(225, 215, 215);
   margin: 0 auto;
 }
-
-/** Vergelijken */
-.vergelijken article {
-  display: flex;
-  flex-wrap: wrap;
-}
-.vergelijken .border {
-  width: 25%;
-  margin-top: 10rem;
-  margin-left: 5rem;
-  margin-right: 15%;
-}
-.vergelijken img {
-  height: 15rem;
-}
 .battler img {
   height: 20rem;
 }
@@ -521,4 +483,37 @@ body.landingpage {
   .battler #battleYou {
     margin-left: 5%;
   }
+}
+/** vergelijken  */
+.vergelijken {
+  background-image: url("../assets/backVerg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.vergelijken article {
+  margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.vergelijken .border {
+  width: 25%;
+  margin-left: 5rem;
+  margin-right: 15%;
+}
+.vergelijken img {
+  height: 15rem;
+}
+.vergelijken .vergOther {
+  float: right;
+}
+.vergelijken span {
+  text-align: center;
+  color: var(--colour-text);
+}
+.vergelijken .vergSearch {
+  width: 75%;
+}
+.vergelijken .vergBut {
+  width: 25%;
 }
