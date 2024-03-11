@@ -4,7 +4,7 @@
     document.querySelector('#navbarSideCollapse').addEventListener('click', () => {
         document.querySelector('.offcanvas-collapse').classList.toggle('open')
     })
-})();
+})()
 document.getElementById('togglePassword').addEventListener('click', function (e) {
     var passwordInput = document.getElementById('loginPwd');
     var togglePasswordIcon = document.getElementById('togglePasswordIcon');
