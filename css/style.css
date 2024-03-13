@@ -4,7 +4,7 @@
   --colour-wave-light: #6e9ed6;
   --colour-wave-dark: #4a6e9e;
   --colour-wave-darker: #3a4e6e;
-  --bs-nav-mobile: #87c3ce;
+  --bs-nav-mobile: #ffffff;
   --colour-text: #fff;
 }
 /** NAV */
@@ -254,7 +254,15 @@ body.allPoke {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   padding-bottom: 10px;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(to bottom right, var(--colour-card-1), var(--colour-card-2))
+      border-box;
+  border: 4px solid transparent;
 }
+.allPoke .card .card-title {
+  font-size: larger;
+}
+
 .allPoke .card a {
   text-decoration: none;
   color: black;
@@ -263,148 +271,85 @@ body.allPoke {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }
-.allPoke .card.fire {
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 0, 0, 0),
-    rgba(255, 0, 0, 1)
-  );
+.card.fire {
+  --colour-card-1: rgba(255, 0, 0, 0.1);
+  --colour-card-2: rgba(255, 0, 0, 1);
 }
 
-.allPoke .card.water {
-  background: linear-gradient(
-    to bottom right,
-    rgba(0, 0, 255, 0),
-    rgba(0, 0, 255, 1)
-  );
+.card.water {
+  --colour-card-1: rgba(0, 0, 255, 0.1);
+  --colour-card-2: rgba(0, 0, 255, 1);
 }
 
-.allPoke .card.grass {
-  background: linear-gradient(
-    to bottom right,
-    rgba(0, 255, 0, 0),
-    rgba(0, 255, 0, 1)
-  );
+.card.grass {
+  --colour-card-1: rgba(0, 255, 0, 0.1);
+  --colour-card-2: rgba(0, 255, 0, 1);
 }
 
-.allPoke .card.electric {
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 255, 0, 0),
-    rgba(255, 255, 0, 1)
-  );
+.card.electric {
+  --colour-card-1: rgba(255, 255, 0, 0.1);
+  --colour-card-2: rgba(255, 255, 0, 1);
 }
 
-.allPoke .card.psychic {
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 0, 255, 0),
-    rgba(255, 0, 255, 1)
-  );
+.card.psychic {
+  --colour-card-1: rgba(255, 0, 255, 0.1);
+  --colour-card-2: rgba(255, 0, 255, 1);
 }
 
-.allPoke .card.ice {
-  background: linear-gradient(
-    to bottom right,
-    rgba(0, 255, 255, 0),
-    rgba(0, 255, 255, 1)
-  );
+.card.ice {
+  --colour-card-1: rgba(0, 255, 255, 0.1);
+  --colour-card-2: rgba(0, 255, 255, 1);
 }
 
-.allPoke .card.dragon {
-  background: linear-gradient(
-    to bottom right,
-    rgba(128, 0, 128, 0),
-    rgba(128, 0, 128, 1)
-  );
+.card.dragon {
+  --colour-card-1: rgba(128, 0, 128, 0.1);
+  --colour-card-2: rgba(128, 0, 128, 1);
 }
 
-.allPoke .card.dark {
-  background: linear-gradient(
-    to bottom right,
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 1)
-  );
+.card.dark {
+  --colour-card-1: rgba(0, 0, 0, 0.1);
+  --colour-card-2: rgba(0, 0, 0, 1);
+}
+.card.fairy {
+  --colour-card-1: rgba(255, 192, 203, 0.1);
+  --colour-card-2: rgba(255, 192, 203, 1);
+}
+.card.normal {
+  --colour-card-1: rgba(192, 192, 192, 0.1);
+  --colour-card-2: rgba(192, 192, 192, 1);
 }
 
-.allPoke .card.fairy {
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 192, 203, 0),
-    rgba(255, 192, 203, 1)
-  );
+.card.fighting {
+  --colour-card-1: rgba(139, 69, 19, 0.1);
+  --colour-card-2: rgba(139, 69, 19, 1);
 }
-
-.allPoke .card.normal {
-  background: linear-gradient(
-    to bottom right,
-    rgba(192, 192, 192, 0),
-    rgba(192, 192, 192, 1)
-  );
+.card.poison {
+  --colour-card-1: rgba(147, 112, 219, 0.1);
+  --colour-card-2: rgba(80, 200, 120, 1);
 }
-
-.allPoke .card.fighting {
-  background: linear-gradient(
-    to bottom right,
-    rgba(139, 69, 19, 0),
-    rgba(139, 69, 19, 1)
-  );
+.card.ground {
+  --colour-card-1: rgba(210, 105, 30, 0.1);
+  --colour-card-2: rgba(210, 105, 30, 1);
 }
-
-.allPoke .card.poison {
-  background: linear-gradient(
-    to bottom right,
-    rgba(147, 112, 219, 0),
-    rgba(80, 200, 120, 1)
-  );
+.card.flying {
+  --colour-card-1: rgba(135, 206, 235, 0.1);
+  --colour-card-2: rgba(135, 206, 235, 1);
 }
-
-.allPoke .card.ground {
-  background: linear-gradient(
-    to bottom right,
-    rgba(210, 105, 30, 0),
-    rgba(210, 105, 30, 1)
-  );
+.card.bug {
+  --colour-card-1: rgba(0, 128, 0, 0.1);
+  --colour-card-2: rgba(107, 142, 35, 1);
 }
-
-.allPoke .card.flying {
-  background: linear-gradient(
-    to bottom right,
-    rgba(135, 206, 235, 0),
-    rgba(135, 206, 235, 1)
-  );
+.card.rock {
+  --colour-card-1: rgba(119, 136, 153, 0.1);
+  --colour-card-2: rgba(119, 136, 153, 1);
 }
-
-.allPoke .card.bug {
-  background: linear-gradient(
-    to bottom right,
-    rgba(107, 142, 35, 0),
-    rgba(107, 142, 35, 1)
-  );
+.card.ghost {
+  --colour-card-1: rgba(106, 90, 205, 0.1);
+  --colour-card-2: rgba(106, 90, 205, 1);
 }
-
-.allPoke .card.rock {
-  background: linear-gradient(
-    to bottom right,
-    rgba(119, 136, 153, 0),
-    rgba(119, 136, 153, 1)
-  );
-}
-
-.allPoke .card.ghost {
-  background: linear-gradient(
-    to bottom right,
-    rgba(106, 90, 205, 0),
-    rgba(106, 90, 205, 1)
-  );
-}
-
-.allPoke .card.steel {
-  background: linear-gradient(
-    to bottom right,
-    rgba(70, 130, 180, 0),
-    rgba(70, 130, 180, 1)
-  );
+.card.steel {
+  --colour-card-1: rgba(70, 130, 180, 0.1);
+  --colour-card-2: rgba(70, 130, 180, 1);
 }
 .whothat .card-img-top {
   height: 400px;
@@ -552,7 +497,6 @@ body.stats {
   place-items: center;
   height: 100vh;
   margin: 0;
-  background-color: lightsteelblue;
 }
 .pokemon {
   grid-area: pokemon;
@@ -567,6 +511,10 @@ body.stats {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   padding-bottom: 10px;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(to bottom right, var(--colour-card-1), var(--colour-card-2))
+      border-box;
+  border: 4px solid transparent;
 }
 .pokemon .card img {
   max-height: 35vh;
@@ -600,7 +548,6 @@ body.stats {
   padding: 10px;
   border: 5px solid black;
   margin: 5px;
-  background-color: lightgrey;
 }
 #stats {
   border: 2px solid black;
