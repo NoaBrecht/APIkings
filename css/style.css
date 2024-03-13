@@ -403,14 +403,6 @@ body.allPoke {
     rgba(70, 130, 180, 1)
   );
 }
-
-.whothat .container-fluid {
-  /* width: max-content;*/
-}
-
-.whothat .container-body {
-}
-
 .whothat .card-img-top {
   height: 400px;
   width: auto;
@@ -547,4 +539,81 @@ body.allPoke {
   margin: 0 auto;
   height: 450px;
   display: block;
+}
+
+body.stats {
+  grid-template-areas:
+    "pokemon pokemon pokemon"
+    "stats path path";
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: lightsteelblue;
+}
+.pokemon {
+  grid-area: pokemon;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pokemon .card {
+  margin: 10px;
+  width: 25rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  padding-bottom: 10px;
+}
+.pokemon .card img {
+  max-height: 35vh;
+  width: auto;
+  margin: 0 auto;
+}
+.pokemon .card h1 {
+  text-align: center;
+}
+.pokemon .card span {
+  text-align: center;
+  padding: 10px;
+}
+.statspoke {
+  grid-area: stats;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 5px dashed black;
+  width: 30vw;
+  flex-direction: column;
+  padding: 10px;
+  margin: 5px;
+}
+.path {
+  grid-area: path;
+  width: 65vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  border: 5px solid black;
+  margin: 5px;
+  background-color: lightgrey;
+}
+#stats {
+  border: 2px solid black;
+}
+.pokemon .images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+  padding: 10px;
+}
+.pathimg,
+.images svg {
+  width: 15%;
+}
+.images {
+  display: flex;
+  justify-content: space-between;
 }
