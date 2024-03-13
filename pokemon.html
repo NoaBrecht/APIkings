@@ -20,13 +20,12 @@
     <script defer src="js/navCollapse.js" defer></script>
 </head>
 
-<body class="allPoke">
+<body class="stats">
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-danger text-uppercase" aria-label="Main navigation">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="assets/pikachu.png" alt="Bootstrap" style="height: auto; width: 30px;">
-            </a>
-            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
+            </a> <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -52,57 +51,60 @@
                         <a class="nav-link" href="whothat.html">Who's that pokemon</a>
                     </li>
                 </ul>
-                <a class="nav-link" href="#">logout</a>
+                <a class="nav-link" href="">logout</a>
 
             </div>
         </div>
     </nav>
 
     <article class="container-fluid row justify-content-center">
-        <section class="card text-center fire">
-            <article class="card-body">
-                <h1 class="card-title"><a href="pokemon.html">charmander</a></h1>
-                <p class="card-text">1</p>
-            </article>
-            <img src="assets/charmander.png" class="card-img-top" alt="...">
-        </section>
-        <section class="card text-center water">
-            <article class="card-body">
-                <h1 class="card-title">squirtle</h1>
-                <p class="card-text">2</p>
-            </article>
-            <img src="assets/squirtle.png" class="card-img-top" alt="...">
-        </section>
-        <section class="card text-center grass">
-            <article class="card-body">
-                <h1 class="card-title">bulbasaur</h1>
-                <p class="card-text">3</p>
-            </article>
-            <img src="assets/bulbasaur.png" class="card-img-top" alt="...">
-        </section>
 
-        <section class="card text-center electric">
-            <article class="card-body">
-                <h1 class="card-title">pikachu</h1>
-                <p class="card-text">4</p>
-            </article>
-            <img src="assets/pikachu.png" class="card-img-top" alt="...">
-        </section>
+        <section class="pokemon">
+            <section class="card text-center fire">
+                <article class="card-body">
+                    <h1 class="card-title">1.<span class="pokename">charmander</span></h1>
 
-        <section class="card text-center psychic">
-            <article class="card-body">
-                <h1 class="card-title">mewtwo</h1>
-                <p class="card-text">5</p>
-            </article>
-            <img src="assets/mewtwo.png" class="card-img-top" alt="...">
+                </article>
+                <img src="assets/charmander.png" class="card-img-top" alt="...">
+            </section>
         </section>
+        <section class="statspoke">
+            <h1>Geof</h1>
+            <section id="stats">
+                <h2>Stats</h2>
+                <p>HP: 5</p>
+                <p>ATT: 5</p>
+                <p>DEF: 5</p>
+            </section>
+        </section>
+        <section class="path">
+            <h1>
+                Evolutiepad
+            </h1>
+            <section class="images">
+                <img src="assets/charmander.png" alt="" class="pathimg">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
+                        stroke-width="0.192" />
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#000000" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                </svg>
+                <img src="assets/charmeleon.png" alt="" class="pathimg">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
+                        stroke-width="0.192" />
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#000000" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                </svg>
+                <img src="assets/charizard.png" alt="" class="pathimg">
 
-        <section class="card text-center normal">
-            <article class="card-body">
-                <h1 class="card-title">eevee</h1>
-                <p class="card-text">6</p>
-            </article>
-            <img src="assets/eevee.png" class="card-img-top" alt="...">
+            </section>
         </section>
 
     </article>

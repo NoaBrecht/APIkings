@@ -16,10 +16,12 @@
 </head>
 
 <body class="vergelijken">
-  <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-danger" aria-label="Main navigation">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-danger text-uppercase" aria-label="Main navigation">
     <div class="container-fluid">
-      <a class="navbar-brand text-light" href="#">Pokémon</a>
-      <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="#">
+        <img src="assets/pikachu.png" alt="Bootstrap" style="height: auto; width: 30px;">
+      </a> <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
+        aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -38,12 +40,14 @@
             <a class="nav-link" href="battler.html">Vechten</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Vangen</a>
+            <a class="nav-link" href="catcher.html">Vangen</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="whothat.html">Who's that pokemon</a>
           </li>
         </ul>
+        <a class="nav-link" href="">logout</a>
+
       </div>
     </div>
   </nav>
@@ -67,7 +71,7 @@
         <section class="vergSearch">
           <label class="visually-hidden" for="pokemon2">OthrPkm</label>
           <input type="text" class="form-control" id="pokemon2" value="Meowth" placeholder="Naam">
-        </section> 
+        </section>
         <section class="vergBut">
           <button type="submit" class="btn btn-dark">Zoeken</button>
         </section>
