@@ -448,19 +448,6 @@ body.allPoke {
   background-color: rgb(225, 215, 215);
   margin: 0 auto;
 }
-
-.battler .firstpokemon-btn {
-  max-width: 300px;
-  height: 300px;
-  text-align: center;
-  margin: 80px;
-  flex: 4 0 35%;
-}
-
-.battler .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
 .battler img {
   height: 20rem;
 }
@@ -533,4 +520,15 @@ body.allPoke {
 }
 .vergelijken .vergBut {
   width: 25%;
+}
+.catcher {
+  background-color: lightgreen;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../assets/battler.png");
+}
+.catcher .charizard {
+  margin: 0 auto;
+  height: 450px;
+  display: block;
 }
