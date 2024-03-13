@@ -403,14 +403,6 @@ body.allPoke {
     rgba(70, 130, 180, 1)
   );
 }
-
-.whothat .container-fluid {
-  /* width: max-content;*/
-}
-
-.whothat .container-body {
-}
-
 .whothat .card-img-top {
   height: 400px;
   width: auto;
