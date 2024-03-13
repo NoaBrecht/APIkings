@@ -166,10 +166,10 @@ body.landingpage {
 }
 
 .landingpage .container button {
-  width: 200px;
+  width: 450px;
   height: 300px;
   text-align: center;
-  margin: 80px;
+  margin: 50px;
   flex: 4 0 35%;
 }
 
@@ -178,24 +178,8 @@ body.landingpage {
   flex-wrap: wrap;
 }
 
-.landingpage .login button {
-  width: 1000px;
-  height: 50px;
-  text-align: center;
-  margin: 10px auto 50px;
-}
-
-.landingpage .login button:hover {
-  background-color: #040faa;
-  color: white;
-}
-
-.landingpage .login {
-  text-align: center;
-}
-
 .landingpage .square-container {
-  width: 1600px;
+  width: 90%;
   height: 50px;
   background-color: lightgray;
   display: flex;
@@ -212,35 +196,53 @@ body.landingpage {
 .landingpage .page {
   margin-top: 50px;
 }
-.landingpage .pikachu-btn {
-  background-image: url("https://i.pinimg.com/550x/cb/33/49/cb3349b86ca661ca61ae9a36d88d70d4.jpg");
+
+.landingpage .landbtns {
+  color: white;
 }
 
-.landingpage .btn:nth-child(2) {
+.landingpage .pikachu-btn {
+  background-image: url("https://i.pinimg.com/550x/cb/33/49/cb3349b86ca661ca61ae9a36d88d70d4.jpg");
+  background-size: 100% 100%;
+}
+
+.landingpage .fifa-btn {
   background-image: url("https://ftw.usatoday.com/wp-content/uploads/sites/90/2023/07/EA-Sports-FC-24-cover.jpg?w=640");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
 }
-.landingpage .btn:nth-child(3) {
+.landingpage .fort-btn {
   background-image: url("https://wallpapers.com/images/featured/fortnite-pictures-b5kfcchwazwiz3cs.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-.landingpage .btn:nth-child(4) {
+.landingpage .lego-btn {
   background-image: url("https://m.media-amazon.com/images/M/MV5BYjM0ZGJhYTYtZjUyMi00MWZmLTg0MTQtNDRiM2U3Yzk2ZGNhXkEyXkFqcGdeQXVyMzkyOTQ0NzY@._V1_.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-.landingpage .btn:nth-child(5) {
+.landingpage .lotr-btn {
   background-image: url("https://m.media-amazon.com/images/S/pv-target-images/06b3a88bd674980e8dfab3347c9d991379ba476b024a3a4a64556ebff88c8191._SX1080_FMjpg_.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-.landingpage .btn:nth-child(6) {
+.landingpage .mtg-btn {
   background-image: url("https://images.ctfassets.net/s5n2t79q9icq/114xMnrR6RiLD15UxL8LYZ/ca73ec9fe59f654a150b543e05979181/Meta-Homepage.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 769px) {
+  .landingpage .landbtns {
+    width: 100%;
+    color: white;
+  }
+  .landingpage .container button {
+    width: 250px;
+    height: 300px;
+    margin: 50px;
+  }
 }
 
 /** Al mijn pokemon weergeven */
@@ -402,13 +404,6 @@ body.allPoke {
     rgba(70, 130, 180, 0),
     rgba(70, 130, 180, 1)
   );
-}
-
-.whothat .container-fluid {
-  /* width: max-content;*/
-}
-
-.whothat .container-body {
 }
 
 .whothat .card-img-top {
