@@ -10,6 +10,7 @@
 /** NAV */
 body {
   padding-top: 13vh;
+  background-color: lightgray !important;
 }
 
 @media (max-width: 991.98px) {
@@ -381,9 +382,6 @@ body.allPoke {
   margin: -100px;
   height: 100px;
 }
-.whothat {
-  background-color: rgb(170, 164, 164);
-}
 .whothat .form-control {
   background-color: rgb(225, 215, 215);
   margin: 0 auto;
@@ -414,7 +412,6 @@ body.allPoke {
   background-color: black;
 }
 .battler {
-  background-color: lightgreen;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("../assets/battler.png");
@@ -429,12 +426,6 @@ body.allPoke {
   }
 }
 /** vergelijken  */
-.vergelijken {
-  background-image: url("../assets/backVerg.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
 .vergelijken article {
   margin-top: 5vw;
   display: flex;
@@ -452,7 +443,6 @@ body.allPoke {
 }
 .vergelijken span {
   text-align: center;
-  color: var(--colour-text);
 }
 .vergelijken .vergSearch {
   width: 65%;
@@ -478,7 +468,6 @@ body.allPoke {
   }
 }
 .catcher {
-  background-color: lightgreen;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("../assets/battler.png");
