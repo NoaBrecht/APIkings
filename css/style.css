@@ -536,6 +536,10 @@ body.allPoke {
   position: relative;
 }
 
+.catcher .btn:hover {
+  background-color: grey;
+}
+
 .catcher .pokeball::before {
   content: "";
   width: 10.3em;
