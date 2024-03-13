@@ -469,6 +469,10 @@ body.allPoke {
 .battler .border {
   background-color: white;
 }
+.battler .progress {
+  border-style: solid;
+  background-color: black;
+}
 .battler {
   background-color: lightgreen;
   background-repeat: no-repeat;
@@ -532,4 +536,15 @@ body.allPoke {
     padding-left: 0;
     padding-right: 0;
   }
+}
+.catcher {
+  background-color: lightgreen;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../assets/battler.png");
+}
+.catcher .charizard {
+  margin: 0 auto;
+  height: 450px;
+  display: block;
 }
