@@ -496,30 +496,46 @@ body.allPoke {
   background-attachment: fixed;
 }
 .vergelijken article {
-  margin-top: 5rem;
+  margin-top: 5vw;
   display: flex;
-  flex-wrap: wrap;
 }
 .vergelijken .border {
-  width: 25%;
-  margin-left: 5rem;
-  margin-right: 15%;
+  width: 25vw;
+  margin-left: 10vw;
 }
 .vergelijken img {
   height: 15rem;
+  width: 15rem;
 }
 .vergelijken .vergOther {
-  float: right;
+  margin-left: 30vw;
 }
 .vergelijken span {
   text-align: center;
   color: var(--colour-text);
 }
 .vergelijken .vergSearch {
-  width: 75%;
+  width: 65%;
 }
 .vergelijken .vergBut {
   width: 25%;
+}
+.vergelijken h2 {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+@media (max-width: 769px) {
+  .vergelijken .border {
+    margin: 0;
+    width: 50%;
+  }
+  .vergelijken .vergSearch {
+    width: 100%;
+  }
+  .vergelijken h2 {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 .catcher {
   background-color: lightgreen;
