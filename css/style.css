@@ -482,6 +482,10 @@ body.allPoke {
 .battler .border {
   background-color: white;
 }
+.battler .progress {
+  border-style: solid;
+  background-color: black;
+}
 .battler {
   background-color: lightgreen;
   background-repeat: no-repeat;
