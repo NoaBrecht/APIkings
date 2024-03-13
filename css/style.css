@@ -481,7 +481,90 @@ body.allPoke {
   height: 450px;
   display: block;
 }
+.catcher .catch {
+  width: 15rem;
+  margin-left: 42%;
+}
 
+.catcher .pokeballbody {
+  width: 25em;
+  height: 25em;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+}
+
+.catcher .pokeball {
+  position: relative;
+  width: 42.5%;
+
+  height: 42.5%;
+  border-radius: 50%;
+  border: 7px #111 solid;
+  background: linear-gradient(
+    0deg,
+    #fff 0%,
+    #fff 50%,
+    #876f74 50%,
+    #fb0d3e 100%
+  );
+}
+
+.catcher .btn {
+  background: #fff;
+  width: 5.5em;
+  height: 5.5em;
+  border-radius: 50%;
+  border: 15px solid #111;
+  margin-top: 10.5%;
+  margin-left: -31.5%;
+  position: relative;
+}
+
+.catcher .btn::before {
+  content: "";
+  border: 3.5px solid #111;
+  border-radius: 50%;
+  width: 2.9em;
+  height: 2.9em;
+  display: inline-block;
+  margin-bottom: 1%;
+  margin-left: -15%;
+  position: relative;
+}
+
+.catcher .pokeball::before {
+  content: "";
+  width: 10.3em;
+  background: #111;
+  height: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.catcher .pokeball::after {
+  content: "";
+  background: #fff;
+  position: absolute;
+  top: 1em;
+  left: 2em;
+  width: 1em;
+  height: 2.5em;
+  border-radius: 50%;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 750px) {
+  .battler .catch {
+    width: 100%;
+    border-radius: 100px !important;
+  }
+}
 body.stats {
   grid-template-areas:
     "pokemon pokemon pokemon"
