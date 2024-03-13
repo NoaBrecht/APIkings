@@ -471,6 +471,10 @@ body.allPoke {
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("../assets/battler.png");
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .catcher .charizard {
   margin: 0 auto;
