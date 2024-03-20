@@ -10,7 +10,7 @@
 /** NAV */
 body {
   padding-top: 13vh;
-  background-color: lightgray !important;
+  background-color: white !important;
 }
 
 @media (max-width: 991.98px) {
@@ -361,7 +361,7 @@ body.allPoke {
   --colour-card-2: rgba(70, 130, 180, 1);
 }
 .whothat .card-img-top {
-  height: 400px;
+  height: 200px;
   width: auto;
   margin: 0 auto;
 }
@@ -373,26 +373,47 @@ body.allPoke {
   margin: 0;
 }
 .whothat .card {
+  border: 5px solid rgb(47, 45, 45);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 600px;
+  max-width: 1000px;
+  height: 600px;
   background: linear-gradient(
     to bottom right,
     rgba(39, 187, 245, 0.8),
     rgba(241, 39, 39, 0.8)
   );
 }
+
 .whothat .form-group {
+  /* border: 2px solid rgb(47, 45, 45);*/
   width: 100%;
   max-width: 400px;
-  margin: -100px;
+  margin: 0 auto;
+  margin-top: 5%;
   height: 100px;
 }
 .whothat .form-control {
   background-color: rgb(225, 215, 215);
   margin: 0 auto;
+}
+.whothat .gokbtn {
+  width: 100%;
+  height: 50%;
+  bottom: 10%;
+
+  margin: 0 auto;
+  margin-top: 30%;
+}
+
+.whothat #pokemonname {
+  background: linear-gradient(
+    to bottom right,
+    rgba(111, 173, 198, 0.8),
+    rgba(73, 13, 13, 0.8)
+  );
 }
 .battler img {
   height: 20rem;
