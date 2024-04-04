@@ -49,12 +49,21 @@ app.get("/pokemon/:id", async (req, res) => {
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
+
         const pokemon = await response.json();
         console.log(pokemon.name + " " + pokemon.types[0].type.name);
+
+        let pokemonbijnaam: string = "";
+        if (pokemonbijnaam === "") {
+            pokemonbijnaam = pokemon.name;
+        }
+
         res.render('pokemon', {
             title: pokemon.name,
-            pokemon: pokemon
+            pokemon: pokemon,
+            pokemonbijnaam: pokemonbijnaam,
         });
+
     } catch (error) {
         console.error('Error:', error);
     }

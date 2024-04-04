@@ -639,6 +639,7 @@ body.stats {
 }
 #stats {
   border: 2px solid black;
+  padding: 9px;
 }
 .pokemon .images {
   display: flex;
