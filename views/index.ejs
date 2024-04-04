@@ -2,54 +2,65 @@
 
     <body class="allPoke">
         <%- include("partials/nav") %>
-
-
             <article class="container-fluid row justify-content-center">
-                <section class="card text-center fire">
-                    <article class="card-body">
-                        <h1 class="card-title"><a href="pokemon.html">charmander</a></h1>
-                        <p class="card-text">1</p>
-                    </article>
-                    <img src="assets/charmander.png" class="card-img-top" alt="...">
-                </section>
-                <section class="card text-center water">
-                    <article class="card-body">
-                        <h1 class="card-title">squirtle</h1>
-                        <p class="card-text">2</p>
-                    </article>
-                    <img src="assets/squirtle.png" class="card-img-top" alt="...">
-                </section>
-                <section class="card text-center grass">
-                    <article class="card-body">
-                        <h1 class="card-title">bulbasaur</h1>
-                        <p class="card-text">3</p>
-                    </article>
-                    <img src="assets/bulbasaur.png" class="card-img-top" alt="...">
-                </section>
+                <% for(let pokemon of pokemons) { %>
+                    <section class="card text-center <%=pokemon.type%>">
+                        <article class="card-body">
+                            <h1 class="card-title"><a href="/pokemon/<%=pokemon.id%>">
+                                    <%= pokemon.name %>
+                                </a></h1>
+                            <p class="card-text">
+                                <%= pokemon.id %>
+                            </p>
+                        </article>
+                        <img src="<%=pokemon.image%>" class="card-img-top" alt="een afbeelding van <%= pokemon.name %>">
+                    </section>
+                    <% } %>
+                        <!-- <section class="card text-center fire">
+                            <article class="card-body">
+                                <h1 class="card-title"><a href="pokemon.html">charmander</a></h1>
+                                <p class="card-text">1</p>
+                            </article>
+                            <img src="assets/charmander.png" class="card-img-top" alt="...">
+                        </section>
+                        <section class="card text-center water">
+                            <article class="card-body">
+                                <h1 class="card-title">squirtle</h1>
+                                <p class="card-text">2</p>
+                            </article>
+                            <img src="assets/squirtle.png" class="card-img-top" alt="...">
+                        </section>
+                        <section class="card text-center grass">
+                            <article class="card-body">
+                                <h1 class="card-title">bulbasaur</h1>
+                                <p class="card-text">3</p>
+                            </article>
+                            <img src="assets/bulbasaur.png" class="card-img-top" alt="...">
+                        </section>
 
-                <section class="card text-center electric">
-                    <article class="card-body">
-                        <h1 class="card-title">pikachu</h1>
-                        <p class="card-text">4</p>
-                    </article>
-                    <img src="assets/pikachu.png" class="card-img-top" alt="...">
-                </section>
+                        <section class="card text-center electric">
+                            <article class="card-body">
+                                <h1 class="card-title">pikachu</h1>
+                                <p class="card-text">4</p>
+                            </article>
+                            <img src="assets/pikachu.png" class="card-img-top" alt="...">
+                        </section>
 
-                <section class="card text-center psychic">
-                    <article class="card-body">
-                        <h1 class="card-title">mewtwo</h1>
-                        <p class="card-text">5</p>
-                    </article>
-                    <img src="assets/mewtwo.png" class="card-img-top" alt="...">
-                </section>
+                        <section class="card text-center psychic">
+                            <article class="card-body">
+                                <h1 class="card-title">mewtwo</h1>
+                                <p class="card-text">5</p>
+                            </article>
+                            <img src="assets/mewtwo.png" class="card-img-top" alt="...">
+                        </section>
 
-                <section class="card text-center normal">
-                    <article class="card-body">
-                        <h1 class="card-title">eevee</h1>
-                        <p class="card-text">6</p>
-                    </article>
-                    <img src="assets/eevee.png" class="card-img-top" alt="...">
-                </section>
+                        <section class="card text-center normal">
+                            <article class="card-body">
+                                <h1 class="card-title">eevee</h1>
+                                <p class="card-text">6</p>
+                            </article>
+                            <img src="assets/eevee.png" class="card-img-top" alt="...">
+                        </section> -->
 
             </article>
 
