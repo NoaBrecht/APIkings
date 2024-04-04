@@ -38,10 +38,16 @@ app.get("/", async (req, res) => {
             title: "Alle pokemons",
             pokemons: pokemonWithImages
         });
+        
     } catch (error) {
         console.error('Error:', error);
     }
 });
+app.get("/catcher", async (req,res) =>{
+    res.render('catcher', {
+        title: "vangen van pokemons",
+    });
+})
 app.get("/pokemon/:id", async (req, res) => {
     try {
         const { id } = req.params;
