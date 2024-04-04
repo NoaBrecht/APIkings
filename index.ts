@@ -20,6 +20,12 @@ app.get("/", (req, res) => {
     })
 });
 
+app.get("/whothat",(req,res)=>{
+    res.render("whothat", {
+        title: "who is that pokemon?"
+    })
+})
+
 app.listen(app.get("port"), () => {
     console.log("Server started on http://localhost:" + app.get('port'));
 });
