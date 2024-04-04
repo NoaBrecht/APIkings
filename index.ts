@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
+import { cp } from "fs";
 
 dotenv.config();
 
@@ -21,14 +22,16 @@ app.get("/", async (req, res) => {
     try {
         const maxPoke = req.query.maxpoke;
         const limit = maxPoke ? parseInt(maxPoke.toString()) : 100;
-        const test = req.query.page;
-        const paging = test ? parseInt(test.toString()) : 1;
+        const page = req.query.page;
+        const paging = page ? parseInt(page.toString()) : 1;
         const offset = paging === 1 ? 0 : (paging - 1) * limit;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         let pokemons: any = await response.json();
+        const total = pokemons.count;
+        console.log(total);
         const pokemonWithImages = await Promise.all(pokemons.results.map(async (pokemon: any) => {
             const response = await fetch(pokemon.url);
             const data = await response.json();
@@ -37,11 +40,13 @@ app.get("/", async (req, res) => {
                 name: pokemon.name,
                 image: data.sprites.other.home.front_default,
                 type: data.types[0].type.name
+
             };
         }));
         res.render('index', {
             title: "Alle pokemons",
-            pokemons: pokemonWithImages
+            pokemons: pokemonWithImages,
+            currentPage: paging,
         });
     } catch (error) {
         console.error('Error:', error);

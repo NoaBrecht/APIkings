@@ -20,18 +20,20 @@
             <nav>
                 <ul class="pagination justify-content-center">
                     <li class="page-item">
-                        <a class="page-link disabled" href="#" aria-label="Previous">
+                        <a class="page-link" href="/?page=<%=currentPage-1%>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="/?page=1">1</a></li>
-                    <li class="page-item"><a class="page-link" href="/?page=2">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+                    <% for( let index=1; index < 15; index++ ) { %>
+                        <li class="page-item"><a class="page-link" href="/?page=<%=index%>">
+                                <%=index%>
+                            </a></li>
+                        <% } %>
+                            <li class="page-item">
+                                <a class="page-link" href="/?page=<%= currentPage+1 %>" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
                 </ul>
             </nav>
             <%- include("partials/footer") %>
