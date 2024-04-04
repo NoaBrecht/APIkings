@@ -19,7 +19,12 @@ app.use((req, res, next) => {
 });
 app.get("/", async (req, res) => {
     try {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100');
+        const maxPoke = req.query.maxpoke;
+        const limit = maxPoke ? parseInt(maxPoke.toString()) : 100;
+        const test = req.query.page;
+        const paging = test ? parseInt(test.toString()) : 1;
+        const offset = paging === 1 ? 0 : (paging - 1) * limit;
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
