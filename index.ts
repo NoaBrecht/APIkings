@@ -35,7 +35,7 @@ app.get("/", async (req, res) => {
             };
         }));
         res.render('index', {
-            title: "Brands",
+            title: "Alle pokemons",
             pokemons: pokemonWithImages
         });
     } catch (error) {
