@@ -10,7 +10,7 @@
 /** NAV */
 body {
   padding-top: 13vh;
-  background-color: lightgray !important;
+  background-color: rgb(254, 254, 254) !important;
 }
 
 @media (max-width: 991.98px) {
