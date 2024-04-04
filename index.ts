@@ -50,6 +50,7 @@ app.get("/pokemon/:id", async (req, res) => {
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         const pokemon = await response.json();
+        console.log(pokemon.name + " " + pokemon.types[0].type.name);
         res.render('pokemon', {
             title: pokemon.name,
             pokemon: pokemon

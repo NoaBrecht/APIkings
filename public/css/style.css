@@ -125,8 +125,8 @@ body.login-main {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
-  label,
-  H1 {
+  .login-form label,
+  .login-form H1 {
     color: white;
   }
   .toggle-password {
@@ -654,4 +654,25 @@ body.stats {
 .images {
   display: flex;
   justify-content: space-between;
+}
+@media (max-width: 750px) {
+.arrow-path{
+  rotate: 90deg;
+}
+.images {
+  flex-direction: column;
+  align-items: center;
+}
+.pokemon .card img {
+  max-height: 20dvh;
+}
+.statspoke, .path {
+  width: 90vw;
+}
+.pathimg{
+  width: 50%;
+}
+.statspoke {
+  text-align: center;
+}
 }
