@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 app.get("/", async (req, res) => {
     try {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon');
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100');
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
