@@ -48,6 +48,11 @@ app.get("/catcher", async (req,res) =>{
         title: "vangen van pokemons",
     });
 })
+app.get("/landingpagina", async (req,res) =>{
+    res.render('landingpage', {
+        title: "Landingpagina, kies een project",
+    });
+})
 app.get("/pokemon/:id", async (req, res) => {
     try {
         const { id } = req.params;
