@@ -50,6 +50,7 @@ app.get("/", async (req, res) => {
             limit: limit,
             totalPages: Math.ceil(totalCount / limit)
         });
+
     } catch (error) {
         console.error('Error:', error);
     }
