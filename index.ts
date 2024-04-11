@@ -1,7 +1,6 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { cp } from "fs";
 
 dotenv.config();
 
@@ -25,13 +24,14 @@ app.get("/", async (req, res) => {
         const page = req.query.page;
         const paging = page ? parseInt(page.toString()) : 1;
         const offset = paging === 1 ? 0 : (paging - 1) * limit;
+        const totalCountResponse = await fetch("https://pokeapi.co/api/v2/pokemon");
+        const totalCountData = await totalCountResponse.json();
+        const totalCount = totalCountData.count;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         let pokemons: any = await response.json();
-        const total = pokemons.count;
-        console.log(total);
         const pokemonWithImages = await Promise.all(pokemons.results.map(async (pokemon: any) => {
             const response = await fetch(pokemon.url);
             const data = await response.json();
@@ -40,18 +40,31 @@ app.get("/", async (req, res) => {
                 name: pokemon.name,
                 image: data.sprites.other.home.front_default,
                 type: data.types[0].type.name
-
             };
         }));
+
         res.render('index', {
             title: "Alle pokemons",
             pokemons: pokemonWithImages,
             currentPage: paging,
+            limit: limit,
+            totalPages: Math.ceil(totalCount / limit)
         });
     } catch (error) {
         console.error('Error:', error);
     }
 });
+app.get("/catcher", async (req, res) => {
+    res.render('catcher', {
+        title: "vangen van pokemons",
+    });
+})
+app.get("/landingpagina", async (req, res) => {
+    res.render('landingpage', {
+        title: "Landingpagina, kies een project",
+    });
+})
+
 app.get("/pokemon/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -78,6 +91,12 @@ app.get("/pokemon/:id", async (req, res) => {
         console.error('Error:', error);
     }
 });
+
+app.get("/whothat", (req, res) => {
+    res.render("whothat", {
+        title: "who is that pokemon?"
+    })
+})
 
 app.listen(app.get("port"), () => {
     console.log("Server started on http://localhost:" + app.get('port'));

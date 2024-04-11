@@ -19,21 +19,25 @@
             </article>
             <nav>
                 <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="/?page=<%=currentPage-1%>" aria-label="Previous">
+                    <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                        <a class="page-link" href="/?page=<%=currentPage-1%>&maxpoke=<%=limit%>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <% for( let index=1; index < 15; index++ ) { %>
-                        <li class="page-item"><a class="page-link" href="/?page=<%=index%>">
-                                <%=index%>
-                            </a></li>
+                    <% for(let index=1; index <=totalPages; index++) { %>
+                        <li class="page-item <%= currentPage === index ? 'active' : '' %>">
+                            <a class="page-link" href="/?page=<%=index%>&maxpoke=<%=limit%>">
+                                <%= index %>
+                            </a>
+                        </li>
                         <% } %>
-                            <li class="page-item">
-                                <a class="page-link" href="/?page=<%= currentPage+1 %>" aria-label="Next">
+                            <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                                <a class="page-link" href="/?page=<%= currentPage+1 %>&maxpoke=<%=limit%>"
+                                    aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                 </ul>
             </nav>
             <%- include("partials/footer") %>
+    </body>
