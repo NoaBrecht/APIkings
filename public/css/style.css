@@ -7,6 +7,7 @@
   --bs-nav-mobile: #ffffff;
   --colour-text: #fff;
 }
+
 /** NAV */
 body {
   padding-top: 13vh;
@@ -16,7 +17,8 @@ body {
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
-    top: 56px; /* Height of navbar */
+    top: 56px;
+    /* Height of navbar */
     bottom: 0;
     left: 100%;
     width: 100%;
@@ -27,6 +29,7 @@ body {
     background-color: var(--bs-nav-mobile);
     transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
+
   .offcanvas-collapse.open {
     visibility: visible;
     transform: translateX(-100%);
@@ -61,23 +64,26 @@ body.login-main {
   height: 100vh;
   overflow: hidden;
 }
+
 .login {
   grid-area: login;
   padding: 1vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
 }
+
 .login-form {
   background-color: #ababab85;
   border-radius: 2vh;
   padding: 2vw;
 }
+
 .login-form h1 {
   text-align: center;
   margin-bottom: 2vh;
 }
+
 .waves {
   grid-area: waves;
   background-color: var(--colour-wave-background);
@@ -87,6 +93,7 @@ body.login-main {
   padding: 0;
   margin: 0;
 }
+
 .wave-1,
 .wave-2 {
   stroke-width: 0px;
@@ -97,11 +104,13 @@ body.login-main {
   background-color: #8b0000;
   background-image: url(../assets/charmander.png);
 }
+
 .waves-red .wave-1,
 .waves-red .wave-2 {
   stroke-width: 0px;
   fill: #b80000;
 }
+
 .btn-login {
   --bs-btn-color: #fff;
   --bs-btn-bg: var(--colour-wave-background);
@@ -118,6 +127,7 @@ body.login-main {
   --bs-btn-disabled-bg: var(--colour-wave-darker);
   --bs-btn-disabled-border-color: var(--colour-wave-dark);
 }
+
 @media (max-width: 768px) {
   .login-form {
     box-shadow: 0 0 5px 0;
@@ -125,14 +135,17 @@ body.login-main {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
-  .login-form label,
-  .login-form H1 {
+
+  label,
+  H1 {
     color: white;
   }
+
   .toggle-password {
     color: black;
     background-color: #ababab85;
   }
+
   .btn-login {
     --bs-btn-color: #fff;
     --bs-btn-bg: #6c757d;
@@ -150,26 +163,26 @@ body.login-main {
     --bs-btn-disabled-border-color: #6c757d;
   }
 }
+
 @media (min-width: 769px) {
   body.login-main {
     grid-template-areas: "waves waves login";
   }
 }
+
 /** Landings pagina */
 body.landingpage {
   background: rgb(0, 18, 32);
-  background: linear-gradient(
-    126deg,
-    rgba(0, 18, 32, 1) 0%,
-    rgba(72, 33, 39, 1) 36%,
-    rgba(74, 34, 39, 1) 60%,
-    rgba(124, 44, 44, 1) 100%
-  );
+  background: linear-gradient(126deg,
+      rgba(0, 18, 32, 1) 0%,
+      rgba(72, 33, 39, 1) 36%,
+      rgba(74, 34, 39, 1) 60%,
+      rgba(124, 44, 44, 1) 100%);
   /*
   display: flex;
   justify-content:center;
   align-items:center;*/
-  
+
 }
 
 .landingpage .container button {
@@ -200,6 +213,7 @@ body.landingpage {
   left: 0;
   right: 0;
 }
+
 .landingpage .square-text {
   font-size: larger;
   font-weight: 600;
@@ -224,21 +238,25 @@ body.landingpage {
   background-repeat: no-repeat;
   background-position: center;
 }
+
 .landingpage .fort-btn {
   background-image: url("https://wallpapers.com/images/featured/fortnite-pictures-b5kfcchwazwiz3cs.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
 .landingpage .lego-btn {
   background-image: url("https://m.media-amazon.com/images/M/MV5BYjM0ZGJhYTYtZjUyMi00MWZmLTg0MTQtNDRiM2U3Yzk2ZGNhXkEyXkFqcGdeQXVyMzkyOTQ0NzY@._V1_.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
 .landingpage .lotr-btn {
   background-image: url("https://m.media-amazon.com/images/S/pv-target-images/06b3a88bd674980e8dfab3347c9d991379ba476b024a3a4a64556ebff88c8191._SX1080_FMjpg_.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
 .landingpage .mtg-btn {
   background-image: url("https://images.ctfassets.net/s5n2t79q9icq/114xMnrR6RiLD15UxL8LYZ/ca73ec9fe59f654a150b543e05979181/Meta-Homepage.jpg");
   background-size: 100% 100%;
@@ -250,6 +268,7 @@ body.landingpage {
     width: 100%;
     color: white;
   }
+
   .landingpage .container button {
     width: 250px;
     height: 300px;
@@ -261,6 +280,7 @@ body.landingpage {
 body.allPoke {
   padding-top: 13vh;
 }
+
 .allPoke .card {
   margin: 10px;
   width: 18rem;
@@ -269,10 +289,10 @@ body.allPoke {
   transition: all 0.3s ease;
   padding-bottom: 10px;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(to bottom right, var(--colour-card-1), var(--colour-card-2))
-      border-box;
+    linear-gradient(to bottom right, var(--colour-card-1), var(--colour-card-2)) border-box;
   border: 4px solid transparent;
 }
+
 .allPoke .card .card-title {
   font-size: larger;
 }
@@ -281,10 +301,12 @@ body.allPoke {
   text-decoration: none;
   color: black;
 }
+
 .allPoke .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }
+
 .card.fire {
   --colour-card-1: rgba(255, 0, 0, 0.1);
   --colour-card-2: rgba(255, 0, 0, 1);
@@ -324,10 +346,12 @@ body.allPoke {
   --colour-card-1: rgba(0, 0, 0, 0.1);
   --colour-card-2: rgba(0, 0, 0, 1);
 }
+
 .card.fairy {
   --colour-card-1: rgba(255, 192, 203, 0.1);
   --colour-card-2: rgba(255, 192, 203, 1);
 }
+
 .card.normal {
   --colour-card-1: rgba(192, 192, 192, 0.1);
   --colour-card-2: rgba(192, 192, 192, 1);
@@ -337,34 +361,42 @@ body.allPoke {
   --colour-card-1: rgba(139, 69, 19, 0.1);
   --colour-card-2: rgba(139, 69, 19, 1);
 }
+
 .card.poison {
   --colour-card-1: rgba(147, 112, 219, 0.1);
   --colour-card-2: rgba(80, 200, 120, 1);
 }
+
 .card.ground {
   --colour-card-1: rgba(210, 105, 30, 0.1);
   --colour-card-2: rgba(210, 105, 30, 1);
 }
+
 .card.flying {
   --colour-card-1: rgba(135, 206, 235, 0.1);
   --colour-card-2: rgba(135, 206, 235, 1);
 }
+
 .card.bug {
   --colour-card-1: rgba(0, 128, 0, 0.1);
   --colour-card-2: rgba(107, 142, 35, 1);
 }
+
 .card.rock {
   --colour-card-1: rgba(119, 136, 153, 0.1);
   --colour-card-2: rgba(119, 136, 153, 1);
 }
+
 .card.ghost {
   --colour-card-1: rgba(106, 90, 205, 0.1);
   --colour-card-2: rgba(106, 90, 205, 1);
 }
+
 .card.steel {
   --colour-card-1: rgba(70, 130, 180, 0.1);
   --colour-card-2: rgba(70, 130, 180, 1);
 }
+
 .whothat .card-img-top {
   height: 400px;
   width: auto;
@@ -376,36 +408,35 @@ body.allPoke {
   place-items: center;
   height: 100vh;
   margin: 0;
-  
+
 }
+
 .whothat .card {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 800px;
-  height:  750px;
-  background: linear-gradient(
-    to bottom right,
-    rgba(39, 187, 245, 0.8),
-    rgba(241, 39, 39, 0.8)
-  );
+  height: 750px;
+  background: linear-gradient(to bottom right,
+      rgba(39, 187, 245, 0.8),
+      rgba(241, 39, 39, 0.8));
 }
+
 .whothat .form-group {
   width: 100%;
   max-width: 500px;
   margin: -100px;
   height: 100px;
   margin-top: -25%;
-  position:absolute;
+  position: absolute;
   bottom: 80px;
 }
+
 .whothat .form-control {
-  background: linear-gradient(
-    to bottom right,
-    rgba(39, 187, 245, 0.8),
-    rgba(241, 39, 39, 0.8)
-  );
+  background: linear-gradient(to bottom right,
+      rgba(39, 187, 245, 0.8),
+      rgba(241, 39, 39, 0.8));
   margin: 0 auto;
   border: 2px solid black;
   border-radius: 5px;
@@ -415,84 +446,105 @@ body.allPoke {
 .battler img {
   height: 20rem;
 }
+
 .battler #battleYou {
   margin-top: 12rem;
   margin-left: 20%;
 }
+
 .battler section {
   display: flex;
 }
+
 .battler #battleOp {
   margin-top: 4rem;
   margin-left: 25%;
 }
+
 .battler .attack {
   width: 15rem;
   margin-left: 45%;
 }
+
 .battler .border {
   background-color: white;
 }
+
 .battler .progress {
   border-style: solid;
   background-color: black;
 }
+
 .battler {
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("../assets/battler.png");
 }
+
 @media (max-width: 769px) {
   .battler .attack {
     margin: 0;
     width: 100%;
   }
+
   .battler #battleYou {
     margin-left: 5%;
   }
 }
+
 /** vergelijken  */
 .vergelijken article {
   margin-top: 5vw;
   display: flex;
 }
+
 .vergelijken .border {
   width: 25vw;
   margin-left: 10vw;
 }
+
 .vergelijken img {
   height: 15rem;
   width: 15rem;
 }
+
 .vergelijken .vergOther {
   margin-left: 30vw;
 }
+
 .vergelijken span {
   text-align: center;
 }
+
 .vergelijken .vergSearch {
   width: 65%;
 }
+
 .vergelijken .vergBut {
   width: 25%;
 }
+
 .vergelijken h2 {
   padding-left: 5rem;
   padding-right: 5rem;
 }
+
 @media (max-width: 769px) {
   .vergelijken .border {
     margin: 0;
     width: 50%;
   }
+
   .vergelijken .vergSearch {
     width: 100%;
   }
+
   .vergelijken h2 {
     padding-left: 0;
     padding-right: 0;
   }
 }
+
 .catcher {
   background-repeat: no-repeat;
   background-size: cover;
@@ -502,11 +554,13 @@ body.allPoke {
   justify-content: center;
   align-items: center;
 }
+
 .catcher .charizard {
   margin: 0 auto;
   height: 450px;
   display: block;
 }
+
 .catcher .catch {
   width: 15rem;
   margin-left: 42%;
@@ -530,13 +584,11 @@ body.allPoke {
   height: 42.5%;
   border-radius: 50%;
   border: 7px #111 solid;
-  background: linear-gradient(
-    0deg,
-    #fff 0%,
-    #fff 50%,
-    #876f74 50%,
-    #fb0d3e 100%
-  );
+  background: linear-gradient(0deg,
+      #fff 0%,
+      #fff 50%,
+      #876f74 50%,
+      #fb0d3e 100%);
 }
 
 .catcher .btn {
@@ -595,6 +647,7 @@ body.allPoke {
     border-radius: 100px !important;
   }
 }
+
 body.stats {
   grid-template-areas:
     "pokemon pokemon pokemon"
@@ -604,12 +657,14 @@ body.stats {
   height: 100vh;
   margin: 0;
 }
+
 .pokemon {
   grid-area: pokemon;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .pokemon .card {
   margin: 10px;
   width: 25rem;
@@ -618,22 +673,25 @@ body.stats {
   transition: all 0.3s ease;
   padding-bottom: 10px;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(to bottom right, var(--colour-card-1), var(--colour-card-2))
-      border-box;
+    linear-gradient(to bottom right, var(--colour-card-1), var(--colour-card-2)) border-box;
   border: 4px solid transparent;
 }
+
 .pokemon .card img {
   max-height: 35vh;
   width: auto;
   margin: 0 auto;
 }
+
 .pokemon .card h1 {
   text-align: center;
 }
+
 .pokemon .card span {
   text-align: center;
   padding: 10px;
 }
+
 .statspoke {
   grid-area: stats;
   display: flex;
@@ -645,6 +703,7 @@ body.stats {
   padding: 10px;
   margin: 5px;
 }
+
 .path {
   grid-area: path;
   width: 65vw;
@@ -655,10 +714,12 @@ body.stats {
   border: 5px solid black;
   margin: 5px;
 }
+
 #stats {
   border: 2px solid black;
   padding: 9px;
 }
+
 .pokemon .images {
   display: flex;
   flex-wrap: wrap;
@@ -666,32 +727,41 @@ body.stats {
   flex-direction: row;
   padding: 10px;
 }
+
 .pathimg,
 .images svg {
   width: 15%;
 }
+
 .images {
   display: flex;
   justify-content: space-between;
 }
+
 @media (max-width: 750px) {
-.arrow-path{
-  rotate: 90deg;
-}
-.images {
-  flex-direction: column;
-  align-items: center;
-}
-.pokemon .card img {
-  max-height: 20dvh;
-}
-.statspoke, .path {
-  width: 90vw;
-}
-.pathimg{
-  width: 50%;
-}
-.statspoke {
-  text-align: center;
-}
+  .arrow-path {
+    rotate: 90deg;
+  }
+
+  .images {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pokemon .card img {
+    max-height: 20dvh;
+  }
+
+  .statspoke,
+  .path {
+    width: 90vw;
+  }
+
+  .pathimg {
+    width: 50%;
+  }
+
+  .statspoke {
+    text-align: center;
+  }
 }

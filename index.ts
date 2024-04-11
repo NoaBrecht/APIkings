@@ -76,7 +76,7 @@ app.get("/register", async (req, res) => {
     });
 })
 app.get("/wrong_project", async (req, res) => {
-    res.render('login', {
+    res.render('wrong_project', {
         title: "Login pagina"
     });
 })
