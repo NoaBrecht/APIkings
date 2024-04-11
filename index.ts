@@ -65,6 +65,22 @@ app.get("/landingpagina", async (req, res) => {
         title: "Landingpagina, kies een project",
     });
 })
+app.get("/login", async (req, res) => {
+    res.render('login', {
+        title: "Login pagina"
+    });
+})
+app.get("/register", async (req, res) => {
+    res.render('register', {
+        title: "register pagina"
+    });
+})
+app.get("/wrong_project", async (req, res) => {
+    res.render('login', {
+        title: "Login pagina"
+    });
+})
+
 
 app.get("/pokemon/:id", async (req, res) => {
     try {
