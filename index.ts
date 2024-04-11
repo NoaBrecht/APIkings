@@ -72,16 +72,14 @@ app.get("/login", async (req, res) => {
 })
 app.get("/register", async (req, res) => {
     res.render('register', {
-        title: "register pagina"
+        title: "Register pagina"
     });
 })
 app.get("/wrong_project", async (req, res) => {
     res.render('wrong_project', {
-        title: "Login pagina"
+        title: "Dit project is niet beschikbaar"
     });
 })
-
-
 app.get("/pokemon/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -108,13 +106,11 @@ app.get("/pokemon/:id", async (req, res) => {
         console.error('Error:', error);
     }
 });
-
 app.get("/whothat", (req, res) => {
     res.render("whothat", {
         title: "who is that pokemon?"
     })
 })
-
 app.listen(app.get("port"), () => {
     console.log("Server started on http://localhost:" + app.get('port'));
 });
