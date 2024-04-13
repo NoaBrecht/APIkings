@@ -1,0 +1,52 @@
+<%- include("partials/header") %>
+
+    <body class="login-main">
+        <section class="waves waves-red">
+            <figure>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <svg height="100vh" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 385.75 94.74">
+                    <path class="wave-1"
+                        d="M277.19,44.11c-5.75-9.3-12.62-12.5-52-17.96-58.5-8.69-27.06-20.73-74.8-26.15h235.36v75.43s-104.2-11.98-108.57-31.32Z" />
+                    <path class="wave-2"
+                        d="M0,4.18s52.6,4.75,58.47,30.7c7.69,12.48,16.92,16.77,69.75,24.1,78.51,11.66,37.59,28.49,101.64,35.75H0V4.18Z" />
+                </svg>
+            </figure>
+        </section>
+        <section class="login">
+            <form class="login-form" action="">
+                <h1>Registreer</h1>
+
+                <article class="mb-3">
+                    <label for="registerUsername" class="form-label">Gebruikersnaam</label>
+                    <input type="text" class="form-control" id="registerUsername" required>
+                </article>
+                <article class="mb-3">
+                    <label for="registerEmail" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="registerEmail" required>
+                </article>
+                <article class="mb-3">
+                    <label for="registerPwd" class="form-label">Wachtwoord</label>
+                    <article class="input-group">
+                        <input type="password" class="form-control" id="registerPwd" required>
+                    </article>
+                </article>
+                <article class="mb-3">
+                    <label for="registerPwd2" class="form-label">Herhaal wachtwoord</label>
+                    <article class="input-group">
+                        <input type="password" class="form-control" id="registerPwd2" required>
+                    </article>
+                </article>
+                <article class="mb-3">
+                    <input type="checkbox" id="terms" name="terms" value="agree">
+                    <label for="terms">Accepteer de voorwaarden</label>
+                </article>
+                <article class="d-grid gap-2">
+                    <button type="submit" class="btn btn-login btn-lg">Account aanmaken</button>
+                </article>
+                <article class="text-center mt-3">
+                    <p>Heb je al een account? <a href="/login">Log hier in</a></p>
+                </article>
+            </form>
+        </section>
+        <%- include("partials/footer") %>
