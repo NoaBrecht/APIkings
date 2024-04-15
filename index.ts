@@ -19,15 +19,7 @@ app.use((req, res, next) => {
 });
 app.get("/", async (req, res) => {
     try {
-        const maxPoke = req.query.maxpoke;
-        const limit = maxPoke ? parseInt(maxPoke.toString()) : 100;
-        const page = req.query.page;
-        const paging = page ? parseInt(page.toString()) : 1;
-        const offset = paging === 1 ? 0 : (paging - 1) * limit;
-        const totalCountResponse = await fetch("https://pokeapi.co/api/v2/pokemon");
-        const totalCountData = await totalCountResponse.json();
-        const totalCount = totalCountData.count;
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
@@ -46,9 +38,6 @@ app.get("/", async (req, res) => {
         res.render('index', {
             title: "Alle pokemons",
             pokemons: pokemonWithImages,
-            currentPage: paging,
-            limit: limit,
-            totalPages: Math.ceil(totalCount / limit)
         });
 
     } catch (error) {
