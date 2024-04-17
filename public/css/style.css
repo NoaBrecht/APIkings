@@ -1,339 +1,355 @@
 :root {
-  --colour-wave: #588dcc;
-  --colour-wave-background: #5284be;
-  --colour-wave-light: #6e9ed6;
-  --colour-wave-dark: #4a6e9e;
-  --colour-wave-darker: #3a4e6e;
-  --bs-nav-mobile: #ffffff;
-  --colour-text: #fff;
+    --colour-wave: #588dcc;
+    --colour-wave-background: #5284be;
+    --colour-wave-light: #6e9ed6;
+    --colour-wave-dark: #4a6e9e;
+    --colour-wave-darker: #3a4e6e;
+    --bs-nav-mobile: #ffffff;
+    --colour-text: #fff;
 }
 
 /** NAV */
 body {
-  padding-top: 13vh;
-  background-color: rgb(254, 254, 254) !important;
+    padding-top: 13vh;
+    background-color: rgb(254, 254, 254) !important;
 }
 
 @media (max-width: 991.98px) {
-  .offcanvas-collapse {
-      position: fixed;
-      top: 56px;
-      /* Height of navbar */
-      bottom: 0;
-      left: 100%;
-      width: 100%;
-      padding-right: 1rem;
-      padding-left: 1rem;
-      overflow-y: auto;
-      visibility: hidden;
-      background-color: var(--bs-nav-mobile);
-      transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  }
+    .offcanvas-collapse {
+        position: fixed;
+        top: 56px;
+        /* Height of navbar */
+        bottom: 0;
+        left: 100%;
+        width: 100%;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        overflow-y: auto;
+        visibility: hidden;
+        background-color: var(--bs-nav-mobile);
+        transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
 
-  .offcanvas-collapse.open {
-      visibility: visible;
-      transform: translateX(-100%);
-  }
+    .offcanvas-collapse.open {
+        visibility: visible;
+        transform: translateX(-100%);
+    }
 }
 
 .nav-scroller .nav {
-  color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.75);
 }
 
 .nav-scroller .nav-link {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 0.875rem;
-  color: #6c757d;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 0.875rem;
+    color: #6c757d;
 }
 
 .nav-scroller .nav-link:hover {
-  color: #007bff;
+    color: #007bff;
 }
 
 .nav-scroller .active {
-  font-weight: 500;
-  color: #343a40;
+    font-weight: 500;
+    color: #343a40;
 }
 
 /** Login Pagina */
 body.login-main {
-  padding: 0;
-  margin: 0;
-  display: grid;
-  height: 100vh;
-  overflow: hidden;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .login {
-  grid-area: login;
-  padding: 1vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    grid-area: login;
+    padding: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-form {
-  background-color: #ababab85;
-  border-radius: 2vh;
-  padding: 2vw;
+    background-color: #ababab85;
+    border-radius: 2vh;
+    padding: 2vw;
 }
 
 .login-form h1 {
-  text-align: center;
-  margin-bottom: 2vh;
+    text-align: center;
+    margin-bottom: 2vh;
 }
 
 .waves {
-  grid-area: waves;
-  background-color: var(--colour-wave-background);
-  background-image: url(../assets/squirtle.png);
-  background-size: cover;
-  width: auto;
-  padding: 0;
-  margin: 0;
+    grid-area: waves;
+    background-color: var(--colour-wave-background);
+    background-image: url(../assets/squirtle.png);
+    background-size: cover;
+    width: auto;
+    padding: 0;
+    margin: 0;
 }
 
 .wave-1,
 .wave-2 {
-  stroke-width: 0px;
-  fill: var(--colour-wave);
+    stroke-width: 0px;
+    fill: var(--colour-wave);
 }
 
 .waves-red {
-  background-color: #8b0000;
-  background-image: url(../assets/charmander.png);
+    background-color: #8b0000;
+    background-image: url(../assets/charmander.png);
 }
 
 .waves-red .wave-1,
 .waves-red .wave-2 {
-  stroke-width: 0px;
-  fill: #b80000;
+    stroke-width: 0px;
+    fill: #b80000;
 }
 
 .btn-login {
-  --bs-btn-color: #fff;
-  --bs-btn-bg: var(--colour-wave-background);
-  --bs-btn-border-color: var(--colour-wave-background);
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: var(--colour-wave);
-  --bs-btn-hover-border-color: #0a58ca;
-  --bs-btn-focus-shadow-rgb: 49, 132, 253;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: var(--colour-wave-light);
-  --bs-btn-active-border-color: #0a53be;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: var(--colour-wave-darker);
-  --bs-btn-disabled-border-color: var(--colour-wave-dark);
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--colour-wave-background);
+    --bs-btn-border-color: var(--colour-wave-background);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--colour-wave);
+    --bs-btn-hover-border-color: #0a58ca;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--colour-wave-light);
+    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--colour-wave-darker);
+    --bs-btn-disabled-border-color: var(--colour-wave-dark);
 }
 
 @media (max-width: 768px) {
-  .login-form {
-      box-shadow: 0 0 5px 0;
-      background: inherit;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-  }
+    .login-form {
+        box-shadow: 0 0 5px 0;
+        background: inherit;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
 
-  .login-form label,
-  .login-form H1 {
-      color: white;
-  }
+    .login-form label,
+    .login-form H1 {
+        color: white;
+    }
 
-  .toggle-password {
-      color: black;
-      background-color: #ababab85;
-  }
+    .toggle-password {
+        color: black;
+        background-color: #ababab85;
+    }
 
-  .btn-login {
-      --bs-btn-color: #fff;
-      --bs-btn-bg: #6c757d;
-      --bs-btn-border-color: #6c757d;
-      --bs-btn-hover-color: #fff;
-      --bs-btn-hover-bg: #5c636a;
-      --bs-btn-hover-border-color: #565e64;
-      --bs-btn-focus-shadow-rgb: 130, 138, 145;
-      --bs-btn-active-color: #fff;
-      --bs-btn-active-bg: #565e64;
-      --bs-btn-active-border-color: #51585e;
-      --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-      --bs-btn-disabled-color: #fff;
-      --bs-btn-disabled-bg: #6c757d;
-      --bs-btn-disabled-border-color: #6c757d;
-  }
+    .btn-login {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #6c757d;
+        --bs-btn-border-color: #6c757d;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #5c636a;
+        --bs-btn-hover-border-color: #565e64;
+        --bs-btn-focus-shadow-rgb: 130, 138, 145;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #565e64;
+        --bs-btn-active-border-color: #51585e;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #6c757d;
+        --bs-btn-disabled-border-color: #6c757d;
+    }
 }
 
 @media (min-width: 769px) {
-  body.login-main {
-      grid-template-areas: "waves waves login";
-  }
+    body.login-main {
+        grid-template-areas: "waves waves login";
+    }
 }
 
 /* Components */
 .card {
-  margin: 10px;
-  width: 18rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  padding-bottom: 10px;
-  background: linear-gradient(white, white) padding-box,
-      linear-gradient(to bottom right, var(--colour-card-1), var(--colour-card-2)) border-box;
-  border: 4px solid transparent;
+    margin: 10px;
+    width: 18rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    padding-bottom: 10px;
+    background: linear-gradient(white, white) padding-box,
+        linear-gradient(to bottom right, var(--colour-card-1), var(--colour-card-2)) border-box;
+    border: 4px solid transparent;
 }
 
 .card-title {
-  font-size: larger;
+    font-size: larger;
 }
 
 .card a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.card-nohover:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1);
 }
 
 .card.fire {
-  --colour-card-1: rgba(255, 0, 0, 0.1);
-  --colour-card-2: rgba(255, 0, 0, 1);
+    --colour-card-1: rgba(255, 0, 0, 0.1);
+    --colour-card-2: rgba(255, 0, 0, 1);
 }
 
 .card.water {
-  --colour-card-1: rgba(0, 0, 255, 0.1);
-  --colour-card-2: rgba(0, 0, 255, 1);
+    --colour-card-1: rgba(0, 0, 255, 0.1);
+    --colour-card-2: rgba(0, 0, 255, 1);
 }
 
 .card.grass {
-  --colour-card-1: rgba(0, 255, 0, 0.1);
-  --colour-card-2: rgba(0, 255, 0, 1);
+    --colour-card-1: rgba(0, 255, 0, 0.1);
+    --colour-card-2: rgba(0, 255, 0, 1);
 }
 
 .card.electric {
-  --colour-card-1: rgba(255, 255, 0, 0.1);
-  --colour-card-2: rgba(255, 255, 0, 1);
+    --colour-card-1: rgba(255, 255, 0, 0.1);
+    --colour-card-2: rgba(255, 255, 0, 1);
 }
 
 .card.psychic {
-  --colour-card-1: rgba(255, 0, 255, 0.1);
-  --colour-card-2: rgba(255, 0, 255, 1);
+    --colour-card-1: rgba(255, 0, 255, 0.1);
+    --colour-card-2: rgba(255, 0, 255, 1);
 }
 
 .card.ice {
-  --colour-card-1: rgba(0, 255, 255, 0.1);
-  --colour-card-2: rgba(0, 255, 255, 1);
+    --colour-card-1: rgba(0, 255, 255, 0.1);
+    --colour-card-2: rgba(0, 255, 255, 1);
 }
 
 .card.dragon {
-  --colour-card-1: rgba(128, 0, 128, 0.1);
-  --colour-card-2: rgba(128, 0, 128, 1);
+    --colour-card-1: rgba(128, 0, 128, 0.1);
+    --colour-card-2: rgba(128, 0, 128, 1);
 }
 
 .card.dark {
-  --colour-card-1: rgba(0, 0, 0, 0.1);
-  --colour-card-2: rgba(0, 0, 0, 1);
+    --colour-card-1: rgba(0, 0, 0, 0.1);
+    --colour-card-2: rgba(0, 0, 0, 1);
 }
 
 .card.fairy {
-  --colour-card-1: rgba(255, 192, 203, 0.1);
-  --colour-card-2: rgba(255, 192, 203, 1);
+    --colour-card-1: rgba(255, 192, 203, 0.1);
+    --colour-card-2: rgba(255, 192, 203, 1);
 }
 
 .card.normal {
-  --colour-card-1: rgba(192, 192, 192, 0.1);
-  --colour-card-2: rgba(192, 192, 192, 1);
+    --colour-card-1: rgba(192, 192, 192, 0.1);
+    --colour-card-2: rgba(192, 192, 192, 1);
 }
 
 .card.fighting {
-  --colour-card-1: rgba(139, 69, 19, 0.1);
-  --colour-card-2: rgba(139, 69, 19, 1);
+    --colour-card-1: rgba(139, 69, 19, 0.1);
+    --colour-card-2: rgba(139, 69, 19, 1);
 }
 
 .card.poison {
-  --colour-card-1: rgba(147, 112, 219, 0.1);
-  --colour-card-2: rgba(80, 200, 120, 1);
+    --colour-card-1: rgba(147, 112, 219, 0.1);
+    --colour-card-2: rgba(80, 200, 120, 1);
 }
 
 .card.ground {
-  --colour-card-1: rgba(210, 105, 30, 0.1);
-  --colour-card-2: rgba(210, 105, 30, 1);
+    --colour-card-1: rgba(210, 105, 30, 0.1);
+    --colour-card-2: rgba(210, 105, 30, 1);
 }
 
 .card.flying {
-  --colour-card-1: rgba(135, 206, 235, 0.1);
-  --colour-card-2: rgba(135, 206, 235, 1);
+    --colour-card-1: rgba(135, 206, 235, 0.1);
+    --colour-card-2: rgba(135, 206, 235, 1);
 }
 
 .card.bug {
-  --colour-card-1: rgba(0, 128, 0, 0.1);
-  --colour-card-2: rgba(107, 142, 35, 1);
+    --colour-card-1: rgba(0, 128, 0, 0.1);
+    --colour-card-2: rgba(107, 142, 35, 1);
 }
 
 .card.rock {
-  --colour-card-1: rgba(119, 136, 153, 0.1);
-  --colour-card-2: rgba(119, 136, 153, 1);
+    --colour-card-1: rgba(119, 136, 153, 0.1);
+    --colour-card-2: rgba(119, 136, 153, 1);
 }
 
 .card.ghost {
-  --colour-card-1: rgba(106, 90, 205, 0.1);
-  --colour-card-2: rgba(106, 90, 205, 1);
+    --colour-card-1: rgba(106, 90, 205, 0.1);
+    --colour-card-2: rgba(106, 90, 205, 1);
 }
 
 .card.steel {
-  --colour-card-1: rgba(70, 130, 180, 0.1);
-  --colour-card-2: rgba(70, 130, 180, 1);
+    --colour-card-1: rgba(70, 130, 180, 0.1);
+    --colour-card-2: rgba(70, 130, 180, 1);
 }
 
 body.stats {
-  grid-template-areas:
-      "pokemon"
-      "path";
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  margin: 0;
-  justify-content: center;
+    place-items: center;
+    height: 100vh;
+    margin: 0;
+    justify-content: center;
 }
 
 .pokemon .card {
-  width: 65vw;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
+    width: 65vw;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+
+.pokemon {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pokemonstats {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
 }
 
 .path {
-  width: 65vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
-  border: 5px solid black;
-  margin: 5px;
+    width: 65vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    border: 5px solid black;
+    margin: 5px;
 }
 
 .images {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: row;
-  padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    padding: 10px;
 }
 
 .pathimg,
 .images svg {
-  width: 15%;
+    width: 15%;
 }
 
 .images {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 /**/
 .blackout {
