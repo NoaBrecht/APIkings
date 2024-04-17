@@ -641,6 +641,22 @@ body.allPoke {
   transform: rotate(45deg);
 }
 
+.catcher .notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #c53737; 
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 9999;
+  display: none;
+}
+.catcher .notification.show {
+  display: block;
+}
+
 @media (max-width: 750px) {
   .battler .catch {
     width: 100%;

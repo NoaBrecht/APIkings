@@ -5,6 +5,7 @@
             <article class="container-fluid row justify-content-center">
                 <% for(let pokemon of pokemons) { %>
                     <section class="card text-center <%=pokemon.type%>">
+                      
                         <article class="card-body">
                             <h1 class="card-title"><a href="/pokemon/<%=pokemon.id%>">
                                     <%= pokemon.name %>

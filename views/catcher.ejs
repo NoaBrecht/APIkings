@@ -10,9 +10,39 @@
           <img src="assets/charizard.png" class="charizard" alt="">
         </div>
         <section class="pokeballbody">
-          <div class="pokeball"></div>    
-          <div class="btn"></div>
+          <div class="pokeball" ></div>    
+          <div class="btn" ></div>
+          <div class="notification" id="notification"></div>
+         
         </section>  
+       
 </body>
 
+
 <%- include("partials/footer") %>
+
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+    const notification = document.getElementById("notification");
+
+    function showNotification(message) {
+        notification.textContent = message; 
+        notification.classList.add("show");
+
+      
+        setTimeout(() => {
+            hideNotification();
+        }, 3000);
+    }
+
+    function hideNotification() {
+        notification.classList.remove("show");
+    }
+
+    const pokeball = document.querySelector(".btn"); 
+
+    pokeball.addEventListener("click", function () {
+        showNotification("Pokemon gevangen!");
+    });
+});
+</script>
