@@ -423,7 +423,7 @@ body.stats {
             #fb0d3e 100%);
 }
 
-.btn {
+.pokebtn {
     background: #fff;
     width: 5.5em;
     height: 5.5em;
@@ -434,7 +434,7 @@ body.stats {
     position: relative;
 }
 
-.btn::before {
+.pokebtn::before {
     content: "";
     border: 3.5px solid #111;
     border-radius: 50%;
@@ -446,7 +446,7 @@ body.stats {
     position: relative;
 }
 
-.btn:hover {
+.pokebtn:hover {
     background-color: grey;
 }
 
