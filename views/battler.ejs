@@ -1,0 +1,39 @@
+<%- include("partials/header") %>
+  <body class="battler">
+    <%- include("partials/nav") %>
+    <section class="container-fluid">
+      <span id="battleYou">
+        <h2 class="border border-4 rounded">Pikachu</h2>
+        <div class="progress" role="progressbar" style="height: 40px">
+          <div class="progress-bar bg-primary" style="width: 100%">
+            HP: 100%
+          </div>
+        </div>
+        <figure>
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png"
+            alt=""
+          />
+        </figure>
+      </span>
+      <span id="battleOp">
+        <h2 class="border border-4 rounded">Meowth</h2>
+        <div class="progress" role="progressbar" style="height: 40px">
+          <div class="progress-bar bg-primary" style="width: 100%">
+            HP: 100%
+          </div>
+        </div>
+        <figure>
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png"
+            alt="apokemon naam"
+          />
+        </figure>
+      </span>
+    </section>
+    <section>
+      <button type="button" class="btn btn-danger btn-lg attack">
+        Aanvallen
+      </button>
+    </section>
+    <%- include("partials/footer") %>

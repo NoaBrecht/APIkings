@@ -95,10 +95,20 @@ app.get("/pokemon/:id", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.get("/whothat", (req, res) => {
+app.get("/whothat", async (req, res) => {
     res.render("whothat", {
         title: "who is that pokemon?"
     })
+})
+app.get("/battler", async (req, res) => {
+    res.render('battler', {
+        title: "vechten"
+    });
+})
+app.get("/vergelijken", async (req, res) => {
+    res.render('vergelijken', {
+        title: "pokemon vergelijken"
+    });
 })
 app.listen(app.get("port"), () => {
     console.log("Server started on http://localhost:" + app.get('port'));
