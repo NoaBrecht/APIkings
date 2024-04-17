@@ -84,8 +84,8 @@ Het project zal uitgewerkt worden door middel van de programmeertaal Typescript.
 | ------------------------ | ---------------------------------------------------------------- |
 | --colour-wave            | ![#588dcc](https://via.placeholder.com/10/588dcc?text=+) #588dcc |
 | --colour-wave-background | ![#5284be](https://via.placeholder.com/10/5284be?text=+) #5284be |
-| --colour-wave-light | ![#5284be](https://via.placeholder.com/10/5284be?text=+) #6e9ed6 |
-| --colour-wave-dark | ![#5284be](https://via.placeholder.com/10/5284be?text=+) #4a6e9e |
-| --colour-wave-darker | ![#5284be](https://via.placeholder.com/10/5284be?text=+) #3a4e6e |
-| --colour-wave-mobile | ![#5284be](https://via.placeholder.com/10/5284be?text=+) #ffffff |
-| --colour-wave-text | ![#5284be](https://via.placeholder.com/10/5284be?text=+) #fff |
+| --colour-wave-light | ![#5284be](https://via.placeholder.com/10/6e9ed6?text=+) #6e9ed6 |
+| --colour-wave-dark | ![#5284be](https://via.placeholder.com/10/4a6e9e?text=+) #4a6e9e |
+| --colour-wave-darker | ![#5284be](https://via.placeholder.com/10/3a4e6e?text=+) #3a4e6e |
+| --colour-wave-mobile | ![#5284be](https://via.placeholder.com/10/ffffff?text=+) #ffffff |
+| --colour-wave-text | ![#5284be](https://via.placeholder.com/10/fff?text=+) #fff |
