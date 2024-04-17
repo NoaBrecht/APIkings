@@ -197,6 +197,11 @@ body.login-main {
     transform: scale(1.05);
 }
 
+.card-nohover:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1);
+}
+
 .card.fire {
     --colour-card-1: rgba(255, 0, 0, 0.1);
     --colour-card-2: rgba(255, 0, 0, 1);
