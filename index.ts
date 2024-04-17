@@ -95,11 +95,34 @@ app.get("/pokemon/:id", async (req, res) => {
         console.error('Error:', error);
     }
 });
+/*
 app.get("/whothat", async (req, res) => {
+    
     res.render("whothat", {
-        title: "who is that pokemon?"
+        title: "who is that pokemon?",
+       
     })
-})
+})*/
+app.get("/whothat", async (req, res) => {
+    
+    try {
+        const randompok = (min: number, max: number) =>
+            Math.floor(Math.random() * (max - min + 1)) + min;
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0,1100)}`);
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+
+        const pokemon = await response.json();    
+        res.render('whothat', {
+            title: "who is that pokemon?",
+            pokemon: pokemon,
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
 app.get("/battler", async (req, res) => {
     res.render('battler', {
         title: "vechten"
