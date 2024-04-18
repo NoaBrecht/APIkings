@@ -496,7 +496,7 @@ body.stats {
     width: 50%;
 }
 
-.vergelijken .pokemonimg {
+.pokemonimg {
     display: flex;
     align-items: center;
     justify-content: center;
