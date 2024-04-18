@@ -472,3 +472,47 @@ body.stats {
     border-radius: 50%;
     transform: rotate(45deg);
 }
+
+.vergelijken {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.vergelijken .col-5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.vergelijken .card {
+    width: 35vw;
+}
+
+.vergelijken .card img {
+    width: 50%;
+}
+
+.vergelijken .pokemonimg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 750px) {
+    .arrow-path {
+        rotate: 90deg;
+    }
+
+    .images {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pathimg {
+        width: 50%;
+    }
+}
