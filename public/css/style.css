@@ -359,6 +359,13 @@ body.stats {
     font-weight: 200;
     font-style: italic;
 }
+.pokemonimg{
+    height:400px;
+    width:400px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
 .blackout {
     filter: brightness(0);
     transition: filter .5s ease-out;
