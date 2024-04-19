@@ -76,19 +76,42 @@ app.get("/pokemon/:id", async (req, res) => {
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
-
         const pokemon = await response.json();
-        console.log(pokemon.name + " " + pokemon.types[0].type.name);
+        console.log(pokemon.id + ' ' + pokemon.name + ' ' + pokemon.types[0].type.name);
+        const speciesResponse = await fetch(pokemon.species.url);
+        if (speciesResponse.status === 404) throw new Error('Not found');
+        if (speciesResponse.status === 500) throw new Error('Internal server error');
+        if (speciesResponse.status === 400) throw new Error('Bad request');
+        const speciesData = await speciesResponse.json();
+        const evolutionChainUrl = speciesData.evolution_chain.url;
+        const evolutionChainResponse = await fetch(evolutionChainUrl);
+        const evolutionChainData = await evolutionChainResponse.json();
+        const pokemonNames: string[] = [];
+        let currentChain = evolutionChainData.chain;
+        while (currentChain) {
+            pokemonNames.push(currentChain.species.name);
 
+            if (currentChain.evolves_to.length > 0) {
+                currentChain = currentChain.evolves_to[0];
+            } else {
+                currentChain = null;
+            }
+        }
+        const chaindata = [];
+        for (const name of pokemonNames) {
+            const spriteResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+            const spriteData = await spriteResponse.json();
+            chaindata.push({ name: name, spriteUrl: spriteData.sprites.other.home.front_default });
+        }
         let pokemonbijnaam: string = "";
         if (pokemonbijnaam === "") {
-            pokemonbijnaam = pokemon.name;
+            pokemonbijnaam = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
         }
-
         res.render('pokemon', {
             title: pokemon.name,
             pokemon: pokemon,
             pokemonbijnaam: pokemonbijnaam,
+            evolutionChain: chaindata,
         });
 
     } catch (error) {
@@ -104,16 +127,16 @@ app.get("/whothat", async (req, res) => {
     })
 })*/
 app.get("/whothat", async (req, res) => {
-    
+
     try {
         const randompok = (min: number, max: number) =>
             Math.floor(Math.random() * (max - min + 1)) + min;
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0,1100)}`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0, 1100)}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
 
-        const pokemon = await response.json();    
+        const pokemon = await response.json();
         res.render('whothat', {
             title: "who is that pokemon?",
             pokemon: pokemon,
