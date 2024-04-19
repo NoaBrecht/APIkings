@@ -353,6 +353,17 @@ body.stats {
 }
 
 /**/
+.pokemoncatcher {
+    text-align: center;
+    font-size:xx-large;
+    font-weight: 800;
+}
+.fadedtext{
+    text-align: center;
+    font-size: medium;
+    font-weight: 200;
+    font-style: italic;
+}
 .blackout {
     filter: brightness(0);
     transition: filter .5s ease-out;
@@ -406,7 +417,7 @@ body.stats {
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: auto;
+    margin: 10em auto 0 auto;
 }
 
 .pokeball {
@@ -441,8 +452,8 @@ body.stats {
     width: 2.9em;
     height: 2.9em;
     display: inline-block;
-    margin-bottom: 1%;
-    margin-left: -15%;
+    margin-top: 10%;
+    margin-left: 10%;
     position: relative;
 }
 

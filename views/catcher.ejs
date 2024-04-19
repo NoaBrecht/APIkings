@@ -7,7 +7,12 @@
 
       <section class="container-fluid">
         <div id="catchthis">
-          <img src="assets/charizard.png" class="charizard" alt="">
+          <article class="container-fluid row justify-content-center card card-whothat">
+            <label class="pokemoncatcher"><%= pokemon.name %></label>
+            <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
+          <img src="<%= pokemon.sprites %>"  alt="">
+          
+          </article>
         </div>
         <section class="pokeballbody">
           <div class="pokeball"></div>

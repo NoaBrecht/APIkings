@@ -45,10 +45,24 @@ app.get("/", async (req, res) => {
     }
 });
 app.get("/catcher", async (req, res) => {
-    res.render('catcher', {
-        title: "vangen van pokemons",
-    });
-})
+    
+    try {
+        
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+
+        const pokemon = await response.json();    
+        res.render('catcher', {
+            title: "catching a pokemon?",
+            pokemon: pokemon,
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
 app.get("/landingpagina", async (req, res) => {
     res.render('landingpage', {
         title: "Landingpagina, kies een project",
