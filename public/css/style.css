@@ -337,7 +337,7 @@ body.stats {
 .images {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: row;
     padding: 10px;
 }
@@ -345,11 +345,6 @@ body.stats {
 .pathimg,
 .images svg {
     width: 15%;
-}
-
-.images {
-    display: flex;
-    justify-content: space-between;
 }
 
 /**/
