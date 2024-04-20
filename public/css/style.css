@@ -352,6 +352,7 @@ body.stats {
     text-align: center;
     font-size:xx-large;
     font-weight: 800;
+    
 }
 .fadedtext{
     text-align: center;
@@ -365,6 +366,19 @@ body.stats {
     display: flex;
     align-items: center;
     margin: 0 auto;
+    
+}
+#catchthis{
+    top:450px;
+}
+.pokemonstats-rightcorner .pokemonstats{
+    position: fixed;
+    top: -200px; 
+    right: 20px; 
+    background-color: rgba(255, 255, 255, 0.441); 
+    padding: 10px;
+    border-radius: 5px;
+
 }
 .blackout {
     filter: brightness(0);
@@ -410,7 +424,11 @@ body.stats {
     display: flex;
     align-items: center;
 }
-
+.labelcontainer{
+    border: 1px solid black;
+    padding:10px;
+    margin-bottom: 10px;
+}
 .pokeballbody {
     width: 25em;
     height: 25em;
@@ -419,8 +437,9 @@ body.stats {
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: 10em auto 0 auto;
+    margin: 5em auto 0 auto;
 }
+
 
 .pokeball {
     position: relative;
