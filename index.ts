@@ -45,6 +45,7 @@ app.get("/", async (req, res) => {
     }
 });
 app.get("/catcher", async (req, res) => {
+    // TODO: if no pokemon, player can catch a starterpokemon
     try {
 
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
@@ -68,11 +69,13 @@ app.get("/landingpagina", async (req, res) => {
     });
 })
 app.get("/login", async (req, res) => {
+    // TODO: Login 
     res.render('login', {
         title: "Login pagina"
     });
 })
 app.get("/register", async (req, res) => {
+    // TODO: Let the user create an account safely
     res.render('register', {
         title: "Register pagina"
     });
@@ -145,7 +148,10 @@ app.get("/whothat", async (req, res) => {
         const randompok = (min: number, max: number) =>
             Math.floor(Math.random() * (max - min + 1)) + min;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0, 1100)}`);
-        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 404) {
+            console.log(response);
+            res.redirect("/whothat");
+        }
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
 
@@ -174,7 +180,7 @@ app.get("/battler", async (req, res) => {
         if (response2.status === 500) throw new Error('Internal server error');
         if (response2.status === 400) throw new Error('Bad request');
         const enemy = await response2.json();
-        
+
         res.render('battler', {
             title: "vechten",
             pokemon: pokemon,
