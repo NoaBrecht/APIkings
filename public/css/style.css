@@ -348,6 +348,38 @@ body.stats {
 }
 
 /**/
+.pokemoncatcher {
+    text-align: center;
+    font-size:xx-large;
+    font-weight: 800;
+    
+}
+.fadedtext{
+    text-align: center;
+    font-size: medium;
+    font-weight: 200;
+    font-style: italic;
+}
+.pokemonimg{
+    height:400px;
+    width:400px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    
+}
+#catchthis{
+    top:450px;
+}
+.pokemonstats-rightcorner .pokemonstats{
+    position: fixed;
+    top: -200px; 
+    right: 20px; 
+    background-color: rgba(255, 255, 255, 0.441); 
+    padding: 10px;
+    border-radius: 5px;
+
+}
 .blackout {
     filter: brightness(0);
     transition: filter .5s ease-out;
@@ -392,7 +424,11 @@ body.stats {
     display: flex;
     align-items: center;
 }
-
+.labelcontainer{
+    border: 1px solid black;
+    padding:10px;
+    margin-bottom: 10px;
+}
 .pokeballbody {
     width: 25em;
     height: 25em;
@@ -401,8 +437,9 @@ body.stats {
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: auto;
+    margin: 5em auto 0 auto;
 }
+
 
 .pokeball {
     position: relative;
@@ -436,8 +473,8 @@ body.stats {
     width: 2.9em;
     height: 2.9em;
     display: inline-block;
-    margin-bottom: 1%;
-    margin-left: -15%;
+    margin-top: 10%;
+    margin-left: 10%;
     position: relative;
 }
 
@@ -509,5 +546,104 @@ body.stats {
 
     .pathimg {
         width: 50%;
+    }
+}
+
+.landingpage {
+    background: linear-gradient(126deg,
+            rgb(71, 40, 43) 0%,
+            rgba(72, 33, 39, 1) 36%,
+            rgba(74, 34, 39, 1) 60%,
+            rgba(124, 44, 44, 1) 100%);
+}
+
+.landingpage .container button {
+    width: 450px;
+    height: 300px;
+    text-align: center;
+    margin: 50px;
+    flex: 4 0 35%;
+}
+
+.landingpage .container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.landingpage .square-container {
+    width: 90%;
+    height: 50px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 0px;
+    margin-bottom: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.landingpage .square-text {
+    font-size: larger;
+    font-weight: 600;
+}
+
+.landingpage .page {
+    margin-top: 50px;
+}
+
+.landingpage .landbtns {
+    color: white;
+}
+
+.landingpage .pikachu-btn {
+    background-image: url("https://i.pinimg.com/550x/cb/33/49/cb3349b86ca661ca61ae9a36d88d70d4.jpg");
+    background-size: 100% 100%;
+}
+
+.landingpage .fifa-btn {
+    background-image: url("https://ftw.usatoday.com/wp-content/uploads/sites/90/2023/07/EA-Sports-FC-24-cover.jpg?w=640");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.landingpage .fort-btn {
+    background-image: url("https://wallpapers.com/images/featured/fortnite-pictures-b5kfcchwazwiz3cs.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.landingpage .lego-btn {
+    background-image: url("https://m.media-amazon.com/images/M/MV5BYjM0ZGJhYTYtZjUyMi00MWZmLTg0MTQtNDRiM2U3Yzk2ZGNhXkEyXkFqcGdeQXVyMzkyOTQ0NzY@._V1_.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.landingpage .lotr-btn {
+    background-image: url("https://m.media-amazon.com/images/S/pv-target-images/06b3a88bd674980e8dfab3347c9d991379ba476b024a3a4a64556ebff88c8191._SX1080_FMjpg_.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.landingpage .mtg-btn {
+    background-image: url("https://images.ctfassets.net/s5n2t79q9icq/114xMnrR6RiLD15UxL8LYZ/ca73ec9fe59f654a150b543e05979181/Meta-Homepage.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 769px) {
+    .landingpage .landbtns {
+        width: 100%;
+        color: white;
+    }
+
+    .landingpage .container button {
+        width: 250px;
+        height: 300px;
+        margin: 50px;
     }
 }

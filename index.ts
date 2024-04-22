@@ -1,7 +1,6 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-
 dotenv.config();
 
 const app: Express = express();
@@ -18,6 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 app.get("/", async (req, res) => {
+    // TODO: Pagination
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`);
         if (response.status === 404) throw new Error('Not found');
@@ -45,10 +45,23 @@ app.get("/", async (req, res) => {
     }
 });
 app.get("/catcher", async (req, res) => {
-    res.render('catcher', {
-        title: "vangen van pokemons",
-    });
-})
+    try {
+
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+
+        const pokemon = await response.json();
+        res.render('catcher', {
+            title: "catching a pokemon?",
+            pokemon: pokemon,
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
 app.get("/landingpagina", async (req, res) => {
     res.render('landingpage', {
         title: "Landingpagina, kies een project",
@@ -127,7 +140,7 @@ app.get("/whothat", async (req, res) => {
     })
 })*/
 app.get("/whothat", async (req, res) => {
-
+    // TODO: Checking if the pokemon the user types in is the same as the name of the pokemon
     try {
         const randompok = (min: number, max: number) =>
             Math.floor(Math.random() * (max - min + 1)) + min;
