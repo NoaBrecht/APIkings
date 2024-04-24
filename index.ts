@@ -21,7 +21,6 @@ app.get("/", async (req, res) => {
     // TODO: Pagination
     try {
         let user = await getUser(1)
-        console.log(user)
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
