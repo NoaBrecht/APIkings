@@ -1,10 +1,10 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { cp } from "fs";
+import { connect } from "./database";
 dotenv.config();
 
-const app: Express = express();
+const app : Express = express();
 
 app.set("view engine", "ejs");
 app.use(express.json());
@@ -198,6 +198,7 @@ app.get("/vergelijken", async (req, res) => {
         title: "pokemon vergelijken"
     });
 })
-app.listen(app.get("port"), () => {
+app.listen(app.get("port"), async() => {
+    await connect();
     console.log("Server started on http://localhost:" + app.get('port'));
 });
