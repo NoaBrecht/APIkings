@@ -49,9 +49,6 @@ async function seed() {
 export async function getUser(_userId: number) {
     return await userCollection.findOne({ id: _userId });
 }
-export async function getPokemon(_userId: number) {
-    return await userCollection.findOne({ id: _userId });
-}
 export async function connect() {
     try {
         await client.connect();
