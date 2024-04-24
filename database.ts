@@ -1,8 +1,10 @@
 import { Collection, MongoClient } from "mongodb";
 import { User } from "./interfaces";
+import dotenv from "dotenv"; dotenv.config();
 
 
-export const client = new MongoClient("mongodb+srv://APIkings:APIkings@apikings.lfjnvkg.mongodb.net/?retryWrites=true&w=majority&appName=APIkings");
+
+export const client = new MongoClient(process.env.MONGO_URI || "mongodb://localhost:27017");
 
 export const userCollection: Collection<User> = client.db("project_pokemon").collection<User>("users");
 
