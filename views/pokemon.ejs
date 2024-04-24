@@ -1,69 +1,63 @@
 <%- include("partials/header") %>
 
-    <body class="stats">
+    <body>
         <%- include("partials/nav") %>
             <article class="container-fluid row justify-content-center">
 
                 <section class="pokemon">
-                    <section class="card text-center <%= pokemon.types[0].type.name  %>">
-                        <article class="card-body">
-                            <h1 class="card-title">
-                                <%= pokemon.id %>
-                                    <span class="pokename">
-                                        <%= pokemon.name %>
-                                    </span>
-                            </h1>
+                    <article class="card card-nohover text-center <%= pokemon.types[0].type.name  %>">
+                        <div class="row">
+                            <div class="col-6">
 
-                        </article>
-                        <img src="<%=pokemon.sprites.other.home.front_default  %>" class="card-img-top" alt="...">
-                    </section>
-                </section>
-                <section class="statspoke">
-                    <h1>
-                        <%= pokemonbijnaam %>
-                    </h1>
-                    <section id="stats">
-                        <h2>Stats</h2>
-                        <% pokemon.stats.forEach(stat=> { %>
-                            <% if (stat.stat.name==='hp' || stat.stat.name==='attack' || stat.stat.name==='defense' ) {
-                                %>
-                                <p>
-                                    <%= stat.stat.name %>: <%= stat.base_stat %>
-                                </p>
-                                <% } %>
-                                    <% }); %>
-                    </section>
-                </section>
-                </section>
-                </section>
-                <section class="path">
+                                <section class="card-body">
+                                    <h1 class="card-title">
+                                        <%= pokemon.id %>
+                                            <span class="pokename">
+                                                <%= pokemonbijnaam %>
+                                            </span>
+                                    </h1>
+                                    <img src="<%=pokemon.sprites.other.home.front_default  %>" class="card-img-top"
+                                        alt="...">
+                                </section>
+                            </div>
+                            <div class="col-6">
+                                <section class="pokemonstats">
+                                    <% pokemon.stats.forEach(stat=> { %>
+                                        <% if (stat.stat.name==='hp' || stat.stat.name==='attack' ||
+                                            stat.stat.name==='defense' ) { %>
 
+                                            <p>
+                                                <%= stat.stat.name %>: <%= stat.base_stat %>
+                                            </p>
+                                            <% }}); %>
+                                </section>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+                <section class="path card card-nohover">
                     <h1>
                         Evolutiepad
                     </h1>
                     <section class="images">
-                        <img src="/assets/charmander.png" alt="" class="pathimg">
-                        <svg class="arrow-path" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
-                                stroke="#CCCCCC" stroke-width="0.192" />
-                            <g id="SVGRepo_iconCarrier">
-                                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#000000" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </g>
-                        </svg>
-                        <img src="/assets/charmeleon.png" alt="" class="pathimg">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-path">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
-                                stroke="#CCCCCC" stroke-width="0.192" />
-                            <g id="SVGRepo_iconCarrier">
-                                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#000000" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </g>
-                        </svg>
-                        <img src="/assets/charizard.png" alt="" class="pathimg">
+                        <% for(let i=0; i < evolutionChain.length; i++) { %>
+                            <% if (i> 0) { %>
+                                <svg class="arrow-path" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke="#CCCCCC" stroke-width="0.192" />
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#000000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+                                </svg>
+                                <% } %>
+                                    <img src="<%= evolutionChain[i].spriteUrl %>" alt="<%= evolutionChain[i].name %>"
+                                        class="pathimg">
+                                    <% } %>
                     </section>
+
                 </section>
             </article>
             <%- include("partials/footer") %>

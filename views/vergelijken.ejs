@@ -1,53 +1,60 @@
 <%- include("partials/header") %>
 
-<body class="vergelijken">
-  <%- include("partials/nav") %>
-  <article class="container-fluid fluids">
-    <span class="border border-4 rounded-4">
-      <form class="row row-cols-lg-auto g-3 align-items-center">
-        <section class="vergSearch">
-          <label class="visually-hidden" for="pokemon1">MyPkm</label>
-          <input type="text" class="form-control" id="pokemon1" value="Pikachu" placeholder="Naam">
-        </section>
-        <section class="vergBut">
-          <button type="submit" class="btn btn-dark">Zoeken</button>
-        </section>
-      </form>
-      <figure class="container pokemon">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="pokemon naam">
-      </figure>
-    </span>
-    <span class="border border-4 rounded-4 vergOther">
-      <form class="row row-cols-lg-auto g-3 align-items-center">
-        <section class="vergSearch">
-          <label class="visually-hidden" for="pokemon2">OthrPkm</label>
-          <input type="text" class="form-control" id="pokemon2" value="Meowth" placeholder="Naam">
-        </section>
-        <section class="vergBut">
-          <button type="submit" class="btn btn-dark">Zoeken</button>
-        </section>
-        <figure class="container pokemon">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png" alt="Pokemon naam">
-        </figure>
-      </form>
-    </span>
-  </article>
-  <article class="container-fluid fluids">
-    <span class="border border-4 rounded-4">
-      <section class="container stats">
-        <h2>STATS</h2>
-        <h3>HP: 35</h3>
-        <h3>ATT: 55</h3>
-        <h3>DEF: 40</h3>
-      </section>
-    </span>
-    <span class="border border-4 rounded-4 vergOther">
-      <section class="container stats">
-        <h2>STATS</h2>
-        <h3>HP: 40</h3>
-        <h3>ATT: 45</h3>
-        <h3>DEF: 35</h3>
-      </section>
-    </span>
-  </article>
-  <%- include("partials/footer") %>
+  <body>
+    <%- include("partials/nav") %>
+      <div class="row vergelijken" style="margin-right: auto !important;">
+        <div class="col-5">
+          <section class="card text-center card-nohover">
+            <article class="card-body">
+              <form action="">
+                <div class="row">
+                  <div class="col-8">
+                    <input type="text" class="form-control" id="pokemon1" value="Pikachu" placeholder="Naam">
+                  </div>
+                  <div class="col-2">
+                    <input type="submit" class="btn btn-primary" value="zoeken">
+                  </div>
+                </div>
+              </form>
+            </article>
+            <article class="pokemonimg"><img
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png"
+                class="card-img-top" alt="een afbeelding van"></article>
+
+            <article class="card-body">
+              <h2>STATS</h2>
+              <h3>HP: 40</h3>
+              <h3>ATT: 45</h3>
+              <h3>DEF: 35</h3>
+            </article>
+          </section>
+        </div>
+        <div class="col-5">
+
+          <section class="card text-center card-nohover">
+            <article class="card-body">
+              <form action="">
+                <div class="row">
+                  <div class="col-8">
+                    <input type="text" class="form-control" id="pokemon1" value="bulbasaur" placeholder="Naam">
+                  </div>
+                  <div class="col-2">
+                    <input type="submit" class="btn btn-primary" value="zoeken">
+                  </div>
+                </div>
+              </form>
+            </article>
+            <article class="pokemonimg">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png"
+                class="card-img-top" alt="een afbeelding van bulbasaur">
+            </article>
+            <article class="card-body">
+              <h2>STATS</h2>
+              <h3>hp: 45</h3>
+              <h3>attack: 49</h3>
+              <h3>defense: 49</h3>
+            </article>
+          </section>
+        </div>
+      </div>
+      <%- include("partials/footer") %>

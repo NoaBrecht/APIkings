@@ -1,18 +1,44 @@
 <%- include("partials/header") %>
 
 
-<body class="catcher">
+  <body>
 
     <%- include("partials/nav") %>
 
-    <section class="container-fluid">
+      <section class="container-fluid">
         <div id="catchthis">
-          <img src="assets/charizard.png" class="charizard" alt="">
+          <article class="container-fluid row justify-content-center pokemonimg">
+            
+          <img src="<%= pokemon.sprites.other.home.front_default %>"  alt="">
+          <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
+          </article>
         </div>
         <section class="pokeballbody">
-          <div class="pokeball"></div>    
-          <div class="btn"></div>
-        </section>  
-</body>
+          <div class="pokeball"></div>
+          <div class="pokebtn"></div>
+        </section>
+        <div class="pokemonstats-rightcorner">
+          
+        <section class="pokemonstats">
+          <article class="container-fluid row justify-content-center card ">
+            <div class="labelcontainer">
+              <label class="pokemoncatcher"><%= pokemon.name %></label>
+             
+            </div>
+            <% pokemon.stats.forEach(stat=> { %>
+              <% if (stat.stat.name==='hp' || stat.stat.name==='attack' ||
+                  stat.stat.name==='defense' ) { %>
 
-<%- include("partials/footer") %>
+                  <p>
+                      <%= stat.stat.name %>: <%= stat.base_stat %>
+                  </p>
+                  <% }}); %>
+      </section>
+          </article>
+          
+         
+     
+    </div>
+  </body>
+
+  <%- include("partials/footer") %>

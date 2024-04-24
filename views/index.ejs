@@ -1,19 +1,21 @@
 <%- include("partials/header") %>
 
-    <body class="allPoke">
+    <body>
         <%- include("partials/nav") %>
             <article class="container-fluid row justify-content-center">
                 <% for(let pokemon of pokemons) { %>
                     <section class="card text-center <%=pokemon.type%>">
+                        <a href="/pokemon/<%=pokemon.id%>">
                         <article class="card-body">
-                            <h1 class="card-title"><a href="/pokemon/<%=pokemon.id%>">
+                            <h1 class="card-title">
                                     <%= pokemon.name %>
-                                </a></h1>
+                                </h1>
                             <p class="card-text">
                                 <%= pokemon.id %>
                             </p>
                         </article>
                         <img src="<%=pokemon.image%>" class="card-img-top" alt="een afbeelding van <%= pokemon.name %>">
+                    </a>
                     </section>
                     <% } %>
             </article>
