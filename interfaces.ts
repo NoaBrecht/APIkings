@@ -1,8 +1,7 @@
 import { ObjectId } from "mongodb";
-import internal from "stream";
-export interface Pokemon{
-    id:number;
-    nickname:string;
+export interface Pokemon {
+    id: number;
+    nickname: string;
 }
 export interface User {
     _id?: ObjectId;
@@ -10,5 +9,5 @@ export interface User {
     email: string;
     password: string;
     activepokemon: number;
-    pokemons:Pokemon[];
+    pokemons: Pokemon[];
 }
