@@ -48,43 +48,6 @@ app.get("/", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.get("/:page", async (req, res) => {
-    // TODO: Pagination
-    try {
-        let { page } = req.params;
-        let offset;
-        if (parseInt(page) > 1) {
-            offset = (parseInt(page) - 1) * 30;
-        }
-        else {
-            offset = 0;
-        }
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30&offset=${offset}`);
-        if (response.status === 404) throw new Error('Not found');
-        if (response.status === 500) throw new Error('Internal server error');
-        if (response.status === 400) throw new Error('Bad request');
-        let pokemons: any = await response.json();
-        const pokemonWithImages = await Promise.all(pokemons.results.map(async (pokemon: any) => {
-            const response = await fetch(pokemon.url);
-            const data = await response.json();
-            return {
-                id: data.id,
-                name: pokemon.name,
-                image: data.sprites.other.home.front_default,
-                type: data.types[0].type.name
-            };
-        }));
-
-        res.render('index', {
-            title: "Alle pokemons",
-            pokemons: pokemonWithImages,
-            page: page
-        });
-
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
 app.get("/catcher", async (req, res) => {
     // TODO: if no pokemon, player can catch a starterpokemon
     try {
@@ -238,7 +201,44 @@ app.get("/vergelijken", async (req, res) => {
     res.render('vergelijken', {
         title: "pokemon vergelijken"
     });
-})
+});
+app.get("/:page", async (req, res) => {
+    // TODO: Pagination
+    try {
+        let { page } = req.params;
+        let offset;
+        if (parseInt(page) > 1) {
+            offset = (parseInt(page) - 1) * 30;
+        }
+        else {
+            offset = 0;
+        }
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30&offset=${offset}`);
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+        let pokemons: any = await response.json();
+        const pokemonWithImages = await Promise.all(pokemons.results.map(async (pokemon: any) => {
+            const response = await fetch(pokemon.url);
+            const data = await response.json();
+            return {
+                id: data.id,
+                name: pokemon.name,
+                image: data.sprites.other.home.front_default,
+                type: data.types[0].type.name
+            };
+        }));
+
+        res.render('index', {
+            title: "Alle pokemons",
+            pokemons: pokemonWithImages,
+            page: page
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
 app.listen(app.get("port"), async () => {
     await connect();
     console.log("Server started on http://localhost:" + app.get('port'));
