@@ -1,8 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { cp } from "fs";
-import { off } from "process";
+import { connect, getUser } from "./database";
 dotenv.config();
 
 const app: Express = express();
@@ -21,8 +20,9 @@ app.use((req, res, next) => {
 app.get("/", async (req, res) => {
     // TODO: Pagination
     try {
-
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30`);
+        let user = await getUser(1)
+        console.log(user)
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
@@ -39,6 +39,7 @@ app.get("/", async (req, res) => {
         }));
 
         res.render('index', {
+            user: user,
             title: "Alle pokemons",
             pokemons: pokemonWithImages,
         });
@@ -97,7 +98,7 @@ app.get("/catcher", async (req, res) => {
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
-            
+
         });
 
     } catch (error) {
@@ -129,23 +130,31 @@ app.get("/wrong_project", async (req, res) => {
 })
 app.get("/pokemon/:id", async (req, res) => {
     try {
+        let user = await getUser(1)
+        console.log(user);
+        //* POkemon ID ophalen
         const { id } = req.params;
+        //* Pokemon info ophalen
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         const pokemon = await response.json();
+        // Pokemon info log
         console.log(pokemon.id + ' ' + pokemon.name + ' ' + pokemon.types[0].type.name);
+        //* Pokemon species ophalen
         const speciesResponse = await fetch(pokemon.species.url);
         if (speciesResponse.status === 404) throw new Error('Not found');
         if (speciesResponse.status === 500) throw new Error('Internal server error');
         if (speciesResponse.status === 400) throw new Error('Bad request');
         const speciesData = await speciesResponse.json();
+        //* Evolutiechainurl ophalen
         const evolutionChainUrl = speciesData.evolution_chain.url;
         const evolutionChainResponse = await fetch(evolutionChainUrl);
         const evolutionChainData = await evolutionChainResponse.json();
         const pokemonNames: string[] = [];
         let currentChain = evolutionChainData.chain;
+        //! Pokemonnaam uit chain in PokemonNames sturen
         while (currentChain) {
             pokemonNames.push(currentChain.species.name);
 
@@ -155,6 +164,7 @@ app.get("/pokemon/:id", async (req, res) => {
                 currentChain = null;
             }
         }
+        //* Pokemon foto afhalen uit API en in chaindata sturen
         const chaindata = [];
         for (const name of pokemonNames) {
             const spriteResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
@@ -166,6 +176,7 @@ app.get("/pokemon/:id", async (req, res) => {
             pokemonbijnaam = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
         }
         res.render('pokemon', {
+            user: user,
             title: pokemon.name,
             pokemon: pokemon,
             pokemonbijnaam: pokemonbijnaam,
@@ -176,14 +187,6 @@ app.get("/pokemon/:id", async (req, res) => {
         console.error('Error:', error);
     }
 });
-/*
-app.get("/whothat", async (req, res) => {
-    
-    res.render("whothat", {
-        title: "who is that pokemon?",
-       
-    })
-})*/
 app.get("/whothat", async (req, res) => {
     // TODO: Checking if the pokemon the user types in is the same as the name of the pokemon
     try {
@@ -237,6 +240,7 @@ app.get("/vergelijken", async (req, res) => {
         title: "pokemon vergelijken"
     });
 })
-app.listen(app.get("port"), () => {
+app.listen(app.get("port"), async () => {
+    await connect();
     console.log("Server started on http://localhost:" + app.get('port'));
 });
