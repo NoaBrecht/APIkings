@@ -40,6 +40,7 @@ app.get("/", async (req, res) => {
 
         res.render('index', {
             user: user,
+            page: 1,
             title: "Alle pokemons",
             pokemons: pokemonWithImages,
         });
@@ -54,7 +55,7 @@ app.get("/:page", async (req, res) => {
         let { page } = req.params;
         let offset;
         if (parseInt(page) > 1) {
-            offset = (parseInt(page)-1) * 30;
+            offset = (parseInt(page) - 1) * 30;
         }
         else {
             offset = 0;
