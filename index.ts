@@ -53,11 +53,12 @@ app.get("/catcher", async (req, res) => {
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
-
+        const guessedName = "";
         const pokemon = await response.json();
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
+           
             
         });
 
