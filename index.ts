@@ -94,7 +94,6 @@ app.get("/wrong_project", async (req, res) => {
 app.get("/pokemon/:id", async (req, res) => {
     try {
         let user = await getUser(1)
-        console.log(user);
         //* POkemon ID ophalen
         const { id } = req.params;
         //* Pokemon info ophalen
