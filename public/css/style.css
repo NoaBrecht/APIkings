@@ -292,6 +292,23 @@ body.login-main {
     --colour-card-2: rgba(70, 130, 180, 1);
 }
 
+.pagination {
+    display: inline-block;
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 10px 25px;
+    text-decoration: none;
+  }
+  .pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+
 body.stats {
     place-items: center;
     height: 100vh;
@@ -645,6 +662,9 @@ body.stats {
         width: 250px;
         height: 300px;
         margin: 50px;
+    }
+    .pagination {
+        margin-left: 10vw;
     }
 }
 

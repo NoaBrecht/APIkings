@@ -18,5 +18,19 @@
                     </a>
                     </section>
                     <% } %>
+                    <div class="pagination">
+                        <% let pagina = 1 %>
+                        <a href="/<%=parseInt(page)-1%>">&laquo;</a>
+                        <% for(i=0; i<10; i++) {%>
+                            <% if (i==3 && page > 5) {
+                                %><a>...</a><%
+                                i++;
+                                pagina = page;
+                            }%>
+                        <a href="/<%=pagina%>"><%=pagina%></a>
+                        <% pagina++; %>
+                        <%}%>
+                        <a href="/<%=parseInt(page)+1%>">&raquo;</a>
+                      </div> 
             </article>
             <%- include("partials/footer") %>
