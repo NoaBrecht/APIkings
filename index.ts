@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { cp } from "fs";
+import { off } from "process";
 dotenv.config();
 
 const app: Express = express();
@@ -20,7 +21,8 @@ app.use((req, res, next) => {
 app.get("/", async (req, res) => {
     // TODO: Pagination
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`);
+
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
@@ -39,6 +41,43 @@ app.get("/", async (req, res) => {
         res.render('index', {
             title: "Alle pokemons",
             pokemons: pokemonWithImages,
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+app.get("/:page", async (req, res) => {
+    // TODO: Pagination
+    try {
+        let { page } = req.params;
+        let offset;
+        if (parseInt(page) > 1) {
+            offset = (parseInt(page)-1) * 30;
+        }
+        else {
+            offset = 0;
+        }
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30&offset=${offset}`);
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+        let pokemons: any = await response.json();
+        const pokemonWithImages = await Promise.all(pokemons.results.map(async (pokemon: any) => {
+            const response = await fetch(pokemon.url);
+            const data = await response.json();
+            return {
+                id: data.id,
+                name: pokemon.name,
+                image: data.sprites.other.home.front_default,
+                type: data.types[0].type.name
+            };
+        }));
+
+        res.render('index', {
+            title: "Alle pokemons",
+            pokemons: pokemonWithImages,
+            page: page
         });
 
     } catch (error) {
