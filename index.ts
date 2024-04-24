@@ -58,12 +58,14 @@ app.get("/catcher", async (req, res) => {
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
+            
         });
 
     } catch (error) {
         console.error('Error:', error);
     }
 });
+
 app.get("/landingpagina", async (req, res) => {
     res.render('landingpage', {
         title: "Landingpagina, kies een project",

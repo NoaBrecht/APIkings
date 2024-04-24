@@ -8,12 +8,9 @@
       <section class="container-fluid">
         <div id="catchthis">
           <article class="container-fluid row justify-content-center pokemonimg">
-            <div class="labelcontainer">
-            <label class="pokemoncatcher"><%= pokemon.name %></label>
-            <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
-          </div>
+            
           <img src="<%= pokemon.sprites.other.home.front_default %>"  alt="">
-          
+          <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
           </article>
         </div>
         <section class="pokeballbody">
@@ -24,7 +21,10 @@
           
         <section class="pokemonstats">
           <article class="container-fluid row justify-content-center card ">
-            <img src="<%= pokemon.sprites.other.home.front_default %>"  alt="">
+            <div class="labelcontainer">
+              <label class="pokemoncatcher"><%= pokemon.name %></label>
+             
+            </div>
             <% pokemon.stats.forEach(stat=> { %>
               <% if (stat.stat.name==='hp' || stat.stat.name==='attack' ||
                   stat.stat.name==='defense' ) { %>
