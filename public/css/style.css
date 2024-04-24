@@ -647,3 +647,24 @@ body.stats {
         margin: 50px;
     }
 }
+
+.battleEnemy {
+    margin-left: 60vw;
+}
+.battleEnemy img {
+    width: 20vw;
+    height: auto;
+    float: right;
+}
+.battleYou {
+    margin-right: 60vw;
+}
+.battleYou img {
+    width: 20vw;
+    height: auto;
+}
+.attack, .change {
+    margin: 6px;
+    margin-left: 45vw;
+    width: 10vw;
+}
