@@ -2,6 +2,8 @@ import { ObjectId } from "mongodb";
 export interface Pokemon {
     id: number;
     nickname: string;
+    attack: number;
+    defense: number;
 }
 export interface User {
     _id?: ObjectId;

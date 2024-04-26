@@ -27,8 +27,8 @@ async function seed() {
             password: "123",
             activepokemon: 2,
             pokemons: [
-                { id: 1, nickname: "" },
-                { id: 2, nickname: "Big chungus" }
+                { id: 1, nickname: "", attack: 0, defense: 0 },
+                { id: 2, nickname: "Big chungus", attack: 0, defense: 0 },
             ]
         },
         {
@@ -38,13 +38,14 @@ async function seed() {
             password: "321",
             activepokemon: 25,
             pokemons: [
-                { id: 1, nickname: "" },
-                { id: 2, nickname: "Foemp" },
-                { id: 25, nickname: "" }
+                { id: 1, nickname: "", attack: 0, defense: 0 },
+                { id: 2, nickname: "Foemp", attack: 0, defense: 0 },
+                { id: 25, nickname: "", attack: 0, defense: 0 }
             ]
         }
     ];
     if (await userCollection.countDocuments() === 0) {
+        console.log('Seeding database');
         await userCollection.insertMany(students);
     }
 }

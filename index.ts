@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { connect, getUser } from "./database";
+import { User } from "./interfaces";
 dotenv.config();
 
 const app: Express = express();
@@ -93,9 +94,19 @@ app.get("/wrong_project", async (req, res) => {
 })
 app.get("/pokemon/:id", async (req, res) => {
     try {
-        let user = await getUser(1)
+        let pokemonbijnaam: string = "";
+        let pokemonAttack: number = 0;
+        let pokemonDefense: number = 0;
         //* POkemon ID ophalen
         const { id } = req.params;
+        let user: User | null = await getUser(2);
+        user?.pokemons.forEach(poke => {
+            if (poke.id.toString() === id) {
+                pokemonbijnaam = poke.nickname;
+                pokemonAttack = poke.attack;
+                pokemonDefense = poke.defense;
+            };
+        });
         //* Pokemon info ophalen
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (response.status === 404) throw new Error('Not found');
@@ -133,7 +144,6 @@ app.get("/pokemon/:id", async (req, res) => {
             const spriteData = await spriteResponse.json();
             chaindata.push({ name: name, spriteUrl: spriteData.sprites.other.home.front_default });
         }
-        let pokemonbijnaam: string = "";
         if (pokemonbijnaam === "") {
             pokemonbijnaam = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
         }
@@ -143,6 +153,8 @@ app.get("/pokemon/:id", async (req, res) => {
             pokemon: pokemon,
             pokemonbijnaam: pokemonbijnaam,
             evolutionChain: chaindata,
+            pokemonAttack: pokemonAttack,
+            pokemonDefense: pokemonDefense
         });
 
     } catch (error) {
