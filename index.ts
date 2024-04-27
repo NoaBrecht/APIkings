@@ -22,7 +22,7 @@ app.get("/", async (req, res) => {
     // TODO: Pagination
     try {
         let user = await getUser(1)
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
@@ -82,11 +82,42 @@ app.get("/login", async (req, res) => {
     });
 })
 app.get("/register", async (req, res) => {
-    // TODO: Let the user create an account safely
     res.render('register', {
-        title: "Register pagina"
+        title: "Register pagina",
+        error: ""
     });
 })
+app.post("/register", (req, res) => {
+    let fname: string = req.body.fname;
+    let lname: string = req.body.lname;
+    let email: string = req.body.email;
+    let password1: string = req.body.password1;
+    let password2: string = req.body.password2;
+    let terms: boolean = req.body.terms === "agree";
+
+    if (!terms) {
+        res.render("register", {
+            error: "Je moet akkoord gaan met de voorwaarden", title: "Register pagina",
+        });
+    } else
+        if (fname === "" || lname === "" || email === "" || password1 === "" || password2 === "") {
+            res.render("register", {
+                error: "Alle velden zijn verplicht", title: "Register pagina",
+            });
+        } else if (!email.includes("@")) {
+            res.render("register", {
+                error: "Invaliede e-mail", title: "Register pagina",
+            });
+        } else if (password1 !== password2) {
+            res.render("register", {
+                error: "Passwords do not match", title: "Register pagina",
+            });
+        } else {
+            console.log("Data is valid, saving user");
+
+            res.redirect("/login");
+        }
+});
 app.get("/wrong_project", async (req, res) => {
     res.render('wrong_project', {
         title: "Dit project is niet beschikbaar"
@@ -100,7 +131,7 @@ app.get("/pokemon/:id", async (req, res) => {
         //* POkemon ID ophalen
         const { id } = req.params;
         let user: User | null = await getUser(2);
-        user?.pokemons.forEach(poke => {
+        user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === id) {
                 pokemonbijnaam = poke.nickname;
                 pokemonAttack = poke.attack;

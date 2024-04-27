@@ -11,6 +11,6 @@ export interface User {
     username: string;
     email: string;
     password: string;
-    activepokemon: number;
-    pokemons: Pokemon[];
+    activepokemon?: number;
+    pokemons?: Pokemon[];
 }
