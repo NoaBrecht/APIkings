@@ -14,7 +14,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT || 3000);
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+    let user = await getUser(1)
+    let activePOkemon = user?.activepokemon;
+    res.locals.activePOkemon = activePOkemon;
     console.log(`${req.method} ${req.path}`);
     next();
 });
