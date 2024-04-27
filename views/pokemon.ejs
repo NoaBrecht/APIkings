@@ -22,14 +22,19 @@
                             </div>
                             <div class="col-6">
                                 <section class="pokemonstats">
-                                    <% pokemon.stats.forEach(stat=> { %>
-                                        <% if (stat.stat.name==='hp' || stat.stat.name==='attack' ||
-                                            stat.stat.name==='defense' ) { %>
 
-                                            <p>
-                                                <%= stat.stat.name %>: <%= stat.base_stat %>
-                                            </p>
-                                            <% }}); %>
+
+                                    <p>
+                                        <%= pokemon.stats[0].stat.name %>: <%= pokemon.stats[0].base_stat %>
+                                    </p>
+                                    <p>
+                                        <%= pokemon.stats[1].stat.name %>: <%= pokemon.stats[1].base_stat +
+                                                pokemonAttack%>
+                                    </p>
+                                    <p>
+                                        <%= pokemon.stats[2].stat.name %>: <%= pokemon.stats[2].base_stat +
+                                                pokemonDefense %>
+                                    </p>
                                 </section>
                             </div>
                         </div>
