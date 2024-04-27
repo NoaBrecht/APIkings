@@ -15,7 +15,7 @@ app.set('views', path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT || 3000);
 app.use(async (req, res, next) => {
-    let user = await getUser(1)
+    let user = await getUser(2)
     let activePOkemon = user?.activepokemon;
     res.locals.activePOkemon = activePOkemon;
     console.log(`${req.method} ${req.path}`);
@@ -72,8 +72,11 @@ app.get("/catcher", async (req, res) => {
         console.error('Error:', error);
     }
 });
-
-app.get("/landingpagina", async (req, res) => {
+app.get("/logout", (req, res) => {
+    //TODO: Logout
+    res.redirect("/login");
+});
+app.get("/landingpagina", (req, res) => {
     res.render('landingpage', {
         title: "Landingpagina, kies een project",
     });
