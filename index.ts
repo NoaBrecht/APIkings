@@ -221,16 +221,16 @@ app.get("/whothat", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.post("/guess", async (req, res) => {
-    try {
-        const { guessedName, actualName } = req.body;
-        const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
-        res.json({ correct: isCorrectGuess });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+// app.post("/guess", async (req, res) => { >
+//     try {
+//         const { guessedName, actualName } = req.body;
+//         const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
+//         res.json({ correct: isCorrectGuess });
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 app.get("/battler", async (req, res) => {
     try {
         const id = Math.floor(Math.random() * 1025) + 1;
