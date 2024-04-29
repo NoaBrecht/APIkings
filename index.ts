@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, "views"));
 app.set("port", process.env.PORT || 3000);
 app.use(async (req, res, next) => {
     let user = await getUser(2)
-    let activePOkemon = user?.activepokemon;
+    let activePOkemon = user?.activepokemon ?? 0;
     res.locals.activePOkemon = activePOkemon;
     console.log(`${req.method} ${req.path}`);
     next();
