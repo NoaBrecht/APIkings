@@ -22,7 +22,6 @@ app.use(async (req, res, next) => {
     next();
 });
 app.get("/", async (req, res) => {
-    // TODO: Pagination
     try {
         let user = await getUser(1)
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30`);
@@ -215,22 +214,27 @@ app.get("/whothat", async (req, res) => {
         res.render('whothat', {
             title: "who is that pokemon?",
             pokemon: pokemon,
+            guessedName: "noname"
         });
 
     } catch (error) {
         console.error('Error:', error);
     }
 });
-// app.post("/guess", async (req, res) => { >
-//     try {
-//         const { guessedName, actualName } = req.body;
-//         const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
-//         res.json({ correct: isCorrectGuess });
-//     } catch (error) {
-//         console.error('Error:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+app.post("/whothat", async (req, res) => {
+    try {
+        console.log("1")
+        let guessedName: string = req.body.guessedName;
+        let actualName: string = req.body.actualName;
+        console.log(guessedName, actualName)
+
+        const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
+        console.log(isCorrectGuess);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 app.get("/battler", async (req, res) => {
     try {
         const id = Math.floor(Math.random() * 1025) + 1;
