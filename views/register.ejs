@@ -14,39 +14,43 @@
             </figure>
         </section>
         <section class="login">
-            <form class="login-form" action="">
+            <form class="login-form" action="register" method="post">
                 <h1>Registreer</h1>
-
-                <article class="mb-3">
-                    <label for="registerUsername" class="form-label">Gebruikersnaam</label>
-                    <input type="text" class="form-control" id="registerUsername" required>
-                </article>
-                <article class="mb-3">
-                    <label for="registerEmail" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="registerEmail" required>
-                </article>
-                <article class="mb-3">
-                    <label for="registerPwd" class="form-label">Wachtwoord</label>
-                    <article class="input-group">
-                        <input type="password" class="form-control" id="registerPwd" required>
-                    </article>
-                </article>
-                <article class="mb-3">
-                    <label for="registerPwd2" class="form-label">Herhaal wachtwoord</label>
-                    <article class="input-group">
-                        <input type="password" class="form-control" id="registerPwd2" required>
-                    </article>
-                </article>
-                <article class="mb-3">
-                    <input type="checkbox" id="terms" name="terms" value="agree">
-                    <label for="terms">Accepteer de voorwaarden</label>
-                </article>
-                <article class="d-grid gap-2">
-                    <button type="submit" class="btn btn-login btn-lg">Account aanmaken</button>
-                </article>
-                <article class="text-center mt-3">
-                    <p>Heb je al een account? <a href="/login">Log hier in</a></p>
-                </article>
+                <% if (error) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                    <% } %>
+                        <article class="mb-3">
+                            <label for="userName" class="form-label">Gebruikersnaam</label>
+                            <input type="text" name="userName" class="form-control" id="userName">
+                        </article>
+                        <article class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" name="email" class="form-control" id="email">
+                        </article>
+                        <article class="mb-3">
+                            <label for="password" class="form-label">Wachtwoord</label>
+                            <article class="input-group">
+                                <input type="password" name="password" class="form-control" id="password">
+                            </article>
+                        </article>
+                        <article class="mb-3">
+                            <label for="password2" class="form-label">Herhaal wachtwoord</label>
+                            <article class="input-group">
+                                <input type="password" name="password2" class="form-control" id="password2">
+                            </article>
+                        </article>
+                        <article class="mb-3">
+                            <input type="checkbox" id="terms" name="terms" value="agree">
+                            <label for="terms">Accepteer de voorwaarden</label>
+                        </article>
+                        <article class="d-grid gap-2">
+                            <button type="submit" class="btn btn-login btn-lg">Account aanmaken</button>
+                        </article>
+                        <article class="text-center mt-3">
+                            <p>Heb je al een account? <a href="/login">Log hier in</a></p>
+                        </article>
             </form>
         </section>
         <%- include("partials/footer") %>

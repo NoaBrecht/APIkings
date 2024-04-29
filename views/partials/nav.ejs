@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-danger text-uppercase" aria-label="Main navigation">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png"
+        <a class="navbar-brand" href="/pokemon/<%=activePOkemon%>">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/<%=activePOkemon%>.png"
                 style="height: auto; width: 30px;">
         </a>
         <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
@@ -28,7 +28,7 @@
                     <a class="nav-link" href="/whothat">Who's that pokemon</a>
                 </li>
             </ul>
-            <a class="nav-link" href="#">logout</a>
+            <a class="nav-link" href="/logout">logout</a>
 
         </div>
     </div>
