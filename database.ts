@@ -17,7 +17,7 @@ async function exit() {
 
 async function seed() {
     const students : User[] = [
-        { username: "John Doe", email: "John.Doe@gmail.com",password:"123",activepokemon:2,pokemons:[{id:1,nickname:""},{id:2,nickname:"Big chungus"}] }
+        { username: "John Doe",id: 1, email: "John.Doe@gmail.com",password:"123",activepokemon:2,pokemons:[{id:1,nickname:""},{id:2,nickname:"Big chungus"}] }
     ];
     if (await userCollection.countDocuments() === 0) {
         await userCollection.insertMany(students);

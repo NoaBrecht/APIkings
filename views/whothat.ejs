@@ -16,6 +16,13 @@
           <label>Vul naam in: </label>
           <input type="text" class="text-control" id="pokemonname"  name="guessedName"  placeholder="auto-complete..."
             value="<%=pokemon.name%>"></input>
+            <% console.log("guessedName:", guessedName); %>
+            <% console.log("pokemon.name:", pokemon.name); %>
+            <% if(pokemon.name === guessedName){ %>
+                <p style="color: green;">Correct guess!</p>
+            <% } else if (guessedName !== '') { %>
+                <p style="color: red;">Incorrect guess. Try again!</p>
+            <% } %>
            
         </div>
       </form>
