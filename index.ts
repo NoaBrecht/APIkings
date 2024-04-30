@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import path from "path";
 import { connect, getUser } from "./database";
 import { User } from "./interfaces";
+import session from "./session";
 dotenv.config();
 
 const app: Express = express();
 
 app.set("view engine", "ejs");
 app.use(express.json());
+app.use(session);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
@@ -72,7 +74,11 @@ app.get("/catcher", async (req, res) => {
     }
 });
 app.get("/logout", (req, res) => {
-    //TODO: Logout
+    req.session.destroy((e) => {
+        if (e) {
+            console.error(e);
+        }
+    });
     res.redirect("/login");
 });
 app.get("/landingpagina", (req, res) => {
