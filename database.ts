@@ -40,7 +40,8 @@ async function seed() {
             pokemons: [
                 { id: 1, nickname: "", attack: 0, defense: 0 },
                 { id: 2, nickname: "Foemp", attack: 0, defense: 0 },
-                { id: 25, nickname: "", attack: 0, defense: 0 }
+                { id: 25, nickname: "", attack: 0, defense: 0 },
+                { id: 65, nickname: "Bacon", attack: 5, defense: 10 }
             ]
         }
     ];
