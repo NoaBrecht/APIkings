@@ -56,18 +56,30 @@ app.get("/", async (req, res) => {
 app.get("/catcher", async (req, res) => {
     // TODO: if no pokemon, player can catch a starterpokemon
     try {
-
+       
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
+        let isgevangen = false;
 
+        
         const pokemon = await response.json();
+        let user: User | null = await getUser(2);
+        user?.pokemons?.forEach(poke => {
+            if (poke.id.toString() === pokemon.id) {
+               isgevangen = true;
+            };
+        });
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
+            user:user,
+            isgevangen: true
 
         });
+
+      
 
     } catch (error) {
         console.error('Error:', error);
@@ -249,17 +261,13 @@ app.post("/whothat", async (req, res) => {
         }
         if (isCorrectGuess) {
             console.log("juiste gok")
-            res.redirect("/whothat");
-
+           
+            return res.redirect("/whothat");
+            
         }
         //console.log(wrongGuess);
 
-        res.render('whothat', {
-            title: "who is that pokemon?",
-
-            wrongGuess: wrongGuess
-        })
-
+        res.redirect("/whothat");
 
     } catch (error) {
         console.error('Error:', error);
