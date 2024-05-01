@@ -222,14 +222,37 @@ app.get("/whothat", async (req, res) => {
     }
 });
 app.post("/whothat", async (req, res) => {
+    
     try {
         console.log("1")
         let guessedName: string = req.body.guessedName;
         let actualName: string = req.body.actualName;
+        
         console.log(guessedName, actualName)
 
         const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
-        console.log(isCorrectGuess);
+        const wrongGuess = !isCorrectGuess ?? false;
+        console.log(wrongGuess);
+      
+        if(wrongGuess){
+            console.log("verkeerde gok")
+           
+         
+        }
+        if(isCorrectGuess){
+            console.log("juiste gok")
+            res.redirect("/whothat");
+           
+        }
+        //console.log(wrongGuess);
+        
+        res.render('whothat',{
+            title: "who is that pokemon?",
+            
+            wrongGuess: wrongGuess
+        })
+        
+      
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal Server Error' });
