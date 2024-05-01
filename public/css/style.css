@@ -294,20 +294,23 @@ body.login-main {
 
 .pagination {
     display: inline-block;
-  }
-  
-  .pagination a {
+}
+
+.pagination a {
     color: black;
     float: left;
     padding: 10px 25px;
     text-decoration: none;
-  }
-  .pagination a.active {
+}
+
+.pagination a.active {
     background-color: #4CAF50;
     color: white;
-  }
-  
-  .pagination a:hover:not(.active) {background-color: #ddd;}
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
 
 body.stats {
     place-items: center;
@@ -367,36 +370,41 @@ body.stats {
 /**/
 .pokemoncatcher {
     text-align: center;
-    font-size:xx-large;
+    font-size: xx-large;
     font-weight: 800;
-    
+
 }
-.fadedtext{
+
+.fadedtext {
     text-align: center;
     font-size: medium;
     font-weight: 200;
     font-style: italic;
 }
-.pokemonimg{
-    height:400px;
-    width:400px;
+
+.pokemonimg {
+    height: 400px;
+    width: 400px;
     display: flex;
     align-items: center;
     margin: 0 auto;
-    
+
 }
-#catchthis{
-    top:450px;
+
+#catchthis {
+    top: 450px;
 }
-.pokemonstats-rightcorner .pokemonstats{
+
+.pokemonstats-rightcorner .pokemonstats {
     position: fixed;
-    top: -200px; 
-    right: 20px; 
-    background-color: rgba(255, 255, 255, 0.441); 
+    top: -200px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.441);
     padding: 10px;
     border-radius: 5px;
 
 }
+
 .blackout {
     filter: brightness(0);
     transition: filter .5s ease-out;
@@ -441,11 +449,13 @@ body.stats {
     display: flex;
     align-items: center;
 }
-.labelcontainer{
+
+.labelcontainer {
     border: 1px solid black;
-    padding:10px;
+    padding: 10px;
     margin-bottom: 10px;
 }
+
 .pokeballbody {
     width: 25em;
     height: 25em;
@@ -470,6 +480,14 @@ body.stats {
             #fff 50%,
             #876f74 50%,
             #fb0d3e 100%);
+}
+
+.pokeball-green {
+    border: 7px green solid;
+}
+
+.pokeball-red {
+    border: 7px red solid;
 }
 
 .pokebtn {
@@ -663,6 +681,7 @@ body.stats {
         height: 300px;
         margin: 50px;
     }
+
     .pagination {
         margin-left: 10vw;
     }
@@ -671,19 +690,24 @@ body.stats {
 .battleEnemy {
     margin-left: 60vw;
 }
+
 .battleEnemy img {
     width: 20vw;
     height: auto;
     float: right;
 }
+
 .battleYou {
     margin-right: 60vw;
 }
+
 .battleYou img {
     width: 20vw;
     height: auto;
 }
-.attack, .change {
+
+.attack,
+.change {
     margin: 6px;
     margin-left: 45vw;
     width: 10vw;
