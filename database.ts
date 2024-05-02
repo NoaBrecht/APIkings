@@ -22,7 +22,6 @@ async function exit() {
 async function seed() {
     const users: User[] = [
         {
-            id: 1,
             username: "John Doe",
             email: "John.Doe@gmail.com",
             password: "123",
@@ -33,7 +32,6 @@ async function seed() {
             ]
         },
         {
-            id: 2,
             username: "Jane Doe",
             email: "Jane@gmail.com",
             password: "321",
@@ -57,7 +55,7 @@ async function seed() {
 export async function registerUser(username: string, email: string, password: string) {
     password = await bcrypt.hash(password, saltRounds)
     let user: User = {
-        id: 0, username: username, email: email, password: password
+        username: username, email: email, password: password
     }
     return await userCollection.insertOne(user)
 }
