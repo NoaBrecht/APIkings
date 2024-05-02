@@ -1,11 +1,12 @@
 import { Collection, MongoClient } from "mongodb";
 import { User } from "./interfaces";
 import bcrypt from 'bcrypt';
+import dotenv from "dotenv";
+dotenv.config();
 const saltRounds: number = 13;
 
 export const MONGODB_URI = process.env.MONGO_URI ?? "mongodb://localhost:27017"
-export const client = new MongoClient(process.env.MONGO_URI || "mongodb://localhost:27017");
-
+export const client = new MongoClient(process.env.MONGO_URI ?? "mongodb://localhost:27017");
 export const userCollection: Collection<User> = client.db("project_pokemon").collection<User>("users");
 
 async function exit() {

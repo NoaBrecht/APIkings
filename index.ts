@@ -95,14 +95,12 @@ app.get("/landingpagina", (req, res) => {
     });
 })
 app.get("/login", async (req, res) => {
-    // TODO: Login 
     res.render('login', {
         title: "Login pagina"
     });
 })
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    let user: User = await login(username, password);
     try {
         let user: User = await login(username, password);
         delete user.password;
