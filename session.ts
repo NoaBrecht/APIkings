@@ -7,7 +7,7 @@ const MongoDBStore = mongoDbSession(session);
 const mongoStore = new MongoDBStore({
     uri: MONGODB_URI,
     collection: "sessions",
-    databaseName: "login-express",
+    databaseName: "project_pokemon",
 });
 
 declare module 'express-session' {
