@@ -1,9 +1,10 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { connect, getUser, login, registerUser } from "./database";
+import { connect, login, registerUser } from "./database";
 import { User } from "./interfaces";
 import session from "./session";
+import { secureMiddleware } from "./middleware/secureMiddleware";
 dotenv.config();
 
 const app: Express = express();
@@ -17,15 +18,11 @@ app.set('views', path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT || 3000);
 app.use(async (req, res, next) => {
-    let user = await getUser(2)
-    let activePOkemon = user?.activepokemon ?? 0;
-    res.locals.activePOkemon = activePOkemon;
     console.log(`${req.method} ${req.path}`);
     next();
 });
-app.get("/", async (req, res) => {
+app.get("/", secureMiddleware, async (req, res) => {
     try {
-        let user = await getUser(1)
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
@@ -41,9 +38,9 @@ app.get("/", async (req, res) => {
                 type: data.types[0].type.name
             };
         }));
-
+        console.log(req.session.user)
         res.render('index', {
-            user: user,
+            user: req.session.user,
             page: 1,
             title: "Alle pokemons",
             pokemons: pokemonWithImages,
@@ -53,7 +50,7 @@ app.get("/", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.get("/catcher", async (req, res) => {
+app.get("/catcher", secureMiddleware, async (req, res) => {
     // TODO: if no pokemon, player can catch a starterpokemon
     try {
 
@@ -65,7 +62,7 @@ app.get("/catcher", async (req, res) => {
 
 
         const pokemon = await response.json();
-        let user: User | null = await getUser(2);
+        let user = req.session.user;
         user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === pokemon.id) {
                 isgevangen = true;
@@ -107,7 +104,14 @@ app.get("/login", async (req, res) => {
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     let user: User = await login(username, password);
-    res.redirect("/")
+    try {
+        let user: User = await login(username, password);
+        delete user.password;
+        req.session.user = user;
+        res.redirect("/")
+    } catch (e: any) {
+        res.redirect("/login");
+    }
 })
 app.get("/register", async (req, res) => {
     res.render('register', {
@@ -149,14 +153,14 @@ app.get("/wrong_project", async (req, res) => {
         title: "Dit project is niet beschikbaar"
     });
 })
-app.get("/pokemon/:id", async (req, res) => {
+app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
     try {
         let pokemonbijnaam: string = "";
         let pokemonAttack: number = 0;
         let pokemonDefense: number = 0;
         //* POkemon ID ophalen
         const { id } = req.params;
-        let user: User | null = await getUser(2);
+        let user = req.session.user;
         user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === id) {
                 pokemonbijnaam = poke.nickname;
@@ -218,7 +222,7 @@ app.get("/pokemon/:id", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.get("/whothat", async (req, res) => {
+app.get("/whothat", secureMiddleware, async (req, res) => {
     // TODO: Checking if the pokemon the user types in is the same as the name of the pokemon
     try {
         const randompok = (min: number, max: number) =>
@@ -244,7 +248,7 @@ app.get("/whothat", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.post("/whothat", async (req, res) => {
+app.post("/whothat", secureMiddleware, async (req, res) => {
 
     try {
         console.log("1")
@@ -277,7 +281,7 @@ app.post("/whothat", async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-app.get("/battler", async (req, res) => {
+app.get("/battler", secureMiddleware, async (req, res) => {
     try {
         const id = Math.floor(Math.random() * 1025) + 1;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -302,12 +306,12 @@ app.get("/battler", async (req, res) => {
         console.error('Error:', error);
     }
 })
-app.get("/vergelijken", async (req, res) => {
+app.get("/vergelijken", secureMiddleware, async (req, res) => {
     res.render('vergelijken', {
         title: "pokemon vergelijken"
     });
 });
-app.get("/:page", async (req, res) => {
+app.get("/:page", secureMiddleware, async (req, res) => {
     // TODO: Pagination
     try {
         let { page } = req.params;
