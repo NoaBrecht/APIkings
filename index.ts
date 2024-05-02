@@ -165,9 +165,6 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
                 pokemonDefense = poke.defense;
             };
         });
-        if (user) {
-            updateActive(user, parseInt(id));
-        }
         //* Pokemon info ophalen
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (response.status === 404) throw new Error('Not found');
