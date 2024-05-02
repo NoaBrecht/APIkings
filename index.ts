@@ -81,7 +81,7 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.get("/logout", (req, res) => {
+app.get("/logout", secureMiddleware, (req, res) => {
     req.session.destroy((e) => {
         if (e) {
             console.error(e);
