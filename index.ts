@@ -38,7 +38,6 @@ app.get("/", secureMiddleware, async (req, res) => {
                 type: data.types[0].type.name
             };
         }));
-        console.log(req.session.user)
         res.render('index', {
             user: req.session.user,
             page: 1,
