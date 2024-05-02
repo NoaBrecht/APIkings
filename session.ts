@@ -1,5 +1,5 @@
 import { MONGODB_URI } from "./database";
-import session, { MemoryStore } from "express-session";
+import session from "express-session";
 import mongoDbSession from "connect-mongodb-session";
 import { User } from "./interfaces";
 const MongoDBStore = mongoDbSession(session);

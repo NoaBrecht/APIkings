@@ -61,6 +61,9 @@ export async function registerUser(username: string, email: string, password: st
     }
     return await userCollection.insertOne(user)
 }
+export async function refreshSession() {
+
+}
 export async function login(userName: string, password: string) {
     if (userName === "" || password === "") {
         throw new Error("Email and password required");
@@ -78,11 +81,7 @@ export async function login(userName: string, password: string) {
     }
 }
 export async function updateActive(user: User, id: number) {
-    for (let pokemon of user.pokemons!) {
-        if (pokemon.id === id) {
-            return await userCollection.updateOne({ _id: user._id }, { $set: { activepokemon: id } });
-        }
-    }
+    return await userCollection.updateOne({ _id: user._id }, { $set: { activepokemon: id } });
 }
 export async function connect() {
     await client.connect();

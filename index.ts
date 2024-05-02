@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { connect, login, registerUser } from "./database";
+import { connect, login, registerUser, updateActive } from "./database";
 import { User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
@@ -157,7 +157,7 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
         let pokemonDefense: number = 0;
         //* POkemon ID ophalen
         const { id } = req.params;
-        let user = req.session.user;
+        let user: User | undefined = req.session.user;
         user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === id) {
                 pokemonbijnaam = poke.nickname;
@@ -165,6 +165,9 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
                 pokemonDefense = poke.defense;
             };
         });
+        if (user) {
+            updateActive(user, parseInt(id));
+        }
         //* Pokemon info ophalen
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (response.status === 404) throw new Error('Not found');
