@@ -1,8 +1,8 @@
 import { Collection, MongoClient } from "mongodb";
 import { User } from "./interfaces";
+import bcrypt from 'bcrypt';
 import dotenv from "dotenv"; dotenv.config();
-
-
+const saltRounds: number = 13;
 
 export const client = new MongoClient(process.env.MONGO_URI || "mongodb://localhost:27017");
 
@@ -19,7 +19,7 @@ async function exit() {
 }
 
 async function seed() {
-    const students: User[] = [
+    const users: User[] = [
         {
             id: 1,
             username: "John Doe",
@@ -46,20 +46,26 @@ async function seed() {
         }
     ];
     if (await userCollection.countDocuments() === 0) {
+        for (let user of users) {
+            user.password = await bcrypt.hash(user.password, saltRounds)
+        }
         console.log('Seeding database');
-        await userCollection.insertMany(students);
+        await userCollection.insertMany(users);
     }
 }
 export async function getUser(_userId: number) {
     return await userCollection.findOne({ id: _userId });
 }
-export async function connect() {
-    try {
-        await client.connect();
-        await seed();
-        console.log('Connected to database');
-        process.on('SIGINT', exit);
-    } catch (error) {
-        console.error(error);
+export async function registerUser(username: string, email: string, password: string) {
+    await bcrypt.hash(username, saltRounds)
+    let user: User = {
+        id: 0, username: username, email: email, password
     }
+    return await userCollection.insertOne(user)
+}
+export async function connect() {
+    await client.connect();
+    await seed();
+    console.log('Connected to database');
+    process.on('SIGINT', exit);
 }

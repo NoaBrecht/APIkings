@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { connect, getUser } from "./database";
+import { connect, getUser, registerUser } from "./database";
 import { User } from "./interfaces";
 import session from "./session";
 dotenv.config();
@@ -56,30 +56,30 @@ app.get("/", async (req, res) => {
 app.get("/catcher", async (req, res) => {
     // TODO: if no pokemon, player can catch a starterpokemon
     try {
-       
+
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         let isgevangen = false;
 
-        
+
         const pokemon = await response.json();
         let user: User | null = await getUser(2);
         user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === pokemon.id) {
-               isgevangen = true;
+                isgevangen = true;
             };
         });
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
-            user:user,
+            user: user,
             isgevangen: true
 
         });
 
-      
+
 
     } catch (error) {
         console.error('Error:', error);
@@ -111,19 +111,18 @@ app.get("/register", async (req, res) => {
     });
 })
 app.post("/register", (req, res) => {
-    let fname: string = req.body.fname;
-    let lname: string = req.body.lname;
+
+    let username: string = req.body.userName;
     let email: string = req.body.email;
-    let password1: string = req.body.password1;
+    let password1: string = req.body.password;
     let password2: string = req.body.password2;
     let terms: boolean = req.body.terms === "agree";
-
     if (!terms) {
         res.render("register", {
             error: "Je moet akkoord gaan met de voorwaarden", title: "Register pagina",
         });
     } else
-        if (fname === "" || lname === "" || email === "" || password1 === "" || password2 === "") {
+        if (username === "" || email === "" || password1 === "" || password2 === "") {
             res.render("register", {
                 error: "Alle velden zijn verplicht", title: "Register pagina",
             });
@@ -136,8 +135,7 @@ app.post("/register", (req, res) => {
                 error: "Passwords do not match", title: "Register pagina",
             });
         } else {
-            console.log("Data is valid, saving user");
-
+            registerUser(username, email, password1);
             res.redirect("/login");
         }
 });
@@ -261,9 +259,9 @@ app.post("/whothat", async (req, res) => {
         }
         if (isCorrectGuess) {
             console.log("juiste gok")
-           
+
             return res.redirect("/whothat");
-            
+
         }
         //console.log(wrongGuess);
 
@@ -342,6 +340,13 @@ app.get("/:page", async (req, res) => {
     }
 });
 app.listen(app.get("port"), async () => {
-    await connect();
-    console.log("Server started on http://localhost:" + app.get('port'));
+    try {
+        await connect();
+        console.log("Server started on http://localhost:" + app.get('port'));
+    }
+    catch (e) {
+        console.error(e);
+        console.log("Database couldn't connect")
+        process.exit(1);
+    }
 });
