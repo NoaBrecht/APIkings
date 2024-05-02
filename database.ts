@@ -46,7 +46,8 @@ async function seed() {
     ];
     if (await userCollection.countDocuments() === 0) {
         for (let user of users) {
-            // user.password = await bcrypt.hash(user.password, saltRounds)
+            if (user.password)
+                user.password = await bcrypt.hash(user.password, saltRounds)
         }
         console.log('Seeding database');
         await userCollection.insertMany(users);
@@ -58,9 +59,6 @@ export async function registerUser(username: string, email: string, password: st
         username: username, email: email, password: password
     }
     return await userCollection.insertOne(user)
-}
-export async function refreshSession() {
-
 }
 export async function login(userName: string, password: string) {
     if (userName === "" || password === "") {
