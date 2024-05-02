@@ -1,10 +1,11 @@
 import { Collection, MongoClient } from "mongodb";
 import { User } from "./interfaces";
 import bcrypt from 'bcrypt';
-import dotenv from "dotenv"; dotenv.config();
 const saltRounds: number = 13;
 
-export const client = new MongoClient(process.env.MONGO_URI || "mongodb://localhost:27017");
+export const MONGODB_URI = process.env.MONGO_URI ?? "mongodb://localhost:27017";
+
+export const client = new MongoClient(MONGODB_URI || "mongodb://localhost:27017");
 
 export const userCollection: Collection<User> = client.db("project_pokemon").collection<User>("users");
 
@@ -47,7 +48,7 @@ async function seed() {
     ];
     if (await userCollection.countDocuments() === 0) {
         for (let user of users) {
-            user.password = await bcrypt.hash(user.password, saltRounds)
+            // user.password = await bcrypt.hash(user.password, saltRounds)
         }
         console.log('Seeding database');
         await userCollection.insertMany(users);
@@ -57,11 +58,27 @@ export async function getUser(_userId: number) {
     return await userCollection.findOne({ id: _userId });
 }
 export async function registerUser(username: string, email: string, password: string) {
-    await bcrypt.hash(username, saltRounds)
+    password = await bcrypt.hash(password, saltRounds)
     let user: User = {
-        id: 0, username: username, email: email, password
+        id: 0, username: username, email: email, password: password
     }
     return await userCollection.insertOne(user)
+}
+export async function login(userName: string, password: string) {
+    if (userName === "" || password === "") {
+        throw new Error("Email and password required");
+    }
+    let user: User | null = await userCollection.findOne<User>({ username: userName });
+    if (user) {
+        if (await bcrypt.compare(password, user.password!)) {
+            delete user.password;
+            return user;
+        } else {
+            throw new Error("Password incorrect");
+        }
+    } else {
+        throw new Error("User not found");
+    }
 }
 export async function connect() {
     await client.connect();

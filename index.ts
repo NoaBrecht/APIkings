@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { connect, getUser, registerUser } from "./database";
+import { connect, getUser, login, registerUser } from "./database";
 import { User } from "./interfaces";
 import session from "./session";
 dotenv.config();
@@ -103,6 +103,11 @@ app.get("/login", async (req, res) => {
     res.render('login', {
         title: "Login pagina"
     });
+})
+app.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+    let user: User = await login(username, password);
+    res.redirect("/")
 })
 app.get("/register", async (req, res) => {
     res.render('register', {
