@@ -54,9 +54,6 @@ async function seed() {
         await userCollection.insertMany(users);
     }
 }
-export async function getUser(_userId: number) {
-    return await userCollection.findOne({ id: _userId });
-}
 export async function registerUser(username: string, email: string, password: string) {
     password = await bcrypt.hash(password, saltRounds)
     let user: User = {
@@ -78,6 +75,13 @@ export async function login(userName: string, password: string) {
         }
     } else {
         throw new Error("User not found");
+    }
+}
+export async function updateActive(user: User, id: number) {
+    for (let pokemon of user.pokemons!) {
+        if (pokemon.id === id) {
+            return await userCollection.updateOne({ _id: user._id }, { $set: { activepokemon: id } });
+        }
     }
 }
 export async function connect() {
