@@ -50,7 +50,7 @@ app.get("/", secureMiddleware, async (req, res) => {
         }));
         res.render('index', {
             user: req.session.user,
-            page: 1,
+            page: page,
             title: "Alle pokemons",
             pokemons: pokemonWithImages,
         });
@@ -277,7 +277,7 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
         else {
             console.log("verkeerde gok")
         }
-        
+
         //console.log(wrongGuess);
         res.render('whothat', { previouslyGuessedName: guessedName, previousActualName: actualName, title: "test", pokemon: pokemon });
 
@@ -295,7 +295,7 @@ const fetchRandomPokemon = async (): Promise<any> => {
 
         if (response.status === 404) {
             console.log("Pokémon not found, trying again");
-            return fetchRandomPokemon(); 
+            return fetchRandomPokemon();
         }
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
@@ -304,11 +304,11 @@ const fetchRandomPokemon = async (): Promise<any> => {
         return pokemon;
     } catch (error) {
         console.error('Error fetching random Pokemon:', error);
-        throw error; 
+        throw error;
     }
 };
 
-app.get("/battler", async (req, res) => {
+app.get("/battler", secureMiddleware, async (req, res) => {
     try {
         const id = Math.floor(Math.random() * 1025) + 1;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
