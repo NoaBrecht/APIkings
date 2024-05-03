@@ -14,8 +14,13 @@
           </article>
         </div>
         <section class="pokeballbody">
-          <div class="pokeball"></div>
+          <div class="pokeball pokeball-red <%if(isgevangen){%> pokeball-green<%}%> "></div>
           <div class="pokebtn"></div>
+          <%if(isgevangen){%> <h3>GEVANGEN</h3> <%}%>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
         <% if(isgevangen){ %>
           <p>balls</p>
