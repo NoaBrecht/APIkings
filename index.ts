@@ -244,6 +244,7 @@ app.get("/whothat", async (req, res) => {
 app.post("/whothat", async (req, res) => {
 
     try {
+        const pokemon = await fetchRandomPokemon();
         console.log("1")
         let guessedName: string = req.body.guessedName;
         let actualName: string = req.body.actualName;
@@ -251,29 +252,48 @@ app.post("/whothat", async (req, res) => {
         console.log(guessedName, actualName)
 
         const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
-        const wrongGuess = !isCorrectGuess ?? false;
-        console.log(wrongGuess);
+        console.log(isCorrectGuess);
 
-        if (wrongGuess) {
-            console.log("verkeerde gok")
-
-
-        }
         if (isCorrectGuess) {
             console.log("juiste gok")
            
             return res.redirect("/whothat");
             
         }
+        else {
+            console.log("verkeerde gok")
+        }
+        
         //console.log(wrongGuess);
+        res.render('whothat', { previouslyGuessedName: guessedName, previousActualName: actualName, title: "test", pokemon: pokemon });
 
-        res.redirect("/whothat");
+        //res.redirect("/whothat");
 
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+const fetchRandomPokemon = async (): Promise<any> => {
+    try {
+        const randompok = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0, 1100)}`);
+
+        if (response.status === 404) {
+            console.log("Pokémon not found, trying again");
+            return fetchRandomPokemon(); 
+        }
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+
+        const pokemon = await response.json();
+        return pokemon;
+    } catch (error) {
+        console.error('Error fetching random Pokemon:', error);
+        throw error; 
+    }
+};
+
 app.get("/battler", async (req, res) => {
     try {
         const id = Math.floor(Math.random() * 1025) + 1;

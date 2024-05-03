@@ -482,12 +482,13 @@ body.stats {
             #fb0d3e 100%);
 }
 
-.pokeball-green {
-    border: 7px green solid;
-}
+
 
 .pokeball-red {
     border: 7px red solid;
+}
+.pokeball-green {
+    border: 7px green solid;
 }
 
 .pokebtn {
