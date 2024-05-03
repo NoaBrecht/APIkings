@@ -8,9 +8,9 @@
       <section class="container-fluid">
         <div id="catchthis">
           <article class="container-fluid row justify-content-center pokemonimg">
-            
-          <img src="<%= pokemon.sprites.other.home.front_default %>"  alt="">
-          <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
+
+            <img src="<%= pokemon.sprites.other.home.front_default %>" alt="">
+            <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
           </article>
         </div>
         <section class="pokeballbody">
@@ -22,29 +22,33 @@
             </div>
           </div>
         </section>
-      
-        <div class="pokemonstats-rightcorner">
-          
-        <section class="pokemonstats">
-          <article class="container-fluid row justify-content-center card ">
-            <div class="labelcontainer">
-              <label class="pokemoncatcher"><%= pokemon.name %></label>
-             
-            </div>
-            <% pokemon.stats.forEach(stat=> { %>
-              <% if (stat.stat.name==='hp' || stat.stat.name==='attack' ||
-                  stat.stat.name==='defense' ) { %>
+        <% if(isgevangen){ %>
+          <p>balls</p>
+          <% } %>
+            <div class="pokemonstats-rightcorner">
 
-                  <p>
-                      <%= stat.stat.name %>: <%= stat.base_stat %>
-                  </p>
-                  <% }}); %>
-      </section>
-          </article>
-          
-         
-     
-    </div>
+              <section class="pokemonstats">
+                <article class="container-fluid row justify-content-center card">
+                  <div class="labelcontainer">
+                    <label class="pokemoncatcher">
+                      <%= pokemon.name %>
+                    </label>
+
+                  </div>
+                  <% pokemon.stats.forEach(stat=> { %>
+                    <% if (stat.stat.name==='hp' || stat.stat.name==='attack' || stat.stat.name==='defense' ) { %>
+
+                      <p>
+                        <%= stat.stat.name %>: <%= stat.base_stat %>
+                      </p>
+                      <% }}); %>
+                </article>
+              </section>
+
+
+
+
+            </div>
   </body>
 
   <%- include("partials/footer") %>

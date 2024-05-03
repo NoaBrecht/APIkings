@@ -6,31 +6,35 @@
                 <% for(let pokemon of pokemons) { %>
                     <section class="card text-center <%=pokemon.type%>">
                         <a href="/pokemon/<%=pokemon.id%>">
-                        <article class="card-body">
-                            <h1 class="card-title">
+                            <article class="card-body">
+                                <h1 class="card-title">
                                     <%= pokemon.name %>
                                 </h1>
-                            <p class="card-text">
-                                <%= pokemon.id %>
-                            </p>
-                        </article>
-                        <img src="<%=pokemon.image%>" class="card-img-top" alt="een afbeelding van <%= pokemon.name %>">
-                    </a>
+                                <p class="card-text">
+                                    <%= pokemon.id %>
+                                </p>
+                            </article>
+                            <img src="<%=pokemon.image%>" class="card-img-top"
+                                alt="een afbeelding van <%= pokemon.name %>">
+                        </a>
                     </section>
                     <% } %>
-                    <div class="pagination">
-                        <% let pagina = 1 %>
-                        <a href="/<%=parseInt(page)-1%>">&laquo;</a>
-                        <% for(i=0; i<10; i++) {%>
-                            <% if (i==3 && page > 5) {
-                                %><a>...</a><%
-                                i++;
-                                pagina = page;
-                            }%>
-                        <a href="/<%=pagina%>"><%=pagina%></a>
-                        <% pagina++; %>
-                        <%}%>
-                        <a href="/<%=parseInt(page)+1%>">&raquo;</a>
-                      </div> 
+            </article>
+
+            <div class="pagination">
+                <% let pagina=1 %>
+                    <a href="/<%=parseInt(page)-1%>">&laquo;</a>
+                    <% for(i=0; i<10; i++) {%>
+                        <% if (i==3 && page> 5) {
+                            %><a>...</a>
+                            <% i++; pagina=page; }%>
+                                <a href="/<%=pagina%>">
+                                    <%=pagina%>
+                                </a>
+                                <% pagina++; %>
+                                    <%}%>
+                                        <a href="/<%=parseInt(page)+1%>">&raquo;
+                                        </a>
+            </div>
             </article>
             <%- include("partials/footer") %>

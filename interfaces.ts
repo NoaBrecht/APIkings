@@ -7,10 +7,9 @@ export interface Pokemon {
 }
 export interface User {
     _id?: ObjectId;
-    id: number;
     username: string;
     email: string;
-    password: string;
+    password?: string;
     activepokemon?: number;
     pokemons?: Pokemon[];
 }

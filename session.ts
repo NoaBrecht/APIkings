@@ -1,29 +1,27 @@
-import dotenv from "dotenv";
-dotenv.config();
-
+import { MONGODB_URI } from "./database";
 import session from "express-session";
 import mongoDbSession from "connect-mongodb-session";
+import { User } from "./interfaces";
 const MongoDBStore = mongoDbSession(session);
 
 const mongoStore = new MongoDBStore({
-    uri: process.env.MONGO_URI ?? "mongodb://localhost:27017",
+    uri: MONGODB_URI,
     collection: "sessions",
     databaseName: "project_pokemon",
 });
 
-mongoStore.on("error", (error) => {
-    console.error(error);
-});
-
 declare module 'express-session' {
     export interface SessionData {
-        username?: string;
+        user?: User
     }
 }
 
 export default session({
     secret: process.env.SESSION_SECRET ?? "my-super-secret-secret",
     store: mongoStore,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+    }
 });

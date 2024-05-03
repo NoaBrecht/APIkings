@@ -1,9 +1,10 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { connect, getUser } from "./database";
+import { connect, login, registerUser, updateActive } from "./database";
 import { User } from "./interfaces";
 import session from "./session";
+import { secureMiddleware } from "./middleware/secureMiddleware";
 dotenv.config();
 
 const app: Express = express();
@@ -17,15 +18,11 @@ app.set('views', path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT || 3000);
 app.use(async (req, res, next) => {
-    let user = await getUser(2)
-    let activePOkemon = user?.activepokemon ?? 0;
-    res.locals.activePOkemon = activePOkemon;
     console.log(`${req.method} ${req.path}`);
     next();
 });
-app.get("/", async (req, res) => {
+app.get("/", secureMiddleware, async (req, res) => {
     try {
-        let user = await getUser(1)
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
@@ -41,9 +38,8 @@ app.get("/", async (req, res) => {
                 type: data.types[0].type.name
             };
         }));
-
         res.render('index', {
-            user: user,
+            user: req.session.user,
             page: 1,
             title: "Alle pokemons",
             pokemons: pokemonWithImages,
@@ -53,39 +49,39 @@ app.get("/", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.get("/catcher", async (req, res) => {
+app.get("/catcher", secureMiddleware, async (req, res) => {
     // TODO: if no pokemon, player can catch a starterpokemon
     try {
-       
+
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         let isgevangen = false;
 
-        
+
         const pokemon = await response.json();
-        let user: User | null = await getUser(2);
+        let user = req.session.user;
         user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === pokemon.id) {
-               isgevangen = true;
+                isgevangen = true;
             };
         });
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
-            user:user,
+            user: user,
             isgevangen: true
 
         });
 
-      
+
 
     } catch (error) {
         console.error('Error:', error);
     }
 });
-app.get("/logout", (req, res) => {
+app.get("/logout", secureMiddleware, (req, res) => {
     req.session.destroy((e) => {
         if (e) {
             console.error(e);
@@ -99,10 +95,20 @@ app.get("/landingpagina", (req, res) => {
     });
 })
 app.get("/login", async (req, res) => {
-    // TODO: Login 
     res.render('login', {
         title: "Login pagina"
     });
+})
+app.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        let user: User = await login(username, password);
+        delete user.password;
+        req.session.user = user;
+        res.redirect("/")
+    } catch (e: any) {
+        res.redirect("/login");
+    }
 })
 app.get("/register", async (req, res) => {
     res.render('register', {
@@ -111,19 +117,18 @@ app.get("/register", async (req, res) => {
     });
 })
 app.post("/register", (req, res) => {
-    let fname: string = req.body.fname;
-    let lname: string = req.body.lname;
+
+    let username: string = req.body.userName;
     let email: string = req.body.email;
-    let password1: string = req.body.password1;
+    let password1: string = req.body.password;
     let password2: string = req.body.password2;
     let terms: boolean = req.body.terms === "agree";
-
     if (!terms) {
         res.render("register", {
             error: "Je moet akkoord gaan met de voorwaarden", title: "Register pagina",
         });
     } else
-        if (fname === "" || lname === "" || email === "" || password1 === "" || password2 === "") {
+        if (username === "" || email === "" || password1 === "" || password2 === "") {
             res.render("register", {
                 error: "Alle velden zijn verplicht", title: "Register pagina",
             });
@@ -136,8 +141,7 @@ app.post("/register", (req, res) => {
                 error: "Passwords do not match", title: "Register pagina",
             });
         } else {
-            console.log("Data is valid, saving user");
-
+            registerUser(username, email, password1);
             res.redirect("/login");
         }
 });
@@ -146,14 +150,14 @@ app.get("/wrong_project", async (req, res) => {
         title: "Dit project is niet beschikbaar"
     });
 })
-app.get("/pokemon/:id", async (req, res) => {
+app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
     try {
         let pokemonbijnaam: string = "";
         let pokemonAttack: number = 0;
         let pokemonDefense: number = 0;
         //* POkemon ID ophalen
         const { id } = req.params;
-        let user: User | null = await getUser(2);
+        let user: User | undefined = req.session.user;
         user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === id) {
                 pokemonbijnaam = poke.nickname;
@@ -215,7 +219,7 @@ app.get("/pokemon/:id", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.get("/whothat", async (req, res) => {
+app.get("/whothat", secureMiddleware, async (req, res) => {
     // TODO: Checking if the pokemon the user types in is the same as the name of the pokemon
     try {
         const randompok = (min: number, max: number) =>
@@ -241,7 +245,7 @@ app.get("/whothat", async (req, res) => {
         console.error('Error:', error);
     }
 });
-app.post("/whothat", async (req, res) => {
+app.post("/whothat", secureMiddleware, async (req, res) => {
 
     try {
         const pokemon = await fetchRandomPokemon();
@@ -256,9 +260,9 @@ app.post("/whothat", async (req, res) => {
 
         if (isCorrectGuess) {
             console.log("juiste gok")
-           
+
             return res.redirect("/whothat");
-            
+
         }
         else {
             console.log("verkeerde gok")
@@ -319,12 +323,12 @@ app.get("/battler", async (req, res) => {
         console.error('Error:', error);
     }
 })
-app.get("/vergelijken", async (req, res) => {
+app.get("/vergelijken", secureMiddleware, async (req, res) => {
     res.render('vergelijken', {
         title: "pokemon vergelijken"
     });
 });
-app.get("/:page", async (req, res) => {
+app.get("/:page", secureMiddleware, async (req, res) => {
     // TODO: Pagination
     try {
         let { page } = req.params;
@@ -362,6 +366,13 @@ app.get("/:page", async (req, res) => {
     }
 });
 app.listen(app.get("port"), async () => {
-    await connect();
-    console.log("Server started on http://localhost:" + app.get('port'));
+    try {
+        await connect();
+        console.log("Server started on http://localhost:" + app.get('port'));
+    }
+    catch (e) {
+        console.error(e);
+        console.log("Database couldn't connect")
+        process.exit(1);
+    }
 });

@@ -15,17 +15,17 @@
             </figure>
         </section>
         <section class="login">
-            <form class="login-form" action="">
+            <form class="login-form" action="/login" method="post">
                 <h1>Log in</h1>
 
                 <article class="mb-3">
                     <label for="loginUsername" class="form-label">Gebruikersnaam</label>
-                    <input type="text" class="form-control" id="loginUsername" required>
+                    <input type="text" class="form-control" name="username" id="loginUsername" required>
                 </article>
                 <article class="mb-3">
                     <label for="loginPwd" class="form-label">Wachtwoord</label>
                     <article class="input-group">
-                        <input type="password" class="form-control" id="loginPwd" required>
+                        <input type="password" name="password" class="form-control" id="loginPwd" required>
                         <button id="togglePassword" type="button" class="btn btn-outline-secondary toggle-password"
                             title="Toggle Password Visibility">
                             <i id="togglePasswordIcon" class="bi bi-eye-slash"></i>
