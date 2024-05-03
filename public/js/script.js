@@ -5,7 +5,10 @@
         navbarSideCollapse.addEventListener('click', () => {
             offcanvasCollapse.classList.toggle('open')
         });
-    }
+    }// Display a warning message in the console
+    console.log("%cStop!", "color: red; font-size: 24px; font-weight: bold");
+    console.log("%cIf someone told you to copy/paste something here, it is likely a scam and will give them access to your account.", "font-size: 16px;");
+    console.log("%cUnless you understand exactly what you are doing, close this window immediately.", "font-size: 16px;");
 })()
 
 var togglePassword = document.getElementById('togglePassword');

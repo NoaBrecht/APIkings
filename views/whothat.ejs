@@ -4,22 +4,25 @@
 
   <body>
     <%- include("partials/nav") %>
-      <article class="container-fluid row justify-content-center card card-whothat">
+      <article class="container-fluid row justify-content-center card card-whothat card-nohover">
         <h1>Who is that Pokemon?</h1>
         <img src="<%= pokemon.sprites.other.home.front_default %>" class="blackout" alt="">
         <div class="form-group col-1 whothatform">
-          <form id="guessForm">
-          <div class="formarrow">
-            <label for="pokemonname">Per juist antwoord gaat def/att met 1 naar boven </label>
-            <img src="assets/arrow.jpg" class="arrow">
-          </div>
-          <label>Vul naam in: </label>
-          <input type="text" class="text-control" id="pokemonname"  name="guessedName"  placeholder="auto-complete..."
-            value="<%=pokemon.name%>"></input>
-           
+          <form id="guessForm" method="post" action="/whothat">
+            <div class="formarrow">
+              <label for="pokemonname">Per juist antwoord gaat def/att met 1 naar boven </label>
+              <img src="assets/arrow.jpg" class="arrow">
+            </div>
+            <label>Vul naam in: </label>
+            <input type="text" class="text-control" id="pokemonname" name="guessedName"
+              placeholder="auto-complete..."></input>
+            <% if ( previouslyGuessedName != previousActualName ) { %>
+              <p style="color: red;">Wrong guess</p>
+              <% } %>
+                <input type="hidden" name="actualName" value="<%=pokemon.name%>">
         </div>
-      </form>
+        </form>
       </article>
 
       <%- include("partials/footer") %>
-      <script src="/js/script.js"></script>
+        <script src="/js/script.js"></script>
