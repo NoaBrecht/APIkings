@@ -26,13 +26,11 @@ app.get("/", secureMiddleware, async (req, res) => {
         let page;
         if (typeof req.query.page === "string") {
             page = parseInt(req.query.page);
-            console.log(page);
         }
         else {
             page = 1;
         }
         let offset = page * 30 - 30;
-        console.log(offset);
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30&offset=${offset}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
