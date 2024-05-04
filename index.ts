@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT || 3000);
 app.use(async (req, res, next) => {
-    console.log(`${req.ip} ${req.method} ${req.path}`);
+    console.log(`${req.method} ${req.path}`);
     next();
 });
 app.get("/", secureMiddleware, async (req, res) => {
