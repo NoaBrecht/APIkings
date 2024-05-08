@@ -244,6 +244,8 @@ app.get("/favorite/:id", secureMiddleware, async (req, res) => {
         user?.pokemons?.forEach(poke => {
             if (poke.id === id) {
                 updateActive(user, id)
+                user.activepokemon = id;
+                req.session.user = user;
             };
         });
         res.redirect("/")
@@ -293,7 +295,7 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
         let message = "";
         let wrongGuess = true;
 
-      
+
         if (isCorrectGuess) {
             message = "Correct!";
             wrongGuess = false;
@@ -302,10 +304,12 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
         else {
             message = "Incorrect, try again!";
         }
-       
+
         //console.log(wrongGuess);
-        res.render('whothat', { previouslyGuessedName: guessedName, previousActualName: actualName , title: "test", pokemon: pokemon ,message: message,
-        wrongGuess: wrongGuess, formSubmitted: true});
+        res.render('whothat', {
+            previouslyGuessedName: guessedName, previousActualName: actualName, title: "test", pokemon: pokemon, message: message,
+            wrongGuess: wrongGuess, formSubmitted: true
+        });
 
         //res.redirect("/whothat");
 
