@@ -55,6 +55,10 @@ async function seed() {
 }
 export async function registerUser(username: string, email: string, password: string) {
     password = await bcrypt.hash(password, saltRounds)
+    let existingUser: User | null = await userCollection.findOne<User>({ username: username })
+    if (existingUser) {
+        throw new Error();
+    }
     let user: User = {
         username: username, email: email, password: password
     }
