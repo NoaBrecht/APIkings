@@ -402,6 +402,9 @@ body.stats {
     background-color: rgba(255, 255, 255, 0.441);
     padding: 10px;
     border-radius: 5px;
+    height:750px;
+    z-index: 100;
+    max-width: 80%;
 
 }
 
@@ -456,6 +459,7 @@ body.stats {
     margin-bottom: 10px;
 }
 
+
 .pokeballbody {
     width: 25em;
     height: 25em;
@@ -487,6 +491,7 @@ body.stats {
 .pokeball-red {
     border: 7px red solid;
 }
+
 .pokeball-green {
     border: 7px green solid;
 }
@@ -540,6 +545,13 @@ body.stats {
     border-radius: 50%;
     transform: rotate(45deg);
 }
+@media (min-width: 576px) {
+
+    #catchthis {
+        top: 850px;
+        
+    }
+}
 
 .vergelijken {
     display: flex;
@@ -564,10 +576,47 @@ body.stats {
     width: 50%;
 }
 
+.vergelijken input[type="submit"] {
+    right: 5%;
+    position: absolute;
+}
+
 .pokemonimg {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .vergelijken .col-5 {
+        width: 100%;
+    }
+
+    .vergelijken .card {
+        width: 90%;
+    }
+
+    .pokemonimg {
+        width: 80%;
+    }
+
+    .pokemonstats {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .pokemonimg {
+        width: 100%;
+    }
+
+    .vergelijken .card {
+        width: 100%;
+    }
+
+    .pokemonstats {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 750px) {
