@@ -26,13 +26,11 @@ app.get("/", secureMiddleware, async (req, res) => {
         let page;
         if (typeof req.query.page === "string") {
             page = parseInt(req.query.page);
-            console.log(page);
         }
         else {
             page = 1;
         }
         let offset = page * 30 - 30;
-        console.log(offset);
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30&offset=${offset}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
@@ -117,6 +115,7 @@ app.post("/login", async (req, res) => {
         req.session.user = user;
         res.redirect("/")
     } catch (e: any) {
+        console.warn(`Wrong login from IP: ${req.ip}`)
         res.redirect("/login");
     }
 })
@@ -127,18 +126,17 @@ app.get("/register", async (req, res) => {
     });
 })
 app.post("/register", (req, res) => {
-
-    let username: string = req.body.userName;
-    let email: string = req.body.email;
-    let password1: string = req.body.password;
-    let password2: string = req.body.password2;
-    let terms: boolean = req.body.terms === "agree";
-    if (!terms) {
-        res.render("register", {
-            error: "Je moet akkoord gaan met de voorwaarden", title: "Register pagina",
-        });
-    } else
-        if (username === "" || email === "" || password1 === "" || password2 === "") {
+    try {
+        let username: string = req.body.userName;
+        let email: string = req.body.email;
+        let password1: string = req.body.password;
+        let password2: string = req.body.password2;
+        let terms: boolean = req.body.terms === "agree";
+        if (!terms) {
+            res.render("register", {
+                error: "Je moet akkoord gaan met de voorwaarden", title: "Register pagina",
+            });
+        } else if (username === "" || email === "" || password1 === "" || password2 === "") {
             res.render("register", {
                 error: "Alle velden zijn verplicht", title: "Register pagina",
             });
@@ -154,6 +152,13 @@ app.post("/register", (req, res) => {
             registerUser(username, email, password1);
             res.redirect("/login");
         }
+
+    } catch (err) {
+        console.error(err)
+        res.render("register", {
+            error: "Er is iets foutgegaan", title: "Register pagina",
+        });
+    }
 });
 app.get("/wrong_project", async (req, res) => {
     res.render('wrong_project', {
