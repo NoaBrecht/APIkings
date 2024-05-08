@@ -170,11 +170,13 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
         let pokemonbijnaam: string = "";
         let pokemonAttack: number = 0;
         let pokemonDefense: number = 0;
+        let catchedPokemon: boolean = false;
         //* POkemon ID ophalen
         const { id } = req.params;
         let user: User | undefined = req.session.user;
         user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === id) {
+                catchedPokemon = true
                 pokemonbijnaam = poke.nickname;
                 pokemonAttack = poke.attack;
                 pokemonDefense = poke.defense;
@@ -227,13 +229,30 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
             pokemonbijnaam: pokemonbijnaam,
             evolutionChain: chaindata,
             pokemonAttack: pokemonAttack,
-            pokemonDefense: pokemonDefense
+            pokemonDefense: pokemonDefense,
+            catchedPokemon: catchedPokemon
         });
 
     } catch (error) {
         console.error('Error:', error);
     }
 });
+app.get("/favorite/:id", secureMiddleware, async (req, res) => {
+    try {
+        let id: number = parseInt(req.params.id);
+        let user: User | undefined = req.session.user;
+        user?.pokemons?.forEach(poke => {
+            if (poke.id === id) {
+                updateActive(user, id)
+                user.activepokemon = id;
+                req.session.user = user;
+            };
+        });
+        res.redirect("/")
+    } catch (error) {
+
+    }
+})
 app.get("/whothat", secureMiddleware, async (req, res) => {
     // TODO: Checking if the pokemon the user types in is the same as the name of the pokemon
     try {
@@ -276,7 +295,7 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
         let message = "";
         let wrongGuess = true;
 
-      
+
         if (isCorrectGuess) {
             message = "Correct!";
             wrongGuess = false;
@@ -285,10 +304,12 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
         else {
             message = "Incorrect, try again!";
         }
-       
+
         //console.log(wrongGuess);
-        res.render('whothat', { previouslyGuessedName: guessedName, previousActualName: actualName , title: "test", pokemon: pokemon ,message: message,
-        wrongGuess: wrongGuess, formSubmitted: true});
+        res.render('whothat', {
+            previouslyGuessedName: guessedName, previousActualName: actualName, title: "test", pokemon: pokemon, message: message,
+            wrongGuess: wrongGuess, formSubmitted: true
+        });
 
         //res.redirect("/whothat");
 
