@@ -15,9 +15,10 @@
                                             <span class="pokename">
                                                 <%= pokemonbijnaam %>
                                             </span>
-                                            <%if (catchedPokemon) {%>
-                                                <a href="/favorite/<%= pokemon.id %>"><i class="bi bi-star"></i></a>
-                                                <%}%>
+                                            <%if (pokemon.id===user.activepokemon) { %><i class="bi bi-star-fill"></i>
+                                                <%}else if (catchedPokemon) {%>
+                                                    <a href="/favorite/<%= pokemon.id %>"><i class="bi bi-star"></i></a>
+                                                    <%}%>
 
                                     </h1>
                                     <img src="<%=pokemon.sprites.other.home.front_default  %>" class="card-img-top"
