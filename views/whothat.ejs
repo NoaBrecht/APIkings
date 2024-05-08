@@ -16,10 +16,16 @@
             <label>Vul naam in: </label>
             <input type="text" class="text-control" id="pokemonname" name="guessedName"
               placeholder="auto-complete..."></input>
-            <% if ( previouslyGuessedName != previousActualName ) { %>
-              <p style="color: red;">Wrong guess</p>
-              <% } %>
+              <input type="button" class=" " value="Gok">
+              <input type="submit" class="" value="Volgende pokemon">
                 <input type="hidden" name="actualName" value="<%=pokemon.name%>">
+                <% if (formSubmitted) { %>
+                  <% if (wrongGuess) { %>
+                    <p style="color: red;"><%= message %></p>
+                  <% } else { %>
+                    <p style="color: green;"><%= message %></p>
+                  <% } %>
+                <% } %>
         </div>
         </form>
       </article>

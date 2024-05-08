@@ -402,6 +402,9 @@ body.stats {
     background-color: rgba(255, 255, 255, 0.441);
     padding: 10px;
     border-radius: 5px;
+    height:750px;
+    z-index: 100;
+    max-width: 80%;
 
 }
 
@@ -455,6 +458,7 @@ body.stats {
     padding: 10px;
     margin-bottom: 10px;
 }
+
 
 .pokeballbody {
     width: 25em;
@@ -540,6 +544,13 @@ body.stats {
     height: 2.5em;
     border-radius: 50%;
     transform: rotate(45deg);
+}
+@media (min-width: 576px) {
+
+    #catchthis {
+        top: 850px;
+        
+    }
 }
 
 .vergelijken {
