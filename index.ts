@@ -246,8 +246,9 @@ app.get("/whothat", secureMiddleware, async (req, res) => {
         res.render('whothat', {
             title: "who is that pokemon?",
             pokemon: pokemon,
-            guessedName: "noname",
-            wrongGuess: false
+            previouslyGuessedName: "noname",
+            wrongGuess: false,
+            formSubmitted: false
 
         });
 
@@ -260,26 +261,29 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
     try {
         const pokemon = await fetchRandomPokemon();
         console.log("1")
-        let guessedName: string = req.body.guessedName;
-        let actualName: string = req.body.actualName;
+        let guessedName: string = req.body.guessedName || "";
+        let actualName: string = req.body.actualName || "";
 
         console.log(guessedName, actualName)
 
         const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
         console.log(isCorrectGuess);
+        let message = "";
+        let wrongGuess = true;
 
+      
         if (isCorrectGuess) {
-            console.log("juiste gok")
-
-            return res.redirect("/whothat");
+            message = "Correct!";
+            wrongGuess = false;
 
         }
         else {
-            console.log("verkeerde gok")
+            message = "Incorrect, try again!";
         }
-
+       
         //console.log(wrongGuess);
-        res.render('whothat', { previouslyGuessedName: guessedName, previousActualName: actualName, title: "test", pokemon: pokemon });
+        res.render('whothat', { previouslyGuessedName: guessedName, previousActualName: actualName , title: "test", pokemon: pokemon ,message: message,
+        wrongGuess: wrongGuess, formSubmitted: true});
 
         //res.redirect("/whothat");
 
