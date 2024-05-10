@@ -104,7 +104,8 @@ app.get("/landingpagina", (req, res) => {
 })
 app.get("/login", async (req, res) => {
     res.render('login', {
-        title: "Login pagina"
+        title: "Login pagina",
+        error: ""
     });
 })
 app.post("/login", async (req, res) => {
@@ -116,7 +117,10 @@ app.post("/login", async (req, res) => {
         res.redirect("/")
     } catch (e: any) {
         console.warn(`Wrong login from IP: ${req.ip}`)
-        res.redirect("/login");
+        res.render("login", {
+            error: "Paswoord/gebruikersnaam is fout",
+            title: "Login pagina",
+        });
     }
 })
 app.get("/register", async (req, res) => {
