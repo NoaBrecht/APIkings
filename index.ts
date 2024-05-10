@@ -115,6 +115,7 @@ app.post("/login", async (req, res) => {
         req.session.user = user;
         res.redirect("/")
     } catch (e: any) {
+        console.warn(`Wrong login from IP: ${req.ip}`)
         res.redirect("/login");
     }
 })
@@ -125,18 +126,17 @@ app.get("/register", async (req, res) => {
     });
 })
 app.post("/register", (req, res) => {
-
-    let username: string = req.body.userName;
-    let email: string = req.body.email;
-    let password1: string = req.body.password;
-    let password2: string = req.body.password2;
-    let terms: boolean = req.body.terms === "agree";
-    if (!terms) {
-        res.render("register", {
-            error: "Je moet akkoord gaan met de voorwaarden", title: "Register pagina",
-        });
-    } else
-        if (username === "" || email === "" || password1 === "" || password2 === "") {
+    try {
+        let username: string = req.body.userName;
+        let email: string = req.body.email;
+        let password1: string = req.body.password;
+        let password2: string = req.body.password2;
+        let terms: boolean = req.body.terms === "agree";
+        if (!terms) {
+            res.render("register", {
+                error: "Je moet akkoord gaan met de voorwaarden", title: "Register pagina",
+            });
+        } else if (username === "" || email === "" || password1 === "" || password2 === "") {
             res.render("register", {
                 error: "Alle velden zijn verplicht", title: "Register pagina",
             });
@@ -152,6 +152,13 @@ app.post("/register", (req, res) => {
             registerUser(username, email, password1);
             res.redirect("/login");
         }
+
+    } catch (err) {
+        console.error(err)
+        res.render("register", {
+            error: "Er is iets foutgegaan", title: "Register pagina",
+        });
+    }
 });
 app.get("/wrong_project", async (req, res) => {
     res.render('wrong_project', {
@@ -168,11 +175,13 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
         let pokemonbijnaam: string = "";
         let pokemonAttack: number = 0;
         let pokemonDefense: number = 0;
+        let catchedPokemon: boolean = false;
         //* POkemon ID ophalen
         const { id } = req.params;
         let user: User | undefined = req.session.user;
         user?.pokemons?.forEach(poke => {
             if (poke.id.toString() === id) {
+                catchedPokemon = true
                 pokemonbijnaam = poke.nickname;
                 pokemonAttack = poke.attack;
                 pokemonDefense = poke.defense;
@@ -225,13 +234,30 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
             pokemonbijnaam: pokemonbijnaam,
             evolutionChain: chaindata,
             pokemonAttack: pokemonAttack,
-            pokemonDefense: pokemonDefense
+            pokemonDefense: pokemonDefense,
+            catchedPokemon: catchedPokemon
         });
 
     } catch (error) {
         console.error('Error:', error);
     }
 });
+app.get("/favorite/:id", secureMiddleware, async (req, res) => {
+    try {
+        let id: number = parseInt(req.params.id);
+        let user: User | undefined = req.session.user;
+        user?.pokemons?.forEach(poke => {
+            if (poke.id === id) {
+                updateActive(user, id)
+                user.activepokemon = id;
+                req.session.user = user;
+            };
+        });
+        res.redirect("/")
+    } catch (error) {
+
+    }
+})
 app.get("/whothat", secureMiddleware, async (req, res) => {
     // TODO: Checking if the pokemon the user types in is the same as the name of the pokemon
     try {
@@ -249,8 +275,9 @@ app.get("/whothat", secureMiddleware, async (req, res) => {
         res.render('whothat', {
             title: "who is that pokemon?",
             pokemon: pokemon,
-            guessedName: "noname",
-            wrongGuess: false
+            previouslyGuessedName: "noname",
+            wrongGuess: false,
+            formSubmitted: false
 
         });
 
@@ -263,26 +290,31 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
     try {
         const pokemon = await fetchRandomPokemon();
         console.log("1")
-        let guessedName: string = req.body.guessedName;
-        let actualName: string = req.body.actualName;
+        let guessedName: string = req.body.guessedName || "";
+        let actualName: string = req.body.actualName || "";
 
         console.log(guessedName, actualName)
 
         const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
         console.log(isCorrectGuess);
+        let message = "";
+        let wrongGuess = true;
+
 
         if (isCorrectGuess) {
-            console.log("juiste gok")
-
-            return res.redirect("/whothat");
+            message = "Correct!";
+            wrongGuess = false;
 
         }
         else {
-            console.log("verkeerde gok")
+            message = "Incorrect, try again!";
         }
 
         //console.log(wrongGuess);
-        res.render('whothat', { previouslyGuessedName: guessedName, previousActualName: actualName, title: "test", pokemon: pokemon });
+        res.render('whothat', {
+            previouslyGuessedName: guessedName, previousActualName: actualName, title: "test", pokemon: pokemon, message: message,
+            wrongGuess: wrongGuess, formSubmitted: true
+        });
 
         //res.redirect("/whothat");
 
