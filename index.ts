@@ -226,7 +226,7 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
         for (const name of pokemonNames) {
             const spriteResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
             const spriteData = await spriteResponse.json();
-            chaindata.push({ name: name, spriteUrl: spriteData.sprites.other.home.front_default });
+            chaindata.push({ name: name, id: id, spriteUrl: spriteData.sprites.other.home.front_default });
         }
         if (pokemonbijnaam === "") {
             pokemonbijnaam = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
