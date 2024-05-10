@@ -158,6 +158,11 @@ app.get("/wrong_project", async (req, res) => {
         title: "Dit project is niet beschikbaar"
     });
 })
+app.get("/privacy-policy", async (req, res) => {
+    res.render('policy', {
+        title: "Privacy policy"
+    });
+})
 app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
     try {
         let pokemonbijnaam: string = "";
