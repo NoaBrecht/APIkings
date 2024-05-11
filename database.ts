@@ -83,6 +83,12 @@ export async function login(userName: string, password: string) {
 export async function updateActive(user: User, id: number) {
     return await userCollection.updateOne({ _id: user._id }, { $set: { activepokemon: id } });
 }
+export async function addPokemon(user: User, id: number) {
+    return await userCollection.updateOne({ _id: user._id }, { $push: { pokemons: { id: id, nickname: "", attack: 0, defense: 0 } } });
+}
+export async function updateNickName(user: User, pokemonID: number, nickname: string) {
+    return;
+}
 export async function connect() {
     await client.connect();
     await seed();

@@ -104,7 +104,8 @@ app.get("/landingpagina", (req, res) => {
 })
 app.get("/login", async (req, res) => {
     res.render('login', {
-        title: "Login pagina"
+        title: "Login pagina",
+        error: ""
     });
 })
 app.post("/login", async (req, res) => {
@@ -116,7 +117,10 @@ app.post("/login", async (req, res) => {
         res.redirect("/")
     } catch (e: any) {
         console.warn(`Wrong login from IP: ${req.ip}`)
-        res.redirect("/login");
+        res.render("login", {
+            error: "Paswoord/gebruikersnaam is fout",
+            title: "Login pagina",
+        });
     }
 })
 app.get("/register", async (req, res) => {
@@ -163,6 +167,11 @@ app.post("/register", (req, res) => {
 app.get("/wrong_project", async (req, res) => {
     res.render('wrong_project', {
         title: "Dit project is niet beschikbaar"
+    });
+})
+app.get("/privacy-policy", async (req, res) => {
+    res.render('policy', {
+        title: "Privacy policy"
     });
 })
 app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
@@ -217,7 +226,7 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
         for (const name of pokemonNames) {
             const spriteResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
             const spriteData = await spriteResponse.json();
-            chaindata.push({ name: name, spriteUrl: spriteData.sprites.other.home.front_default });
+            chaindata.push({ name: name, id: id, spriteUrl: spriteData.sprites.other.home.front_default });
         }
         if (pokemonbijnaam === "") {
             pokemonbijnaam = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
