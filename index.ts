@@ -302,7 +302,7 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
 
         }
         else {
-            message = "Incorrect, try again!";
+            message = "Niet correct probeer opnieuw!";
         }
 
         //console.log(wrongGuess);
