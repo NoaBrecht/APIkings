@@ -362,6 +362,10 @@ body.stats {
     padding: 10px;
 }
 
+.pathimg {
+    cursor: pointer;
+}
+
 .pathimg,
 .images svg {
     width: 15%;
@@ -402,7 +406,7 @@ body.stats {
     background-color: rgba(255, 255, 255, 0.441);
     padding: 10px;
     border-radius: 5px;
-    height:750px;
+    height: 750px;
     z-index: 100;
     max-width: 80%;
 
@@ -545,11 +549,12 @@ body.stats {
     border-radius: 50%;
     transform: rotate(45deg);
 }
+
 @media (min-width: 576px) {
 
     #catchthis {
         top: 850px;
-        
+
     }
 }
 
