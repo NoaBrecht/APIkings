@@ -86,7 +86,16 @@ export async function updateActive(user: User, id: number) {
 export async function addPokemon(user: User, id: number) {
     return await userCollection.updateOne({ _id: user._id }, { $push: { pokemons: { id: id, nickname: "", attack: 0, defense: 0 } } });
 }
+export async function removePokemon(user: User, id: number) {
+    return await userCollection.updateOne({ _id: user._id }, { $pull: { pokemons: { id: id } } });
+}
 export async function updateNickName(user: User, pokemonID: number, nickname: string) {
+    return;
+}
+export async function updateDef(user: User, pokemonID: number, nickname: string) {
+    return;
+}
+export async function updateDmg(user: User, pokemonID: number, nickname: string) {
     return;
 }
 export async function connect() {

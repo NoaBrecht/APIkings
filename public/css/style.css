@@ -550,7 +550,17 @@ body.stats {
     border-radius: 50%;
     transform: rotate(45deg);
 }
-
+.invisible-button {
+    background: transparent;
+    border: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    color: transparent; 
+}
 @media (min-width: 576px) {
 
     #catchthis {

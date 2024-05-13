@@ -13,15 +13,17 @@
             <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
           </article>
         </div>
-        <section class="pokeballbody">
-          <div class="pokeball pokeball-red <%if(isgevangen){%> pokeball-green<%}%> "></div>
-          <div class="pokebtn" name="pokebtn"></div>
-          <%if(isgevangen){%> <h3>GEVANGEN</h3> <%}%>
-                </div>
+        <form action="/catcher/<%= pokemon.id %>" method="post">
+          <section class="pokeballbody">
+              <div class="pokeball  <% if(isgevangen) { %> pokeball-green : pokeball-red <% } %> "></div>
+              <div class="pokebtn" name="pokebtn">
+                  <button type="submit" class="invisible-button">Catch Pokémon</button>
               </div>
-            </div>
-          </div>
-        </section>
+              <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
+    <input type="hidden" name="isCaught" value="<%= pokemon.isCaught %>">
+              <% if(isgevangen) { %> <h3>GEVANGEN</h3> <% } %>
+          </section>
+      </form>
         <% if(isgevangen){ %>
           <p>balls</p>
           <% } %>

@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { connect, login, registerUser, updateActive } from "./database";
+import { addPokemon, connect, login, registerUser, removePokemon, updateActive, userCollection } from "./database";
 import { User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
@@ -61,7 +61,7 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
     // TODO: if no pokemon, player can catch a starterpokemon
     try {
 
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/72`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
@@ -87,6 +87,41 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
 
     } catch (error) {
         console.error('Error:', error);
+    }
+});
+app.post("/catcher/:id", secureMiddleware, async (req, res) => {
+    const pokemonId = parseInt(req.params.id);
+    const user = req.session.user;
+
+    if (!user) {
+        res.status(401).send("Gebruiker niet ingelogd");
+        return;
+    }
+
+    try{
+        await addPokemon(user, pokemonId)
+        res.redirect("/catcher"); 
+
+    } catch(error) {
+        console.log('Error:', error)
+        res.status(500).send("pokemon vangen gefaald")
+    }
+});
+app.post("/release/:id", secureMiddleware, async (req, res) => {
+    const pokemonId = parseInt(req.params.id);
+    const user = req.session.user;
+
+    if (!user) {
+        res.status(401).send("Gebruiker niet ingelogd");
+        return;
+    }
+
+    try {
+        await removePokemon(user, pokemonId);
+        res.redirect("/catcher");
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send("Pokemon kan niet losgelaten worden");
     }
 });
 app.get("/logout", secureMiddleware, (req, res) => {
