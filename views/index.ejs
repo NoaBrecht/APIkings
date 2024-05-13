@@ -27,10 +27,24 @@
                     <% for(i=0; i<10; i++) {%>
                         <% if (i==3 && page> 5) {
                             %><a>...</a>
-                            <% i++; pagina=page; }%>
-                                <a href="/?page=<%=pagina%>">
-                                    <%=pagina%>
-                                </a>
+                            <% i++; 
+                                if (pagina>=41) {
+                                    pagina=pagina-(44-page)
+                                } else {
+                                    pagina=page-2;
+                                } }%>
+                                <% if (pagina == page) { %>
+                                    <a href="/?page=<%=pagina%>" class="active">
+                                        <%=pagina%>
+                                    </a>
+                                <% } else { %>
+                                    <a href="/?page=<%=pagina%>">
+                                        <%=pagina%>
+                                    </a>
+                                <% } %>
+                                <% if (pagina==44) {
+                                    break;
+                                } %>
                                 <% pagina++; %>
                                     <%}%>
                                         <a href="/?page=<%=parseInt(page)+1%>">&raquo;
