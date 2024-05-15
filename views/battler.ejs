@@ -2,56 +2,74 @@
 
   <body>
     <%- include("partials/nav") %>
-      <section class="container-fluid">
-        <span>
-          <div class="border border-4 rounded battleEnemy">
-          <h2><%=enemy.name%></h2>
-          <div class="progress" role="progressbar" style="height: 40px">
-            <div class="progress-bar bg-success" style="width: 100%">
-              HP: <%=enemy.stats[0].base_stat%>
-            </div>
-          </div>
-          <div class="progress" role="progressbar" style="height: 40px">
-            <div class="progress-bar bg-danger" style="width: 100%">
-              ATK: <%=enemy.stats[1].base_stat%>
-            </div>
-            <div class="progress-bar bg-primary" style="width: 100%">
-              DEF: <%=enemy.stats[2].base_stat%>
-            </div>
-          </div>
+      <div class="row vergelijken" style="margin-right: auto !important;">
+        <div class="col-5">
+          <section class="card text-center card-nohover">
+            <article class="card-body">
+              <form action="">
+                <div class="row">
+                  <div class="col-9">
+                    <input type="text" class="form-control" name="pokemon" id="pokemon" value="<%=pokemon.name %>"
+                      placeholder="Naam">
+                  </div>
+                  <div class="col-2">
+                    <input type="submit" class="btn btn-primary" value="zoeken">
+                  </div>
+                </div>
+            </article>
+            <article class="pokemonimg"><img src="<%= pokemon.sprites.other.home.front_default %>" class="card-img-top"
+                alt="een afbeelding van">
+            </article>
+
+            <article class="card-body">
+              <h2>STATS</h2>
+              <div class="progress" role="progressbar" style="height: 40px">
+                <div class="progress-bar bg-success" style="width: 100%">
+                  HP: <%=pokemon.stats[0].base_stat%>
+                </div>
+              </div>
+              <div class="progress" role="progressbar" style="height: 40px">
+                <div class="progress-bar bg-danger" style="width: 100%">
+                  ATK: <%=pokemon.stats[1].base_stat%>
+                </div>
+                <div class="progress-bar bg-primary" style="width: 100%">
+                  DEF: <%=pokemon.stats[2].base_stat%>
+                </div>
+              </div>
         </div>
-          <figure class="battleEnemy">
-            <img src="<%=enemy.sprites.other.home.front_default%>" alt="vijand pokemon's name" />
-          </figure>
-        </span>
-        <span>
-          <div class="border border-4 rounded battleYou">
-          <h2><%=pokemon.name%></h2>
-          <div class="progress" role="progressbar" style="height: 40px">
-            <div class="progress-bar bg-success" style="width: 100%">
-              HP: <%=pokemon.stats[0].base_stat%>
-            </div>
-          </div>
-          <div class="progress" role="progressbar" style="height: 40px">
-            <div class="progress-bar bg-danger" style="width: 100%">
-              ATK: <%=pokemon.stats[1].base_stat%>
-            </div>
-            <div class="progress-bar bg-primary" style="width: 100%">
-              DEF: <%=pokemon.stats[2].base_stat%>
-            </div>
-          </div>
+        <div class="col-5">
+          <section class="card text-center card-nohover">
+            <article class="card-body">
+              <form action="">
+                <div class="row">
+                  <div class="col-9">
+                    <input type="text" class="form-control" name="pokemon" id="pokemon" value="<%=pokemon.name %>"
+                      placeholder="Naam">
+                  </div>
+                  <div class="col-2">
+                    <input type="submit" class="btn btn-primary" value="zoeken">
+                  </div>
+                </div>
+            </article>
+            <article class="pokemonimg"><img src="<%= enemy.sprites.other.home.front_default %>" class="card-img-top"
+                alt="een afbeelding van">
+            </article>
+
+            <article class="card-body">
+              <h2>STATS</h2>
+              <div class="progress" role="progressbar" style="height: 40px">
+                <div class="progress-bar bg-success" style="width: 100%">
+                  HP: <%=enemy.stats[0].base_stat%>
+                </div>
+              </div>
+              <div class="progress" role="progressbar" style="height: 40px">
+                <div class="progress-bar bg-danger" style="width: 100%">
+                  ATK: <%=enemy.stats[1].base_stat%>
+                </div>
+                <div class="progress-bar bg-primary" style="width: 100%">
+                  DEF: <%=enemy.stats[2].base_stat%>
+                </div>
+              </div>
         </div>
-          <figure class="battleYou">
-            <img src="<%=pokemon.sprites.other.home.front_default%>" alt="mijn pokemon's naam" />
-          </figure>
-        </span>
-      </section>
-      <section>
-        <button type="button" class="btn btn-danger btn-lg attack">
-          Aanvallen
-        </button>
-        <button type="button" class="btn btn-info btn-lg change">
-          Switch
-        </button>
-      </section>
+      </div>
       <%- include("partials/footer") %>

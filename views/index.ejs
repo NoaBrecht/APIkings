@@ -14,7 +14,7 @@
                                     <%= pokemon.id %>
                                 </p>
                             </article>
-                            <img src="<%=pokemon.image%>" class="card-img-top"
+                            <img src="<%=pokemon.image%>" class="card-img-top <%=pokemon.colour%>"
                                 alt="een afbeelding van <%= pokemon.name %>">
                         </a>
                     </section>
@@ -27,27 +27,24 @@
                     <% for(i=0; i<10; i++) {%>
                         <% if (i==3 && page> 5) {
                             %><a>...</a>
-                            <% i++; 
-                                if (pagina>=41) {
-                                    pagina=pagina-(44-page)
+                            <% i++; if (pagina>=41) {
+                                pagina=pagina-(44-page)
                                 } else {
-                                    pagina=page-2;
+                                pagina=page-2;
                                 } }%>
-                                <% if (pagina == page) { %>
-                                    <a href="/?page=<%=pagina%>" class="active">
+                                <% if (pagina==page) { %>
+                                    <a href="/?page=<%=pagina%>" class="active bg-danger">
                                         <%=pagina%>
                                     </a>
-                                <% } else { %>
-                                    <a href="/?page=<%=pagina%>">
-                                        <%=pagina%>
-                                    </a>
-                                <% } %>
-                                <% if (pagina==44) {
-                                    break;
-                                } %>
-                                <% pagina++; %>
-                                    <%}%>
-                                        <a href="/?page=<%=parseInt(page)+1%>">&raquo;
+                                    <% } else { %>
+                                        <a href="/?page=<%=pagina%>">
+                                            <%=pagina%>
                                         </a>
+                                        <% } %>
+                                            <% if (pagina==44) { break; } %>
+                                                <% pagina++; %>
+                                                    <%}%>
+                                                        <a href="/?page=<%=parseInt(page)+1%>">&raquo;
+                                                        </a>
             </div>
             <%- include("partials/footer") %>

@@ -5,7 +5,6 @@ import { addPokemon, connect, login, registerUser, removePokemon, updateActive, 
 import { User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
-import { WithId } from "mongodb";
 dotenv.config();
 
 const app: Express = express();
@@ -44,7 +43,45 @@ app.get("/", secureMiddleware, async (req, res) => {
                 id: data.id,
                 name: pokemon.name,
                 image: data.sprites.other.home.front_default,
-                type: data.types[0].type.name
+                type: data.types[0].type.name,
+                colour: ""
+            };
+        }));
+        res.render('index', {
+            user: req.session.user,
+            page: page,
+            title: "Alle pokemons",
+            pokemons: pokemonWithImages,
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+app.get("/all", secureMiddleware, async (req, res) => {
+    try {
+        let page;
+        if (typeof req.query.page === "string") {
+            page = parseInt(req.query.page);
+        }
+        else {
+            page = 1;
+        }
+        let offset = page * 30 - 30;
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=30&offset=${offset}`);
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+        let pokemons: any = await response.json();
+        const pokemonWithImages = await Promise.all(pokemons.results.map(async (pokemon: any) => {
+            const response = await fetch(pokemon.url);
+            const data = await response.json();
+            return {
+                id: data.id,
+                name: pokemon.name,
+                image: data.sprites.other.home.front_default,
+                type: data.types[0].type.name,
+                colour: "blackout"
             };
         }));
         res.render('index', {
