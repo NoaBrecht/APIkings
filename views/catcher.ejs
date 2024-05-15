@@ -1,57 +1,52 @@
 <%- include("partials/header") %>
 
-
-  <body>
-
+<body>
     <%- include("partials/nav") %>
 
-      <section class="container-fluid">
+    <section class="container-fluid">
         <div id="catchthis">
-          <article class="container-fluid row justify-content-center pokemonimg">
-
-            <img src="<%= pokemon.sprites.other.home.front_default %>" alt="">
-            <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
-          </article>
+            <article class="container-fluid row justify-content-center pokemonimg">
+                <img src="<%= pokemon.sprites.other.home.front_default %>" alt="">
+                <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
+            </article>
         </div>
         <form action="/catcher/<%= pokemon.id %>" method="post">
-          <section class="pokeballbody">
-              <div class="pokeball  <% if(isgevangen) { %> pokeball-green : pokeball-red <% } %> "></div>
-              <div class="pokebtn" name="pokebtn">
-                  <button type="submit" class="invisible-button">Catch Pokémon</button>
-              </div>
-              <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
-    <input type="hidden" name="isCaught" value="<%= pokemon.isCaught %>">
-              <% if(isgevangen) { %> <h3>GEVANGEN</h3> <% } %>
-          </section>
-      </form>
-        <% if(isgevangen){ %>
-          <p>balls</p>
-          <% } %>
-            <div class="pokemonstats-rightcorner">
+            <section class="pokeballbody">
+                <% if(isnietgevangen) { %>
+                    <input type="hidden" name="action" value="release">
+                <% } else { %>
+                    <input type="hidden" name="action" value="catch">
+                <% } %>
+                <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
+                <input type="hidden" name="isCaught" value="<%= isnietgevangen %>">
+                <% if(isnietgevangen) { %> <h3>GEVANGEN</h3> <% } %>
+                <div class="pokeball <% if(isnietgevangen) { %> pokeball-red <% } else { %> pokeball-green <% } %> "></div>
+                <div class="pokebtn" name="pokebtn">
+                    <button type="submit" class="invisible-button">Catch Pokémon</button>
+                </div>
+              
+            </section>
+        </form>
 
-              <section class="pokemonstats">
+        <div class="pokemonstats-rightcorner">
+            <section class="pokemonstats">
                 <article class="container-fluid row justify-content-center card">
-                  <div class="labelcontainer">
-                    <label class="pokemoncatcher">
-                      <%= pokemon.name %>
-                    </label>
-
-                  </div>
-                  <% pokemon.stats.forEach(stat=> { %>
-                    <% if (stat.stat.name==='hp' || stat.stat.name==='attack' || stat.stat.name==='defense' ) { %>
-
-                      <p>
-                        <%= stat.stat.name %>: <%= stat.base_stat %>
-                      </p>
-                      <% }}); %>
-                      <label class="pokemoncatcher"></label>
+                    <div class="labelcontainer">
+                        <label class="pokemoncatcher">
+                            <%= pokemon.name %>
+                        </label>
+                    </div>
+                    <% pokemon.stats.forEach(stat => { %>
+                        <% if (stat.stat.name === 'hp' || stat.stat.name === 'attack' || stat.stat.name === 'defense') { %>
+                            <p>
+                                <%= stat.stat.name %>: <%= stat.base_stat %>
+                            </p>
+                        <% } %>
+                    <% }); %>
+                    <label class="pokemoncatcher"></label>
                 </article>
-              </section>
+            </section>
+        </div>
+</body>
 
-
-
-
-            </div>
-  </body>
-
-  <%- include("partials/footer") %>
+<%- include("partials/footer") %>

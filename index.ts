@@ -5,6 +5,7 @@ import { addPokemon, connect, login, registerUser, removePokemon, updateActive, 
 import { User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
+import { WithId } from "mongodb";
 dotenv.config();
 
 const app: Express = express();
@@ -58,38 +59,33 @@ app.get("/", secureMiddleware, async (req, res) => {
     }
 });
 app.get("/catcher", secureMiddleware, async (req, res) => {
-    // TODO: if no pokemon, player can catch a starterpokemon
     try {
-
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/72`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/48`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
-        let isgevangen = false;
-
 
         const pokemon = await response.json();
-        let user = req.session.user;
-        user?.pokemons?.forEach(poke => {
-            if (poke.id.toString() === pokemon.id) {
-                isgevangen = true;
-            };
-        });
+        let isnietgevangen = false;
+        const user = req.session.user;
+
+        if (user && user.pokemons) {
+            const filteredPokemons = user.pokemons.filter(poke => poke.id === pokemon.id);
+            isnietgevangen = filteredPokemons.length > 0;
+        }
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
             user: user,
-            isgevangen: true
-
+            isnietgevangen: isnietgevangen
         });
-
-
 
     } catch (error) {
         console.error('Error:', error);
+        res.status(500).send("Er is een fout opgetreden");
     }
 });
-app.post("/catcher/:id", secureMiddleware, async (req, res) => {
+app.post('/catcher/:id', secureMiddleware, async (req, res) => {
     const pokemonId = parseInt(req.params.id);
     const user = req.session.user;
 
@@ -117,21 +113,22 @@ app.post("/release/:id", secureMiddleware, async (req, res) => {
     }
 
     try {
-        await removePokemon(user, pokemonId);
-        res.redirect("/catcher");
+        if (req.body.action === 'catch') {
+            await addPokemon(user, pokemonId);
+            console.log('Pokemon gevangen:', pokemonId);
+        } else if (req.body.action === 'release') {
+            await removePokemon(user, pokemonId);
+            console.log('Pokemon losgelaten:', pokemonId);
+        }
+        return res.redirect('/'); 
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send("Pokemon kan niet losgelaten worden");
+        if (!res.headersSent) {
+            return res.status(500).send("Er is een fout opgetreden");
+        }
     }
 });
-app.get("/logout", secureMiddleware, (req, res) => {
-    req.session.destroy((e) => {
-        if (e) {
-            console.error(e);
-        }
-    });
-    res.redirect("/login");
-});
+
 app.get("/landingpagina", (req, res) => {
     res.render('landingpage', {
         title: "Landingpagina, kies een project",
