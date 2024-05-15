@@ -26,7 +26,7 @@
 
             <div class="pagination">
                 <% let pagina=1 %>
-                    <a href="/?page=<%=parseInt(page)-1%>">&laquo;</a>
+                    <a href="/all?page=<%=parseInt(page)-1%>">&laquo;</a>
                     <% for(i=0; i<10; i++) {%>
                         <% if (i==3 && page> 5) {
                             %><a>...</a>
@@ -36,18 +36,18 @@
                                 pagina=page-2;
                                 } }%>
                                 <% if (pagina==page) { %>
-                                    <a href="/?page=<%=pagina%>" class="active bg-danger">
+                                    <a href="/all?page=<%=pagina%>" class="active bg-danger">
                                         <%=pagina%>
                                     </a>
                                     <% } else { %>
-                                        <a href="/?page=<%=pagina%>">
+                                        <a href="/all?page=<%=pagina%>">
                                             <%=pagina%>
                                         </a>
                                         <% } %>
                                             <% if (pagina==44) { break; } %>
                                                 <% pagina++; %>
                                                     <%}%>
-                                                        <a href="/?page=<%=parseInt(page)+1%>">&raquo;
+                                                        <a href="/all?page=<%=parseInt(page)+1%>">&raquo;
                                                         </a>
             </div>
             <%- include("partials/footer") %>
