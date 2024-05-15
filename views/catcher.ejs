@@ -12,22 +12,25 @@
         </div>
         <form action="/catcher/<%= pokemon.id %>" method="post">
             <section class="pokeballbody">
-                <% if(isnietgevangen) { %>
-                    <input type="hidden" name="action" value="release">
+                <% if(isgevangen) { %>
+                   
+                    <div class="pokeball pokeball-green">
+                        <input type="hidden" name="action" value="release">
+                        <input type="submit" name="action" value="loslaten">  
+                    </div>
                 <% } else { %>
-                    <input type="hidden" name="action" value="catch">
+                    
+                    <div class="pokeball pokeball-red">
+                        <input type="hidden" name="action" value="catch">
+                       
+                        
+                    </div>
                 <% } %>
-                <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
-                <input type="hidden" name="isCaught" value="<%= isnietgevangen %>">
-                <% if(isnietgevangen) { %> <h3>GEVANGEN</h3> <% } %>
-                <div class="pokeball <% if(isnietgevangen) { %> pokeball-red <% } else { %> pokeball-green <% } %> "></div>
                 <div class="pokebtn" name="pokebtn">
                     <button type="submit" class="invisible-button">Catch Pokémon</button>
                 </div>
-              
             </section>
         </form>
-
         <div class="pokemonstats-rightcorner">
             <section class="pokemonstats">
                 <article class="container-fluid row justify-content-center card">

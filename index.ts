@@ -97,24 +97,25 @@ app.get("/all", secureMiddleware, async (req, res) => {
 });
 app.get("/catcher", secureMiddleware, async (req, res) => {
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/48`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/27`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
 
         const pokemon = await response.json();
-        let isnietgevangen = false;
+        let isgevangen = false;
         const user = req.session.user;
 
         if (user && user.pokemons) {
             const filteredPokemons = user.pokemons.filter(poke => poke.id === pokemon.id);
-            isnietgevangen = filteredPokemons.length > 0;
+            isgevangen = filteredPokemons.length > 0;
         }
+        
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
             user: user,
-            isnietgevangen: isnietgevangen
+            isgevangen: isgevangen
         });
 
     } catch (error) {
@@ -125,44 +126,29 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
 app.post('/catcher/:id', secureMiddleware, async (req, res) => {
     const pokemonId = parseInt(req.params.id);
     const user = req.session.user;
-
+    
     if (!user) {
         res.status(401).send("Gebruiker niet ingelogd");
         return;
     }
-
     try {
-        await addPokemon(user, pokemonId)
-        res.redirect("/catcher");
+         if (req.body.action === 'catch') {
+            await addPokemon(user, pokemonId);
+            console.log('Pokemon gevangen:', pokemonId);
+            res.redirect("/");
+        } else if (req.body.action === 'release') {
+            await removePokemon(user, pokemonId);
+            console.log('Pokemon losgelaten:', pokemonId);
+            res.redirect("/catcher");
+        }
+        
+
+        
+       
 
     } catch (error) {
         console.log('Error:', error)
         res.status(500).send("pokemon vangen gefaald")
-    }
-});
-app.post("/release/:id", secureMiddleware, async (req, res) => {
-    const pokemonId = parseInt(req.params.id);
-    const user = req.session.user;
-
-    if (!user) {
-        res.status(401).send("Gebruiker niet ingelogd");
-        return;
-    }
-
-    try {
-        if (req.body.action === 'catch') {
-            await addPokemon(user, pokemonId);
-            console.log('Pokemon gevangen:', pokemonId);
-        } else if (req.body.action === 'release') {
-            await removePokemon(user, pokemonId);
-            console.log('Pokemon losgelaten:', pokemonId);
-        }
-        return res.redirect('/');
-    } catch (error) {
-        console.error('Error:', error);
-        if (!res.headersSent) {
-            return res.status(500).send("Er is een fout opgetreden");
-        }
     }
 });
 app.get("/logout", secureMiddleware, (req, res) => {
