@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+
 export interface Pokemon {
     id: number;
     nickname: string;
@@ -13,6 +14,8 @@ export interface User {
     activepokemon?: number;
     pokemons?: Pokemon[];
 }
+
+//! PokeAPI interface, use on own risk
 export interface Poke {
     id: number;
     name: string;
