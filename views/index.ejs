@@ -3,51 +3,28 @@
     <body>
         <%- include("partials/nav") %>
             <article class="container-fluid row justify-content-center">
-                <% for(let pokemon of pokemons) { %>
-                    <section class="card text-center <%=pokemon.type%>">
-                        <a href="/pokemon/<%=pokemon.id%>">
-                            <article class="card-body">
-                                <h1 class="card-title">
-                                    <%= pokemon.name %>
-                                </h1>
-                                <p class="card-text">
-                                    <%= pokemon.id %>
-                                </p>
-                            </article>
-                            <img src="<%=pokemon.image%>" class="card-img-top"
-                                alt="een afbeelding van <%= pokemon.name %>">
-                        </a>
-                    </section>
-                    <% } %>
+                <div class="text-center">
+                    <a href="/all" class="btn btn-danger"><i class="bi bi-check-circle"></i> Toon alle pokemons</a>
+                </div>
+                <% if(pokemonsCount===0) {%>
+                    <h1>Geen pokemons gevonden</h1>
+                    <p>Wees de eerste om een pokemon te vangen! Ga naar <a href="/catcher">vangen</a> om de eerste
+                        pokemon te vangen.</p>
+                    <% } for(let pokemon of pokemons) { %>
+                        <section class="card text-center <%=pokemon.type%>">
+                            <a href="/pokemon/<%=pokemon.id%>">
+                                <article class="card-body">
+                                    <h1 class="card-title">
+                                        <%= pokemon.name %>
+                                    </h1>
+                                    <p class="card-text">
+                                        <%= pokemon.id %>
+                                    </p>
+                                </article>
+                                <img src="<%=pokemon.image%>" class="card-img-top <%=pokemon.colour%>"
+                                    alt="een afbeelding van <%= pokemon.name %>">
+                            </a>
+                        </section>
+                        <% } %>
             </article>
-
-            <div class="pagination">
-                <% let pagina=1 %>
-                    <a href="/?page=<%=parseInt(page)-1%>">&laquo;</a>
-                    <% for(i=0; i<10; i++) {%>
-                        <% if (i==3 && page> 5) {
-                            %><a>...</a>
-                            <% i++; 
-                                if (pagina>=41) {
-                                    pagina=pagina-(44-page)
-                                } else {
-                                    pagina=page-2;
-                                } }%>
-                                <% if (pagina == page) { %>
-                                    <a href="/?page=<%=pagina%>" class="active">
-                                        <%=pagina%>
-                                    </a>
-                                <% } else { %>
-                                    <a href="/?page=<%=pagina%>">
-                                        <%=pagina%>
-                                    </a>
-                                <% } %>
-                                <% if (pagina==44) {
-                                    break;
-                                } %>
-                                <% pagina++; %>
-                                    <%}%>
-                                        <a href="/?page=<%=parseInt(page)+1%>">&raquo;
-                                        </a>
-            </div>
             <%- include("partials/footer") %>

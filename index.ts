@@ -5,7 +5,7 @@ import { addPokemon, connect, login, registerUser, removePokemon, updateActive, 
 import { User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
-import { WithId } from "mongodb";
+import { battle } from "./functions";
 dotenv.config();
 
 const app: Express = express();
@@ -24,6 +24,37 @@ app.use(async (req, res, next) => {
 });
 app.get("/", secureMiddleware, async (req, res) => {
     try {
+        let user = req.session.user;
+        let pokemons = user?.pokemons;
+        let pokemonWithImages: any = [];
+        if (pokemons) {
+            for (let pokemon of pokemons) {
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`);
+                if (response.status === 404) throw new Error('Not found');
+                if (response.status === 500) throw new Error('Internal server error');
+                if (response.status === 400) throw new Error('Bad request');
+                const data = await response.json();
+                let name = data.name;
+                let image = data.sprites.other.home.front_default;
+                let type = data.types[0].type.name;
+                pokemonWithImages.push({ id: pokemon.id, name: name, image: image, type: type });
+            }
+        }
+        res.render('index', {
+            user: req.session.user,
+            title: "Alle pokemons",
+            pokemons: pokemonWithImages,
+            pokemonsCount: pokemonWithImages.length
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+app.get("/all", secureMiddleware, async (req, res) => {
+    try {
+        let user = req.session.user;
+        let UserPokemons = user?.pokemons;
         let page;
         if (typeof req.query.page === "string") {
             page = parseInt(req.query.page);
@@ -44,10 +75,11 @@ app.get("/", secureMiddleware, async (req, res) => {
                 id: data.id,
                 name: pokemon.name,
                 image: data.sprites.other.home.front_default,
-                type: data.types[0].type.name
+                type: data.types[0].type.name,
+                colour: UserPokemons?.find(poke => poke.id === data.id) ? "" : "blackout"
             };
         }));
-        res.render('index', {
+        res.render('all', {
             user: req.session.user,
             page: page,
             title: "Alle pokemons",
@@ -77,7 +109,7 @@ console.log('Pokemon ID:', pokemon.id);
             isgevangen = filteredPokemons.length > 0;
             console.log(`gevangen ${isgevangen}`)
         }
-        
+
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
@@ -93,13 +125,13 @@ console.log('Pokemon ID:', pokemon.id);
 app.post('/catcher/:id', secureMiddleware, async (req, res) => {
     const pokemonId = parseInt(req.params.id);
     const user = req.session.user;
-    
+
     if (!user) {
         res.status(401).send("Gebruiker niet ingelogd");
         return;
     }
     try {
-         if (req.body.action === 'catch') {
+        if (req.body.action === 'catch') {
             await addPokemon(user, pokemonId);
             console.log('Pokemon gevangen:', pokemonId);
             res.redirect("/");
@@ -108,10 +140,10 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             console.log('Pokemon losgelaten:', pokemonId);
             res.redirect("/catcher");
         }
-        
 
-        
-       
+
+
+
 
     } catch (error) {
         console.log('Error:', error)
@@ -378,20 +410,22 @@ const fetchRandomPokemon = async (): Promise<any> => {
 
 app.get("/battler", secureMiddleware, async (req, res) => {
     try {
-        const id = Math.floor(Math.random() * 1025) + 1;
+        let id = Math.floor(Math.random() * 1025) + 1;
+        id = 1;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         const pokemon = await response.json();
 
-        const randomNumber = Math.floor(Math.random() * 1025) + 1;
+        let randomNumber = Math.floor(Math.random() * 1025) + 1;
+        randomNumber = 4;
         const response2 = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`);
         if (response2.status === 404) throw new Error('Not found');
         if (response2.status === 500) throw new Error('Internal server error');
         if (response2.status === 400) throw new Error('Bad request');
         const enemy = await response2.json();
-
+        console.log(battle(pokemon, enemy));
         res.render('battler', {
             title: "vechten",
             pokemon: pokemon,
