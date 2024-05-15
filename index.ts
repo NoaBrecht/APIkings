@@ -92,7 +92,7 @@ app.get("/all", secureMiddleware, async (req, res) => {
 });
 app.get("/catcher", secureMiddleware, async (req, res) => {
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/27`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/25`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
@@ -127,23 +127,19 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         return;
     }
     try {
+        if (!user.pokemons) {
+            user.pokemons = [];
+        }
         if (req.body.action === 'catch') {
-            // await addPokemon(user, pokemonId);
-            let pokemon: Pokemon = {
-                id: pokemonId,
-                nickname: "",
-                attack: 1,
-                defense: 1
-            }
-            if (!user.pokemons) {
-                user.pokemons = [];
-            }
-            user.pokemons.push(pokemon);
+             await addPokemon(user, pokemonId);
+            user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });;
             req.session.user = user;
             console.log(user);
             console.log('Pokemon gevangen:', pokemonId);
             res.redirect("/");
         } else if (req.body.action === 'release') {
+            req.session.user = user;
+           // user.pokemons.({ id: pokemonId, nickname: "", attack: 0, defense: 0 });
             await removePokemon(user, pokemonId);
             console.log('Pokemon losgelaten:', pokemonId);
             res.redirect("/catcher");
