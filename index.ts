@@ -133,6 +133,9 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
     try {
         if (req.body.action === 'catch') {
             await addPokemon(user, pokemonId);
+            user.pokemons?.push({id: pokemonId, nickname: "", attack: 0, defense: 0})
+            /*req.session.user = user;*/
+            console.log(user);
             console.log('Pokemon gevangen:', pokemonId);
             res.redirect("/");
         } else if (req.body.action === 'release') {
