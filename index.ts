@@ -120,7 +120,7 @@ app.post("/release/:id", secureMiddleware, async (req, res) => {
             await removePokemon(user, pokemonId);
             console.log('Pokemon losgelaten:', pokemonId);
         }
-        return res.redirect('/'); 
+        return res.redirect('/');
     } catch (error) {
         console.error('Error:', error);
         if (!res.headersSent) {
@@ -128,7 +128,14 @@ app.post("/release/:id", secureMiddleware, async (req, res) => {
         }
     }
 });
-
+app.get("/logout", secureMiddleware, (req, res) => {
+    req.session.destroy((e) => {
+        if (e) {
+            console.error(e);
+        }
+    });
+    res.redirect("/login");
+});
 app.get("/landingpagina", (req, res) => {
     res.render('landingpage', {
         title: "Landingpagina, kies een project",
