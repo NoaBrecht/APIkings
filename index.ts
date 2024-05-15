@@ -90,7 +90,26 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
     const user = req.session.user;
 
     if (!user) {
-        return res.status(401).send("Gebruiker niet ingelogd");
+        res.status(401).send("Gebruiker niet ingelogd");
+        return;
+    }
+
+    try {
+        await addPokemon(user, pokemonId)
+        res.redirect("/catcher");
+
+    } catch (error) {
+        console.log('Error:', error)
+        res.status(500).send("pokemon vangen gefaald")
+    }
+});
+app.post("/release/:id", secureMiddleware, async (req, res) => {
+    const pokemonId = parseInt(req.params.id);
+    const user = req.session.user;
+
+    if (!user) {
+        res.status(401).send("Gebruiker niet ingelogd");
+        return;
     }
 
     try {
@@ -239,7 +258,7 @@ app.get("/pokemon/:id", secureMiddleware, async (req, res) => {
         for (const name of pokemonNames) {
             const spriteResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
             const spriteData = await spriteResponse.json();
-            chaindata.push({ name: name, id: id, spriteUrl: spriteData.sprites.other.home.front_default });
+            chaindata.push({ name: name, id: spriteData.id, spriteUrl: spriteData.sprites.other.home.front_default });
         }
         if (pokemonbijnaam === "") {
             pokemonbijnaam = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
@@ -385,11 +404,13 @@ app.get("/battler", secureMiddleware, async (req, res) => {
         console.error('Error:', error);
     }
 })
+
 app.get("/vergelijken", secureMiddleware, async (req, res) => {
     res.render('vergelijken', {
         title: "pokemon vergelijken"
     });
 });
+
 app.listen(app.get("port"), async () => {
     try {
         await connect();
