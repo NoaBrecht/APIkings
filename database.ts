@@ -1,5 +1,5 @@
 import { Collection, MongoClient } from "mongodb";
-import { User } from "./interfaces";
+import { Pokemon, User } from "./interfaces";
 import bcrypt from 'bcrypt';
 import dotenv from "dotenv";
 dotenv.config();
@@ -84,7 +84,9 @@ export async function updateActive(user: User, id: number) {
     return await userCollection.updateOne({ _id: user._id }, { $set: { activepokemon: id } });
 }
 export async function addPokemon(user: User, id: number) {
-    const existingPokemon = user.pokemons?.find(poke => poke.id === id);
+    let existingPokemon = user.pokemons?.find( poke => poke.id === id)
+    
+    //const existingPokemon = user.pokemons?.find(poke => poke.id === id);
     if (existingPokemon) {
         throw new Error('Pokemon already caught');
     }
