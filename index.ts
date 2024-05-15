@@ -114,8 +114,14 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         res.status(500).send("pokemon vangen gefaald")
     }
 });
-
-
+app.get("/logout", secureMiddleware, (req, res) => {
+    req.session.destroy((e) => {
+        if (e) {
+            console.error(e);
+        }
+    });
+    res.redirect("/login");
+});
 app.get("/landingpagina", (req, res) => {
     res.render('landingpage', {
         title: "Landingpagina, kies een project",
@@ -393,9 +399,31 @@ app.get("/battler", secureMiddleware, async (req, res) => {
 })
 
 app.get("/vergelijken", secureMiddleware, async (req, res) => {
-    res.render('vergelijken', {
-        title: "pokemon vergelijken"
-    });
+    try {
+        let user = req.session.user;
+        let pokemon1Name = req.query.pokemon1 || user?.activepokemon || "pikachu";
+        pokemon1Name = pokemon1Name.toString().toLowerCase();
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Name}`);
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+        const pokemon1 = await response.json();
+        let pokemon2Name = req.query.pokemon2 || "ivysaur";
+        pokemon2Name = pokemon2Name.toString().toLowerCase();
+        const response2 = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon2Name}`);
+        if (response2.status === 404) throw new Error('Not found');
+        if (response2.status === 500) throw new Error('Internal server error');
+        if (response2.status === 400) throw new Error('Bad request');
+        const pokemon2 = await response2.json();
+        res.render('vergelijken', {
+            title: "pokemon vergelijken",
+            pokemon1: pokemon1,
+            pokemon2: pokemon2
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 app.listen(app.get("port"), async () => {
