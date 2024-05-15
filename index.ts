@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { addPokemon, connect, login, registerUser, removePokemon, updateActive, userCollection } from "./database";
-import { User } from "./interfaces";
+import { Pokemon, User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
 import { battle } from "./functions";
@@ -100,11 +100,7 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
         const pokemon = await response.json();
         let isgevangen = false;
         const user = req.session.user;
-
-        console.log('User:', user);
-console.log('User Pokemons:', user?.pokemons);
-console.log('Pokemon ID:', pokemon.id);
-        if ( user?.pokemons) {
+        if (user?.pokemons) {
             const filteredPokemons = user.pokemons.filter(poke => poke.id === pokemon.id);
             isgevangen = filteredPokemons.length > 0;
             console.log(`gevangen ${isgevangen}`)
@@ -132,9 +128,18 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
     }
     try {
         if (req.body.action === 'catch') {
-            await addPokemon(user, pokemonId);
-            user.pokemons?.push({id: pokemonId, nickname: "", attack: 0, defense: 0})
-            /*req.session.user = user;*/
+            // await addPokemon(user, pokemonId);
+            let pokemon: Pokemon = {
+                id: pokemonId,
+                nickname: "",
+                attack: 1,
+                defense: 1
+            }
+            if (!user.pokemons) {
+                user.pokemons = [];
+            }
+            user.pokemons.push(pokemon);
+            req.session.user = user;
             console.log(user);
             console.log('Pokemon gevangen:', pokemonId);
             res.redirect("/");
