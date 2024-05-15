@@ -69,9 +69,13 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
         let isgevangen = false;
         const user = req.session.user;
 
-        if (user && user.pokemons) {
+        console.log('User:', user);
+console.log('User Pokemons:', user?.pokemons);
+console.log('Pokemon ID:', pokemon.id);
+        if ( user?.pokemons) {
             const filteredPokemons = user.pokemons.filter(poke => poke.id === pokemon.id);
             isgevangen = filteredPokemons.length > 0;
+            console.log(`gevangen ${isgevangen}`)
         }
         
         res.render('catcher', {

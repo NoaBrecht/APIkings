@@ -60,7 +60,7 @@ export async function registerUser(username: string, email: string, password: st
         throw new Error();
     }
     let user: User = {
-        username: username, email: email, password: password
+        username: username, email: email, password: password, pokemons: []
     }
     return await userCollection.insertOne(user)
 }
