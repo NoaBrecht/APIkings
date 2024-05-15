@@ -9,23 +9,35 @@
               <form action="">
                 <div class="row">
                   <div class="col-9">
-                    <input type="text" class="form-control" id="pokemon1" value="Pikachu" placeholder="Naam">
+                    <input type="text" class="form-control" name="pokemon1" id="pokemon1" value="<%=pokemon1.name %>"
+                      placeholder="Naam">
                   </div>
                   <div class="col-2">
                     <input type="submit" class="btn btn-primary" value="zoeken">
                   </div>
                 </div>
-              </form>
             </article>
-            <article class="pokemonimg"><img
-                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png"
-                class="card-img-top" alt="een afbeelding van"></article>
+            <article class="pokemonimg"><img src="<%= pokemon1.sprites.other.home.front_default %>" class="card-img-top"
+                alt="een afbeelding van">
+            </article>
 
             <article class="card-body">
               <h2>STATS</h2>
-              <h3>HP: 40</h3>
-              <h3>ATT: 45</h3>
-              <h3>DEF: 35</h3>
+              <h3 class="<% if (pokemon1.stats[0].base_stat > pokemon2.stats[0].base_stat) {%>
+                text-success<%
+              } else{%>text-danger<%}%>">
+                <%= pokemon1.stats[0].stat.name %>: <%= pokemon1.stats[0].base_stat %>
+              </h3>
+              <h3 class="<% if (pokemon1.stats[1].base_stat > pokemon2.stats[0].base_stat) {%>
+                              text-success<%
+                            } else{%>text-danger<%}%>">
+                <%= pokemon1.stats[1].stat.name %>: <%= pokemon1.stats[1].base_stat%>
+              </h3>
+              <h3 class="<% if (pokemon1.stats[2].base_stat > pokemon2.stats[2].base_stat) {%>
+                              text-success<%
+                            } else{%>text-danger<%}%>">
+                <%= pokemon1.stats[2].stat.name %>: <%= pokemon1.stats[2].base_stat%>
+              </h3>
             </article>
           </section>
         </div>
@@ -33,26 +45,38 @@
 
           <section class="card text-center card-nohover">
             <article class="card-body">
-              <form action="">
-                <div class="row">
-                  <div class="col-9">
-                    <input type="text" class="form-control" id="pokemon1" value="bulbasaur" placeholder="Naam">
-                  </div>
-                  <div class="col-2">
-                    <input type="submit" class="btn btn-primary" value="zoeken">
-                  </div>
+              <div class="row">
+                <div class="col-9">
+                  <input type="text" class="form-control" name="pokemon2" id="pokemon1" value="<%= pokemon2.name %>"
+                    placeholder="Naam">
                 </div>
+                <div class="col-2">
+                  <input type="submit" class="btn btn-primary" value="zoeken">
+                </div>
+              </div>
               </form>
             </article>
             <article class="pokemonimg">
-              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png"
-                class="card-img-top" alt="een afbeelding van bulbasaur">
+              <img src="<%= pokemon2.sprites.other.home.front_default %>" class="card-img-top"
+                alt="een afbeelding van bulbasaur">
             </article>
             <article class="card-body">
               <h2>STATS</h2>
-              <h3>hp: 45</h3>
-              <h3>attack: 49</h3>
-              <h3>defense: 49</h3>
+              <h3 class="<% if (pokemon1.stats[0].base_stat < pokemon2.stats[0].base_stat) {%>
+                              text-success<%
+                            } else{%>text-danger<%}%>">
+                <%= pokemon2.stats[0].stat.name %>: <%= pokemon2.stats[0].base_stat %>
+              </h3>
+              <h3 class="<% if (pokemon1.stats[1].base_stat < pokemon2.stats[0].base_stat) {%>
+                                            text-success<%
+                                          } else{%>text-danger<%}%>">
+                <%= pokemon2.stats[1].stat.name %>: <%= pokemon2.stats[1].base_stat%>
+              </h3>
+              <h3 class="<% if (pokemon1.stats[2].base_stat < pokemon2.stats[2].base_stat) {%>
+                                            text-success<%
+                                          } else{%>text-danger<%}%>">
+                <%= pokemon2.stats[2].stat.name %>: <%= pokemon2.stats[2].base_stat%>
+              </h3>
             </article>
           </section>
         </div>
