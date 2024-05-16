@@ -1,4 +1,4 @@
-export function calculateFight(hp: number, defence: number, attack: number) {
+function calculateFight(hp: number, defence: number, attack: number) {
     let damage: number = (defence - attack);
     console.debug(`damage: ${damage}`);
     return hp + damage;
@@ -19,12 +19,12 @@ export function battle(pokemon1: any, pokemon2: any) {
         pokemon1.hp = calculateFight(pokemon1.hp, pokemon1.defense, pokemon2.attack);
         if (pokemon1.hp <= 0) {
             console.log(`${pokemon2.name} won!`);
-            return `${pokemon2.name}`;
+            return pokemon2;
         }
         pokemon2.hp = calculateFight(pokemon2.hp, pokemon2.defense, pokemon1.attack);
         if (pokemon2.hp <= 0) {
             console.log(`${pokemon1.name} won!`);
-            return `${pokemon1.name}`;
+            return pokemon1;
         }
     } while (pokemon1.hp > 0 && pokemon2.hp > 0);
 }
