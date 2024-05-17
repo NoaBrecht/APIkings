@@ -442,7 +442,11 @@ const fetchRandomPokemon = async (): Promise<any> => {
 app.get("/battler", secureMiddleware, async (req, res) => {
     try {
         let user: User | undefined = req.session.user;
-        let id = user?.activepokemon || 25;
+        let id = user?.activepokemon;
+        if (id === undefined) {
+            res.redirect("back")
+            return;
+        }
         let userPokemonsWithNames = [];
         for (let poke of user?.pokemons || []) {
             let responseuser = await fetch(`https://pokeapi.co/api/v2/pokemon/${poke.id}`);
