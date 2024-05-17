@@ -9,11 +9,18 @@
         <div class="col-5">
           <section class="card text-center card-nohover">
             <article class="card-body">
-              <form action="">
+              <form action="" method="post">
                 <div class="row">
                   <div class="col-9">
-                    <input type="text" class="form-control" name="pokemon" id="pokemon" value="<%=pokemon.name %>"
-                      placeholder="Naam">
+
+                    <select name="pokemon" id="pokemon" class="form-control">
+                      <%userPokemonsWithNames.forEach(pokemon=> {
+                        %>
+                        <option value=" <%=pokemon.id%>">
+                          <%=pokemon.name%>
+                        </option>
+                        <% }); %>
+                    </select>
                   </div>
                   <div class="col-2">
                     <input type="submit" class="btn btn-primary" value="Vecht">
