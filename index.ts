@@ -133,17 +133,21 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         if (!user.pokemons) {
             user.pokemons = [];
         }
+        const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+        console.log("Request body:", req.body);
+        console.log( user.pokemons)
+        if (targetPokemonResponse.status === 404) throw new Error('Not found');
+                if (targetPokemonResponse.status === 500) throw new Error('Internal server error');
+                if (targetPokemonResponse.status === 400) throw new Error('Bad request');
+
+        const targetPokemon = await targetPokemonResponse.json();
         if (!user.pokemons || user.pokemons.length === 0) {
             res.status(400).send("Geen pokemon beschikbaar.");
             return;
         }
-        const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-        
-        if (targetPokemonResponse.status === 404) throw new Error('Not found');
-                if (targetPokemonResponse.status === 500) throw new Error('Internal server error');
-                if (targetPokemonResponse.status === 400) throw new Error('Bad request');
-               
-        const targetPokemon = await targetPokemonResponse.json();
+       
+            
+       
         const currentPokemon = user.pokemons[0];
         if (!currentPokemon || currentPokemon.attack === undefined) {
             throw new Error('Huidige data mist.');
@@ -155,13 +159,14 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });;
             req.session.user = user;
             console.log(user);
+            console.log("User's Pokémon list after catching:", user.pokemons);
             console.log('Pokemon gevangen:', pokemonId);
             res.redirect("/");
         } else if (req.body.action === 'release') {
             user.pokemons = user.pokemons.filter(poke => poke.id !== pokemonId);
             await removePokemon(user, pokemonId);
             req.session.user = user;
-           
+            console.log("User's Pokémon list after releasing:", user.pokemons);
             console.log('Pokemon losgelaten:', pokemonId);
             res.redirect("/");
         }
@@ -500,6 +505,82 @@ app.get("/vergelijken", secureMiddleware, async (req, res) => {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+
+app.get("/starterpokemon", secureMiddleware, async (req, res) => {
+    try {
+        let user = req.session.user;
+        let UserPokemons = user?.pokemons;
+        let page;
+        if (typeof req.query.page === "string") {
+            page = parseInt(req.query.page);
+        }
+        else {
+            page = 1;
+        }
+        let offset = page * 30 - 30;
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=30`);
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
+        let pokemons: any = await response.json();
+        const pokemonWithImages = await Promise.all(pokemons.results.map(async (pokemon: any) => {
+            const response = await fetch(pokemon.url);
+            const data = await response.json();
+            return {
+                id: data.id,
+                name: pokemon.name,
+                image: data.sprites.other.home.front_default,
+                type: data.types[0].type.name,
+                colour: UserPokemons?.find(poke => poke.id === data.id)  ? "blackout" : ""
+            };
+        }));
+        res.render('starterpokemon', {
+            user: req.session.user,
+            page: page,
+            title: "Alle pokemons",
+            pokemons: pokemonWithImages,
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+app.post("/add-pokemon", secureMiddleware, async (req, res) => {
+    console.log("Received POST to /add-pokemon with data:", req.body);
+    const pokemonId = Array.isArray(req.body.pokemonId) ? req.body.pokemonId[0] : req.body.pokemonId;
+    const action = Array.isArray(req.body.action) ? req.body.action[0] : req.body.action;
+    let user = req.session.user;
+        if (!user) {
+            res.status(401).send("Gebruiker niet ingelogd");
+            return;
+        }
+        try {
+            if (!user.pokemons) {
+                user.pokemons = [];
+            }
+            console.log(pokemonId)
+            if(action === 'test'){
+                console.log("Adding Pokemon:", pokemonId)
+               
+                await addPokemon(user, pokemonId);
+             user.pokemons.push({
+                 id: pokemonId,
+                 nickname: "",
+                 attack: 0,
+                 defense: 0
+             }); 
+            req.session.user = user;
+            res.redirect("/"); 
+        }
+      
+        
+        
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send("Failed to add Pokémon");
+    }
+       
 });
 
 app.listen(app.get("port"), async () => {

@@ -8,8 +8,8 @@
                 </div>
                 <% if(pokemonsCount===0) {%>
                     <h1>Geen pokemons gevonden</h1>
-                    <p>Wees de eerste om een pokemon te vangen! Ga naar <a href="/catcher">vangen</a> om de eerste
-                        pokemon te vangen.</p>
+                    <p>Wees de eerste om een pokemon te vangen! Ga eerst naar de starterpagina <a href="/starterpokemon">om je eerste pokemon te kiezen</a> 
+                        </p>
                     <% } for(let pokemon of pokemons) { %>
                         <section class="card text-center <%=pokemon.type%>">
                             <a href="/pokemon/<%=pokemon.id%>">
@@ -21,6 +21,7 @@
                                         <%= pokemon.id %>
                                     </p>
                                 </article>
+                               
                                 <img src="<%=pokemon.image%>" class="card-img-top <%=pokemon.colour%>"
                                     alt="een afbeelding van <%= pokemon.name %>">
                             </a>
