@@ -415,7 +415,7 @@ const fetchRandomPokemon = async (): Promise<any> => {
 
 app.get("/battler", secureMiddleware, async (req, res) => {
     try {
-        let id = 4;
+        let id = 1;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
@@ -438,6 +438,7 @@ app.get("/battler", secureMiddleware, async (req, res) => {
         const winner = battle(pokemon, enemy);
         res.render('battler', {
             title: "vechten",
+            user: user,
             pokemon: pokemon,
             enemy: enemy,
             winner: winner
