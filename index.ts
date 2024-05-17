@@ -56,6 +56,7 @@ app.get("/all", secureMiddleware, async (req, res) => {
     try {
         let user = req.session.user;
         let UserPokemons = user?.pokemons;
+        console.debug(UserPokemons)
         let page;
         if (typeof req.query.page === "string") {
             page = parseInt(req.query.page);
@@ -592,7 +593,7 @@ app.get("/starterpokemon", secureMiddleware, async (req, res) => {
 });
 app.post("/add-pokemon", secureMiddleware, async (req, res) => {
 
-    const pokemonId = Array.isArray(req.body.pokemonId) ? req.body.pokemonId[0] : req.body.pokemonId;
+    let pokemonId = Array.isArray(req.body.pokemonId) ? req.body.pokemonId[0] : req.body.pokemonId;
     const action = Array.isArray(req.body.action) ? req.body.action[0] : req.body.action;
     let user = req.session.user;
     if (!user) {
@@ -606,7 +607,7 @@ app.post("/add-pokemon", secureMiddleware, async (req, res) => {
         console.log(pokemonId)
         if (action === 'test') {
             console.log("Adding Pokemon:", pokemonId)
-
+            pokemonId = parseInt(pokemonId);
             await addPokemon(user, pokemonId);
             user.pokemons.push({
                 id: pokemonId,
