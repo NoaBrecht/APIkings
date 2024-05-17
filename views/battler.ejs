@@ -2,6 +2,9 @@
 
   <body>
     <%- include("partials/nav") %>
+      <h1>
+        <%= winner.name %> heeft gewonnen
+      </h1>
       <div class="row vergelijken" style="margin-right: auto !important;">
         <div class="col-5">
           <section class="card text-center card-nohover">
@@ -20,7 +23,6 @@
             <article class="pokemonimg"><img src="<%= pokemon.sprites.other.home.front_default %>" class="card-img-top"
                 alt="een afbeelding van">
             </article>
-
             <article class="card-body">
               <h2>STATS</h2>
               <div class="progress" role="progressbar" style="height: 40px">
