@@ -8,32 +8,34 @@
                 </div>
                 
              
-        <% if (pokemons && pokemons.length > 0) { %>
-            <% let starterpok = [0, 3, 6]; %>
-            <% starterpok.forEach(index => { %>
-                <% if (pokemons[index]) { %>
-                    <% let pokemon = pokemons[index]; %>
-                    <form action="/add-pokemon" method="POST">
-                        <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
-                        <input type="hidden" name="action" value="test">
-                        
-                    <section class="card text-center <%= pokemon.type %> " >
-                        <article class="card-body">
-                            <h1 class="card-title">
-                                <%= pokemon.name %>
-                            </h1>
-                            <p class="card-text">
-                                <%= pokemon.id %>
-                            </p>
-                            <button type="submit" class="btn btn-danger"><i class="bi bi-check-circle-fill"></i> I choose you</button>
-                        </article>
-                        <img src="<%= pokemon.image %>" class="card-img-top <%= pokemon.colour %>" alt="een afbeelding van <%= pokemon.name %>">
-                    </section>
+                <% if (pokemons && pokemons.length > 0) { %>
+                    <% let starterpok = [0, 3, 6]; %>
+                    <% starterpok.forEach(index => { %>
+                        <% if (pokemons[index]) { %>
+                            <% let pokemon = pokemons[index]; %>
+                            <form action="/add-pokemon" method="POST">
+                                <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
+                                <input type="hidden" name="action" value="test">
+                                <section class="card text-center <%= pokemon.type %>">
+                                    <article class="card-body">
+                                        <h1 class="card-title">
+                                            <%= pokemon.name %>
+                                        </h1>
+                                        <p class="card-text">
+                                            <%= pokemon.id %>
+                                        </p>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="bi bi-check-circle-fill"></i> I choose you
+                                        </button>
+                                    </article>
+                                    <img src="<%= pokemon.image %>" class="card-img-top <%= pokemon.colour %>" alt="een afbeelding van <%= pokemon.name %>">
+                                </section>
+                            </form>
+                        <% } %>
+                    <% }); %>
+                <% } else { %>
+                    <p>Geen Pokémon beschikbaar.</p>
                 <% } %>
-            <% }); %>
-        <% } else { %>
-            <p>Geen Pokémon beschikbaar.</p>
-        <% } %>
     </article>
             
             <%- include("partials/footer") %>
