@@ -458,6 +458,9 @@ app.get("/battler", secureMiddleware, async (req, res) => {
             const pokemon = await responseuser.json();
             userPokemonsWithNames.push({ id: poke.id, name: pokemon.name });
         }
+        if (!id) {
+            id = userPokemonsWithNames[0].id;
+        }
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
