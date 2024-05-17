@@ -547,7 +547,7 @@ app.get("/starterpokemon", secureMiddleware, async (req, res) => {
     }
 });
 app.post("/add-pokemon", secureMiddleware, async (req, res) => {
-    console.log("Received POST to /add-pokemon with data:", req.body);
+   
     const pokemonId = Array.isArray(req.body.pokemonId) ? req.body.pokemonId[0] : req.body.pokemonId;
     const action = Array.isArray(req.body.action) ? req.body.action[0] : req.body.action;
     let user = req.session.user;
