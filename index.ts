@@ -135,19 +135,19 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         }
         const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         console.log("Request body:", req.body);
-        console.log( user.pokemons)
+        console.log(user.pokemons)
         if (targetPokemonResponse.status === 404) throw new Error('Not found');
-                if (targetPokemonResponse.status === 500) throw new Error('Internal server error');
-                if (targetPokemonResponse.status === 400) throw new Error('Bad request');
+        if (targetPokemonResponse.status === 500) throw new Error('Internal server error');
+        if (targetPokemonResponse.status === 400) throw new Error('Bad request');
 
         const targetPokemon = await targetPokemonResponse.json();
         if (!user.pokemons || user.pokemons.length === 0) {
             res.status(400).send("Geen pokemon beschikbaar.");
             return;
         }
-       
-            
-       
+
+
+
         const currentPokemon = user.pokemons[0];
         if (!currentPokemon || currentPokemon.attack === undefined) {
             throw new Error('Huidige data mist.');
@@ -348,12 +348,15 @@ app.get("/favorite/:id", secureMiddleware, async (req, res) => {
         let id: number = parseInt(req.params.id);
         let user: User | undefined = req.session.user;
         user?.pokemons?.forEach(poke => {
-            if (poke.id === id) {
+            console.log(poke.id, id)
+            console.log(typeof poke.id, typeof id)
+            if (poke.id == id) {
                 updateActive(user, id)
                 user.activepokemon = id;
                 req.session.user = user;
             };
         });
+        console.log(user?.activepokemon)
         res.redirect("/")
     } catch (error) {
 
@@ -448,10 +451,6 @@ app.get("/battler", secureMiddleware, async (req, res) => {
     try {
         let user: User | undefined = req.session.user;
         let id = user?.activepokemon;
-        if (id === undefined) {
-            res.redirect("back")
-            return;
-        }
         let userPokemonsWithNames = [];
         for (let poke of user?.pokemons || []) {
             let responseuser = await fetch(`https://pokeapi.co/api/v2/pokemon/${poke.id}`);
@@ -577,7 +576,7 @@ app.get("/starterpokemon", secureMiddleware, async (req, res) => {
                 name: pokemon.name,
                 image: data.sprites.other.home.front_default,
                 type: data.types[0].type.name,
-                colour: UserPokemons?.find(poke => poke.id === data.id)  ? "blackout" : ""
+                colour: UserPokemons?.find(poke => poke.id === data.id) ? "blackout" : ""
             };
         }));
         res.render('starterpokemon', {
@@ -592,40 +591,40 @@ app.get("/starterpokemon", secureMiddleware, async (req, res) => {
     }
 });
 app.post("/add-pokemon", secureMiddleware, async (req, res) => {
-   
+
     const pokemonId = Array.isArray(req.body.pokemonId) ? req.body.pokemonId[0] : req.body.pokemonId;
     const action = Array.isArray(req.body.action) ? req.body.action[0] : req.body.action;
     let user = req.session.user;
-        if (!user) {
-            res.status(401).send("Gebruiker niet ingelogd");
-            return;
+    if (!user) {
+        res.status(401).send("Gebruiker niet ingelogd");
+        return;
+    }
+    try {
+        if (!user.pokemons) {
+            user.pokemons = [];
         }
-        try {
-            if (!user.pokemons) {
-                user.pokemons = [];
-            }
-            console.log(pokemonId)
-            if(action === 'test'){
-                console.log("Adding Pokemon:", pokemonId)
-               
-                await addPokemon(user, pokemonId);
-             user.pokemons.push({
-                 id: pokemonId,
-                 nickname: "",
-                 attack: 0,
-                 defense: 0
-             }); 
+        console.log(pokemonId)
+        if (action === 'test') {
+            console.log("Adding Pokemon:", pokemonId)
+
+            await addPokemon(user, pokemonId);
+            user.pokemons.push({
+                id: pokemonId,
+                nickname: "",
+                attack: 0,
+                defense: 0
+            });
             req.session.user = user;
-            res.redirect("/"); 
+            res.redirect("/");
         }
-      
-        
-        
+
+
+
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send("Failed to add Pokémon");
     }
-       
+
 });
 
 app.listen(app.get("port"), async () => {
