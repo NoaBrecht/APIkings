@@ -126,11 +126,30 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         res.status(401).send("Gebruiker niet ingelogd");
         return;
     }
+    
     try {
+        
         if (!user.pokemons) {
             user.pokemons = [];
         }
-        if (req.body.action === 'catch') {
+        if (!user.pokemons || user.pokemons.length === 0) {
+            res.status(400).send("Geen pokemon beschikbaar.");
+            return;
+        }
+        const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+        
+        if (targetPokemonResponse.status === 404) throw new Error('Not found');
+                if (targetPokemonResponse.status === 500) throw new Error('Internal server error');
+                if (targetPokemonResponse.status === 400) throw new Error('Bad request');
+               
+        const targetPokemon = await targetPokemonResponse.json();
+        const currentPokemon = user.pokemons[0];
+        if (!currentPokemon || currentPokemon.attack === undefined) {
+            throw new Error('Huidige data mist.');
+        }
+        const catchProbability = Math.max(0, Math.min(100, 100 - targetPokemon.stats.find((stat: { stat: { name: string; }; }) => stat.stat.name === 'defense').base_stat + currentPokemon.attack));
+        const randomChance = Math.random() * 100;
+        if (req.body.action === 'catch' && randomChance < catchProbability) {
              await addPokemon(user, pokemonId);
             user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });;
             req.session.user = user;
@@ -138,11 +157,18 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             console.log('Pokemon gevangen:', pokemonId);
             res.redirect("/");
         } else if (req.body.action === 'release') {
-            req.session.user = user;
-           // user.pokemons.({ id: pokemonId, nickname: "", attack: 0, defense: 0 });
+            user.pokemons = user.pokemons.filter(poke => poke.id !== pokemonId);
             await removePokemon(user, pokemonId);
+            req.session.user = user;
+           
             console.log('Pokemon losgelaten:', pokemonId);
-            res.redirect("/catcher");
+            res.redirect("/");
+        }
+        else{
+            res.render('catcher', {
+                title: "Attempt to Catch Pokémon",
+                message: "Attempt failed, try again!"
+            });
         }
 
 
