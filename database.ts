@@ -30,7 +30,8 @@ async function seed() {
             pokemons: [
                 { id: 1, nickname: "", attack: 0, defense: 0 },
                 { id: 2, nickname: "Big chungus", attack: 0, defense: 0 },
-            ]
+            ],
+            catchAttempts: {}
         },
         {
             username: "Jane Doe",
@@ -42,7 +43,8 @@ async function seed() {
                 { id: 2, nickname: "Foemp", attack: 0, defense: 0 },
                 { id: 25, nickname: "", attack: 0, defense: 0 },
                 { id: 65, nickname: "Bacon", attack: 5, defense: 10 }
-            ]
+            ],
+            catchAttempts: {}
         }
     ];
     if (await userCollection.countDocuments() === 0) {
@@ -83,7 +85,8 @@ export async function registerUser(username: string, email: string, password: st
         throw new Error();
     }
     let user: User = {
-        username: username, email: email, password: password, pokemons: []
+        username: username, email: email, password: password, pokemons: [],
+        catchAttempts: {}
     }
     return await userCollection.insertOne(user)
 }

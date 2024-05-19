@@ -94,7 +94,9 @@ app.get("/all", secureMiddleware, async (req, res) => {
 });
 app.get("/catcher", secureMiddleware, async (req, res) => {
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/25`);
+        const randompok = (min: number, max: number) =>
+            Math.floor(Math.random() * (max - min + 1)) + min;
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0, 1100)}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
@@ -128,47 +130,82 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         res.status(401).send("Gebruiker niet ingelogd");
         return;
     }
+    user.catchAttempts = user.catchAttempts || {};
+    user.catchAttempts[pokemonId] = user.catchAttempts[pokemonId] || 3;
 
+    if (user.catchAttempts[pokemonId] <= 0) {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+        if (response.ok) {
+            const pokemon = await response.json();
+            res.render('catcher', {
+                title: "No Attempts Left",
+                message: "Geen pogingen meer over!",
+                user: user,
+                pokemon: pokemon
+            });
+        } else {
+            res.status(500).send("Failed to fetch Pokémon data");
+            res.redirect('/');
+        }
+        return;
+    }
     try {
 
         if (!user.pokemons) {
             user.pokemons = [];
         }
-        const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-        console.log("Request body:", req.body);
-        console.log(user.pokemons)
-        if (targetPokemonResponse.status === 404) throw new Error('Not found');
-        if (targetPokemonResponse.status === 500) throw new Error('Internal server error');
-        if (targetPokemonResponse.status === 400) throw new Error('Bad request');
+       
 
-        const targetPokemon = await targetPokemonResponse.json();
+        const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+if (targetPokemonResponse.status >= 400) {
+    throw new Error('Failed to fetch Pokémon');
+}
+const targetPokemon = await targetPokemonResponse.json();
+//console.log("Fetched Target Pokemon:", targetPokemon);
         if (!user.pokemons || user.pokemons.length === 0) {
             res.status(400).send("Geen pokemon beschikbaar.");
             return;
         }
+        const action = req.body.action;
 
 
 
-        const currentPokemon = user.pokemons[0];
+        /*const currentPokemon = user.pokemons[0];
         if (!currentPokemon || currentPokemon.attack === undefined) {
             throw new Error('Huidige data mist.');
         }
         const catchProbability = Math.max(0, Math.min(100, 100 - targetPokemon.stats.find((stat: { stat: { name: string; }; }) => stat.stat.name === 'defense').base_stat + currentPokemon.attack));
-        const randomChance = Math.random() * 100;
-        if (req.body.action === 'catch' && randomChance < catchProbability) {
-            await addPokemon(user, pokemonId);
-            user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });;
-            req.session.user = user;
-            console.log(user);
-            console.log("User's Pokémon list after catching:", user.pokemons);
-            console.log('Pokemon gevangen:', pokemonId);
-            res.redirect("/");
-        } else if (req.body.action === 'release') {
+        const randomChance = Math.random() * 100;*/
+        if (action === 'catch' ) {
+            user.catchAttempts[pokemonId]--;
+            const catchSuccess = attemptCatch(user, targetPokemon);
+            if(catchSuccess){
+                await addPokemon(user, pokemonId);
+                user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });;
+               
+                console.log(user);
+                console.log("User's Pokémon list after catching:", user.pokemons);
+                console.log('Pokemon gevangen:', pokemonId);
+                req.session.user = user;
+                res.redirect("/");
+            }
+            else {
+                res.render('catcher', {
+                    title: "Catch Failed",
+                    pokemon: targetPokemon,
+                    user: user,
+                    isgevangen: false,
+                    message: "Pogin gefaald, probeer opnieuw!"
+                });
+            }
+           
+           
+        } else if (action === 'release') {
             user.pokemons = user.pokemons.filter(poke => poke.id !== pokemonId);
             await removePokemon(user, pokemonId);
             req.session.user = user;
-            console.log("User's Pokémon list after releasing:", user.pokemons);
-            console.log('Pokemon losgelaten:', pokemonId);
+           // console.log("User's Pokémon list after releasing:", user.pokemons);
+           // console.log('Pokemon losgelaten:', pokemonId);
             res.redirect("/");
         }
         else {
@@ -177,16 +214,31 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
                 message: "Attempt failed, try again!"
             });
         }
-
-
-
-
-
     } catch (error) {
         console.log('Error:', error)
         res.status(500).send("pokemon vangen gefaald")
     }
 });
+function attemptCatch(user: User, targetPokemon: any): boolean {
+    if (!user.pokemons) {
+       // console.log("No pokemons array found for user.");
+        return false;
+    }
+
+    const userActivePokemon = user.pokemons.find(p => Number(p.id) === user.activepokemon);
+    if (!userActivePokemon) {
+       // console.log("No active pokemon found.");
+        return false;
+    }
+
+    const catchProbability = calculateCatchProbability(userActivePokemon, targetPokemon);
+    return Math.random() < catchProbability;
+}
+function calculateCatchProbability(userPokemon: { attack: any; }, targetPokemon: { stats: any[]; }) {
+    const attackFactor = userPokemon.attack;
+    const defenseFactor = targetPokemon.stats.find(stat => stat.stat.name === 'defense').base_stat;
+    return Math.max(0, Math.min(1, (100 + attackFactor - defenseFactor) / 100));
+}
 app.get("/logout", secureMiddleware, (req, res) => {
     req.session.destroy((e) => {
         if (e) {
@@ -603,6 +655,7 @@ app.post("/add-pokemon", secureMiddleware, async (req, res) => {
         res.status(401).send("Gebruiker niet ingelogd");
         return;
     }
+    
     try {
         if (!user.pokemons) {
             user.pokemons = [];
