@@ -8,24 +8,28 @@
                 </div>
                 <% if(pokemonsCount===0) {%>
                     <h1>Geen pokemons gevonden</h1>
-                    <p>Wees de eerste om een pokemon te vangen! Ga eerst naar de starterpagina <a href="/starterpokemon">om je eerste pokemon te kiezen</a> 
-                        </p>
-                    <% } for(let pokemon of pokemons) { %>
-                        <section class="card text-center <%=pokemon.type%>">
-                            <a href="/pokemon/<%=pokemon.id%>">
-                                <article class="card-body">
-                                    <h1 class="card-title">
-                                        <%= pokemon.name %>
-                                    </h1>
-                                    <p class="card-text">
-                                        <%= pokemon.id %>
-                                    </p>
-                                </article>
-                               
-                                <img src="<%=pokemon.image%>" class="card-img-top <%=pokemon.colour%>"
-                                    alt="een afbeelding van <%= pokemon.name %>">
-                            </a>
-                        </section>
-                        <% } %>
+                    <p>Wees de eerste om een pokemon te vangen! Ga eerst naar de starterpagina <a
+                            href="/starterpokemon">om je eerste pokemon te kiezen</a>
+                    </p>
+                    <% } else { %>
+                        <h1>Jou pokemons</h1>
+                        <p>Je hebt <%=pokemonsCount%> pokemons in bezit</p>
+                        <% } for(let pokemon of pokemons) { %>
+                            <section class="card text-center <%=pokemon.type%>">
+                                <a href="/pokemon/<%=pokemon.id%>">
+                                    <article class="card-body">
+                                        <h1 class="card-title">
+                                            <%= pokemon.name %>
+                                        </h1>
+                                        <p class="card-text">
+                                            <%= pokemon.id %>
+                                        </p>
+                                    </article>
+
+                                    <img src="<%=pokemon.image%>" class="card-img-top <%=pokemon.colour%>"
+                                        alt="een afbeelding van <%= pokemon.name %>">
+                                </a>
+                            </section>
+                            <% } %>
             </article>
             <%- include("partials/footer") %>
