@@ -114,7 +114,7 @@ export async function addPokemon(user: User, id: number) {
 
     //const existingPokemon = user.pokemons?.find(poke => poke.id === id);
     if (existingPokemon) {
-        throw new Error('Pokemon already caught');
+        return;
     }
     return await userCollection.updateOne(
         { _id: user._id },
