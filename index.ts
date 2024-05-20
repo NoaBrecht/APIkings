@@ -577,12 +577,20 @@ app.post("/battler", secureMiddleware, async (req, res) => {
     if (response2.status === 400) throw new Error('Bad request');
     const enemy = await response2.json();
     const winner = battle(pokemon, enemy);
+    let catchedPokemon = false;
     if (winner.name === pokemon.name) {
         if (!user.pokemons) {
             user.pokemons = [];
         }
-        await addPokemon(user, enemy.id);
-        user.pokemons.push({ id: enemy.id, nickname: "", attack: 0, defense: 0 });
+        user.pokemons.forEach(pokemon => {
+            if (pokemon.id == enemy.id) {
+                catchedPokemon = true;
+            }
+        });
+        if (!catchedPokemon) {
+            await addPokemon(user, enemy.id);
+            user.pokemons.push({ id: enemy.id, nickname: "", attack: 0, defense: 0 });
+        }
     }
     res.render('battler', {
         title: "vechten",
