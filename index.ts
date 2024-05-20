@@ -57,7 +57,6 @@ app.get("/all", secureMiddleware, async (req, res) => {
     try {
         let user = req.session.user;
         let UserPokemons = user?.pokemons;
-        console.debug(UserPokemons)
         let page;
         if (typeof req.query.page === "string") {
             page = parseInt(req.query.page);
