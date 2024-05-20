@@ -6,7 +6,6 @@ import { Pokemon, User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
 import { battle } from "./functions";
-import { name } from "ejs";
 dotenv.config();
 
 const app: Express = express();
