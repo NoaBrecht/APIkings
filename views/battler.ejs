@@ -16,11 +16,10 @@
                     <select name="pokemon" id="pokemon" class="form-control">
                       <%userPokemonsWithNames.forEach(pokemon=> {
                         %>
-                        <option value="<%=pokemon.id%>" <% if (pokemon.id===user.activepokemon) { %> selected <% } %>>
+                        <option value="<%=pokemon.id%>" <% if (pokemon.id===user.activepokemon) { %> selected <% } %> >
                             <%=pokemon.name%>
                         </option>
-                        </option>
-                        <% }); %>
+                        <% }) %>
                     </select>
                   </div>
                   <div class="col-2">
