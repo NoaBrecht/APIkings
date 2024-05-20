@@ -41,6 +41,7 @@ app.get("/", secureMiddleware, async (req, res) => {
                 pokemonWithImages.push({ id: pokemon.id, name: name, image: image, type: type });
             }
         }
+        pokemonWithImages.sort((a: any, b: any) => a.id - b.id);
         res.render('index', {
             user: req.session.user,
             title: "Alle pokemons",
