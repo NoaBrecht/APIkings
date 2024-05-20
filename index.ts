@@ -43,7 +43,7 @@ app.get("/", secureMiddleware, async (req, res) => {
         pokemonWithImages.sort((a: any, b: any) => a.id - b.id);
         res.render('index', {
             user: req.session.user,
-            title: "Alle pokemons",
+            title: "Mijn pokemons",
             pokemons: pokemonWithImages,
             pokemonsCount: pokemonWithImages.length
         });
