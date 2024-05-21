@@ -1,8 +1,8 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { addPokemon, connect, login, registerUser, removePokemon, updateActive, userCollection } from "./database";
-import { Pokemon, User } from "./interfaces";
+import { addPokemon, connect, login, registerUser, removePokemon, updateActive, updateAttack, updateDefense } from "./database";
+import { User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
 import { battle } from "./functions";
@@ -455,9 +455,36 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
 
 
         if (isCorrectGuess) {
+            let user: User | undefined = req.session.user;
+            if (!user) {
+                res.redirect("/login");
+                return;
+            }
+            let id = user.activepokemon;
+            if (!id) {
+                if (!user.pokemons || user.pokemons.length === 0) {
+                    res.redirect("/starterpokemon");
+                    return;
+                }
+                id = user.pokemons[0].id;
+            }
             message = "Correct!";
             wrongGuess = false;
-
+            if (Math.random() < 0.5) {
+                updateDefense(user, id);
+                user.pokemons?.forEach(poke => {
+                    if (poke.id.toString() === id.toString()) {
+                        poke.defense = poke.defense + 1;
+                    };
+                });
+            } else {
+                updateAttack(user, id);
+                user.pokemons?.forEach(poke => {
+                    if (poke.id.toString() === id.toString()) {
+                        poke.defense = poke.defense + 1;
+                    };
+                });
+            }
         }
         else {
             message = "Niet correct probeer opnieuw!";
