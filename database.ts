@@ -30,7 +30,8 @@ async function seed() {
             pokemons: [
                 { id: 1, nickname: "", attack: 0, defense: 0 },
                 { id: 2, nickname: "Big chungus", attack: 0, defense: 0 },
-            ]
+            ],
+            catchAttempts: {}
         },
         {
             username: "Jane Doe",
@@ -42,7 +43,8 @@ async function seed() {
                 { id: 2, nickname: "Foemp", attack: 0, defense: 0 },
                 { id: 25, nickname: "", attack: 0, defense: 0 },
                 { id: 65, nickname: "Bacon", attack: 5, defense: 10 }
-            ]
+            ],
+            catchAttempts: {}
         }
     ];
     if (await userCollection.countDocuments() === 0) {
@@ -83,7 +85,8 @@ export async function registerUser(username: string, email: string, password: st
         throw new Error();
     }
     let user: User = {
-        username: username, email: email, password: password, pokemons: []
+        username: username, email: email, password: password, pokemons: [],
+        catchAttempts: {}
     }
     return await userCollection.insertOne(user)
 }
@@ -111,7 +114,7 @@ export async function addPokemon(user: User, id: number) {
 
     //const existingPokemon = user.pokemons?.find(poke => poke.id === id);
     if (existingPokemon) {
-        throw new Error('Pokemon already caught');
+        return;
     }
     return await userCollection.updateOne(
         { _id: user._id },
@@ -124,10 +127,17 @@ export async function removePokemon(user: User, id: number) {
 export async function updateNickName(user: User, pokemonID: number, nickname: string) {
     return;
 }
-export async function updateDef(user: User, pokemonID: number, nickname: string) {
-    return;
+export async function updateDefense(user: User, pokemonID: number) {
+    return await userCollection.updateOne(
+        { _id: user._id, "pokemons.id": pokemonID }, { $inc: { "pokemons.$.attack": 1 } }
+    );
 }
-export async function updateDmg(user: User, pokemonID: number, nickname: string) {
+export async function updateAttack(user: User, pokemonID: number) {
+    return await userCollection.updateOne(
+        { _id: user._id, "pokemons.id": pokemonID }, { $inc: { "pokemons.$.defense": 1 } }
+    );
+}
+export async function addWin(user: User, pokemonID: number) {
     return;
 }
 export async function connect() {

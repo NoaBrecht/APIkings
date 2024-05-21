@@ -13,6 +13,7 @@ export interface User {
     password?: string;
     activepokemon?: number;
     pokemons?: Pokemon[];
+    catchAttempts: { [pokemonId: string]: number };
 }
 
 //! PokeAPI interface, use on own risk
