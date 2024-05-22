@@ -1,78 +1,75 @@
 <%- include("partials/header") %>
 
-  <body>
-    <%- include("partials/nav") %>
-      <h1>
-        <%= winner.name %> heeft gewonnen
-      </h1>
-      <div class="row vergelijken" style="margin-right: auto !important;">
-        <div class="col-5">
-          <section class="card text-center card-nohover">
-            <article class="card-body">
-              <form action="" method="post">
-                <div class="row">
-                  <div class="col-9">
-
-                    <select name="pokemon" id="pokemon" class="form-control">
-                      <%userPokemonsWithNames.forEach(pokemon=> {
-                        %>
-                        <option value="<%=pokemon.id%>">
-                          <%=pokemon.name%>
-                        </option>
-                        <% }); %>
-                    </select>
-                  </div>
-                  <div class="col-2">
-                    <input type="submit" class="btn btn-primary" value="Vecht">
-                  </div>
-                </div>
-            </article>
-            <article class="pokemonimg"><img src="<%= pokemon.sprites.other.home.front_default %>" class="card-img-top"
-                alt="een afbeelding van">
-            </article>
-            <article class="card-body">
-              <h2>STATS</h2>
-             
-                
-                  HP: <%=pokemon.stats[0].stat_name%> <%= pokemon.stats[0].base_stat %>
-                
-             
-                  ATK: <%=pokemon.stats[1].base_stat%>
-                
-                  DEF: <%=pokemon.stats[2].base_stat%>
-             
-        </div>
-        
-        <div class="col-5">
-          <section class="card text-center card-nohover">
-            <article class="card-body">
-              <form action="">
-                <div class="row">
-                  <div class="col-9">
-                    <input type="text" class="form-control" name="enemy" id="pokemon" value="<%=enemy.name %>"
-                      placeholder="Naam">
-                  </div>
-                </div>
-            </article>
-            <article class="pokemonimg"><img src="<%= enemy.sprites.other.home.front_default %>" class="card-img-top"
-                alt="een afbeelding van">
-            </article>
-
-            <article class="card-body">
-              <h2>STATS</h2>
-              <div class="progress" role="progressbar" style="height: 40px">
-                <div class="progress-bar bg-success" style="width: 100%">
-                  HP: <%=enemy.stats[0].base_stat%>
-                </div>
-              </div>
-              <div class="progress" role="progressbar" style="height: 40px">
-                <div class="progress-bar bg-danger" style="width: 100%">
-                  ATK: <%=enemy.stats[1].base_stat%>
-                </div>
-                <div class="progress-bar bg-primary" style="width: 100%">
-                  DEF: <%=enemy.stats[2].base_stat%>
-                </div>
-              </div>
+<body>
+  <%- include("partials/nav") %>
+ 
+  <h1>
+    <%= winner.name %> heeft gewonnen
+  </h1>
+  
+  <div class="col-5 battleYou">
+    <form action="" method="post">
+      <div class="card firstcard">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <select name="pokemon" id="pokemon" class="form-control">
+                <% userPokemonsWithNames.forEach(pokemon => { %>
+                  <option value="<%= pokemon.id %>"><%= pokemon.name %></option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="pokemonstats">
+              HP: <%= pokemon.stats[0].base_stat %><br>
+              ATK: <%= pokemon.stats[1].base_stat %><br>
+              DEF: <%= pokemon.stats[2].base_stat %>
+            </div>
+            <div class="col-2">
+              <input type="submit" class="btn btn-primary" value="Vecht">
+            </div>
+          </div>
         </div>
       </div>
-      <%- include("partials/footer") %>
+    </form>
+    <div class="pokemon-container">
+      <article class="pokemonimg firstbattler-pokemon-img">
+        <img src="<%= pokemon.sprites.other.home.front_default %>" class="card-img-top" alt="een afbeelding van">
+      </article>
+    </div>
+  </div>
+
+      <img src="../assets/platform.png" class="platformimg">
+      <img src="../assets/platform.png" class="platformimg2">
+
+      <div class="col-5 battleEnemy">
+        <form action="">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <input type="text" class="form-control" name="enemy" id="pokemon" value="<%= enemy.name %>" placeholder="Naam">
+                </div>
+              </div>
+              <div class="pokemonstats">
+                HP: <%= enemy.stats[0].base_stat %><br>
+                ATK: <%= enemy.stats[1].base_stat %><br>
+                DEF: <%= enemy.stats[2].base_stat %>
+              </div>
+            </div>
+             
+            
+          </div>
+          <div class="pokemon-container">
+            <article class="pokemonimg">
+              <img src="<%= enemy.sprites.other.home.front_default %>" class="card-img-top" alt="een afbeelding van">
+            </article>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <%- include("partials/footer") %>
+</body>
+</html>
