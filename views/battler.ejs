@@ -32,15 +32,19 @@
             </article>
             <article class="card-body">
               <h2>STATS</h2>
-
-
-              HP: <%=pokemon.stats[0].stat_name%>
-                <%= pokemon.stats[0].base_stat %>
-
-
+              <div class="progress" role="progressbar" style="height: 30px; margin-bottom: 10px;">
+                <div class="progress-bar bg-success" style="width: 100%">
+                  HP: <%=pokemon.stats[0].base_stat%>
+                </div>
+              </div>
+              <div class="progress" role="progressbar" style="height: 40px;">
+                <div class="progress-bar bg-danger" style="width: 100%">
                   ATK: <%=pokemon.stats[1].base_stat%>
-
-                    DEF: <%=pokemon.stats[2].base_stat%>
+                </div>
+                <div class="progress-bar bg-primary" style="width: 100%">
+                  DEF: <%=pokemon.stats[2].base_stat%>
+                </div>
+              </div>
 
         </div>
 
@@ -61,19 +65,20 @@
 
             <article class="card-body">
               <h2>STATS</h2>
-              <div class="progress" role="progressbar" style="height: 40px">
+              <div class="progress" role="progressbar" style="height: 30px; margin-bottom: 10px;">
                 <div class="progress-bar bg-success" style="width: 100%">
                   HP: <%=enemy.stats[0].base_stat%>
                 </div>
               </div>
-              <div class="progress" role="progressbar" style="height: 40px">
-                <div class="progress-bar bg-danger" style="width: 100%">
+              <div class="progress" role="progressbar" style="height: 40px;">
+                <div class="progress-bar bg-danger" style="width: 100%; padding-right: 10px;">
                   ATK: <%=enemy.stats[1].base_stat%>
                 </div>
-                <div class="progress-bar bg-primary" style="width: 100%">
+                <div class="progress-bar bg-primary" style="width: 100%; padding-left: 10px;">
                   DEF: <%=enemy.stats[2].base_stat%>
                 </div>
               </div>
+
         </div>
       </div>
       <%- include("partials/footer") %>
