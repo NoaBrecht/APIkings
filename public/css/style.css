@@ -825,4 +825,8 @@ body.stats {
 
 .firstcard{
     margin-bottom: -223px;
+    margin-right: 200px;
+}
+.btnvecht{
+    z-index:999;
 }

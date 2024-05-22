@@ -2,41 +2,51 @@
 
 <body>
   <%- include("partials/nav") %>
- 
-  <h1>
-    <%= winner.name %> heeft gewonnen
-  </h1>
-  
-  <div class="col-5 battleYou">
-    <form action="" method="post">
-      <div class="card firstcard">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-9">
-              <select name="pokemon" id="pokemon" class="form-control">
-                <% userPokemonsWithNames.forEach(pokemon => { %>
-                  <option value="<%= pokemon.id %>"><%= pokemon.name %></option>
-                <% }); %>
-              </select>
+
+  <div class="battle-container">
+    <div class="row vergelijken" style="margin-right: auto !important;">
+      <div class="col-5 battleYou">
+        <form action="" method="post">
+          <h1>
+            <%= winner && winner.name ? `${winner.name} heeft gewonnen` : 'Geen winnaar' %>
+          </h1>
+          <div class="card firstcard">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <select name="pokemon" id="pokemon" class="form-control">
+                    <% userPokemonsWithNames && userPokemonsWithNames.forEach(pokemon => { %>
+                      <option value="<%= pokemon.id %>"><%= pokemon.name %></option>
+                    <% }); %>
+                  </select>
+                </div>
+                <div class="pokemonstats">
+                  <% if (pokemon && pokemon.stats) { %>
+                    HP: <%= pokemon.stats[0].base_stat %><br>
+                    ATK: <%= pokemon.stats[1].base_stat %><br>
+                    DEF: <%= pokemon.stats[2].base_stat %>
+                  <% } else { %>
+                    <p>Stats not available</p>
+                  <% } %>
+                </div>
+                <div class="col-2">
+                  
+                </div>
+              </div>
             </div>
-            <div class="pokemonstats">
-              HP: <%= pokemon.stats[0].base_stat %><br>
-              ATK: <%= pokemon.stats[1].base_stat %><br>
-              DEF: <%= pokemon.stats[2].base_stat %>
-            </div>
-            <div class="col-2">
-              <input type="submit" class="btn btn-primary" value="Vecht">
-            </div>
+            <input type="submit" class="btn btn-primary" value="Vecht">
           </div>
-        </div>
+          <div class="pokemon-container">
+            <article class="pokemonimg firstbattler-pokemon-img">
+              <% if (pokemon && pokemon.sprites && pokemon.sprites.other.home.front_default) { %>
+                <img src="<%= pokemon.sprites.other.home.front_default %>" class="card-img-top" alt="een afbeelding van">
+              <% } else { %>
+                <p>Image not available</p>
+              <% } %>
+            </article>
+          </div>
+        </form>
       </div>
-    </form>
-    <div class="pokemon-container">
-      <article class="pokemonimg firstbattler-pokemon-img">
-        <img src="<%= pokemon.sprites.other.home.front_default %>" class="card-img-top" alt="een afbeelding van">
-      </article>
-    </div>
-  </div>
 
       <img src="../assets/platform.png" class="platformimg">
       <img src="../assets/platform.png" class="platformimg2">
@@ -47,23 +57,28 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-9">
-                  <input type="text" class="form-control" name="enemy" id="pokemon" value="<%= enemy.name %>" placeholder="Naam">
+                  <input type="text" class="form-control" name="enemy" id="pokemon" value="<%= enemy && enemy.name ? enemy.name : '' %>" placeholder="Naam">
                 </div>
               </div>
               <div class="pokemonstats">
-                HP: <%= enemy.stats[0].base_stat %><br>
-                ATK: <%= enemy.stats[1].base_stat %><br>
-                DEF: <%= enemy.stats[2].base_stat %>
+                <% if (enemy && enemy.stats) { %>
+                  HP: <%= enemy.stats[0].base_stat %><br>
+                  ATK: <%= enemy.stats[1].base_stat %><br>
+                  DEF: <%= enemy.stats[2].base_stat %>
+                <% } else { %>
+                  <p>Stats not available</p>
+                <% } %>
               </div>
             </div>
-             
-            
           </div>
           <div class="pokemon-container">
             <article class="pokemonimg">
-              <img src="<%= enemy.sprites.other.home.front_default %>" class="card-img-top" alt="een afbeelding van">
+              <% if (enemy && enemy.sprites && enemy.sprites.other.home.front_default) { %>
+                <img src="<%= enemy.sprites.other.home.front_default %>" class="card-img-top" alt="een afbeelding van">
+              <% } else { %>
+                <p>Image not available</p>
+              <% } %>
             </article>
-            
           </div>
         </form>
       </div>
