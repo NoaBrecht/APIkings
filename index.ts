@@ -134,7 +134,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         res.status(401).send("Gebruiker niet ingelogd");
         return;
     }
-    user.catchAttempts[pokemonId] = user.catchAttempts[pokemonId] ?? 3;
+    user.catchAttempts[pokemonId] = user.catchAttempts[pokemonId] ?? 2;
 
 
 
@@ -158,16 +158,14 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
     }
     try {
 
-        if (!user.pokemons) {
-            user.pokemons = [];
-        }
-
+        
 
         const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         if (targetPokemonResponse.status >= 400) {
             throw new Error('Failed to fetch Pokémon');
         }
         const targetPokemon = await targetPokemonResponse.json();
+        const catchSuccess = attemptCatch(user, targetPokemon);
         //console.log("Fetched Target Pokemon:", targetPokemon);
         if (!user.pokemons || user.pokemons.length === 0) {
             res.status(400).send("Geen pokemon beschikbaar.");
@@ -188,36 +186,22 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             return;
         }
         if (action === 'catch') {
-            if (user.catchAttempts[pokemonId] === undefined) {
-                user.catchAttempts[pokemonId] = 3;
-            }
             user.catchAttempts[pokemonId]--;
-            if (user.catchAttempts[pokemonId] >= 0) {
-                const catchSuccess = attemptCatch(user, targetPokemon);
-                if (catchSuccess) {
-                    await addPokemon(user, pokemonId);
-                    user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });;
+            const catchSuccess = attemptCatch(user, targetPokemon);
 
-                    console.log(`gevangen ${catchSuccess}`)
-
-                    res.redirect('/');
-                    req.session.save();
-                    return;
-                }
-            }
-
-
-            else {
-                if (user.catchAttempts[pokemonId] <= 0) {
-                    res.render('catcher', {
-                        title: "Catch Failed",
-                        pokemon: targetPokemon,
-                        user: user,
-                        isgevangen: false,
-                        message: "Pogin gefaald, probeer opnieuw!"
-                    });
-                }
-
+            if (catchSuccess) {
+                await addPokemon(user, pokemonId);
+                user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });
+                req.session.save();
+                res.redirect('/');
+            } else {
+                res.render('catcher', {
+                    title: "Catch Failed",
+                    pokemon: targetPokemon,
+                    user: user,
+                    isgevangen: false,
+                    message: "Pogin gefaald, probeer opnieuw!"
+                });
             }
             // req.session.user = user;
 
