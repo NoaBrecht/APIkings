@@ -135,7 +135,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         return;
     }
     user.catchAttempts[pokemonId] = user.catchAttempts[pokemonId] ?? 3;
-    console.log(catchAttempts[pokemonId]);
+   
     
   
     console.log(user.catchAttempts[pokemonId]);
