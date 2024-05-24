@@ -367,7 +367,6 @@ body.stats {
 
 .pathimg {
     cursor: pointer;
-    height: 178.91px;
 }
 
 .pathimg,
@@ -375,7 +374,6 @@ body.stats {
     width: 15%;
 }
 
-/**/
 .pokemoncatcher {
     text-align: center;
     font-size: xx-large;

@@ -411,6 +411,26 @@ app.get("/favorite/:id", secureMiddleware, async (req, res) => {
 
     }
 })
+app.post("/update-nickname/:id", secureMiddleware, async (req, res) => {
+    try {
+        let id: number = parseInt(req.params.id);
+        let user: User | undefined = req.session.user;
+        let nickname: string = req.body.nickname;
+        if (!user) {
+            res.redirect("/login");
+            return;
+        }
+        user?.pokemons?.forEach(poke => {
+            if (poke.id == id) {
+                updateNickName(user, id, nickname);
+                poke.nickname = nickname;
+                req.session.user = user;
+            };
+        });
+        res.redirect("back");
+    } catch (error) {
+    }
+});
 app.get("/whothat", secureMiddleware, async (req, res) => {
     try {
         const randompok = (min: number, max: number) =>
