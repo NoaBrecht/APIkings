@@ -158,7 +158,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
     }
     try {
 
-        
+
 
         const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         if (targetPokemonResponse.status >= 400) {

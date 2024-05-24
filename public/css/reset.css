@@ -6,12 +6,14 @@
 *::after {
   box-sizing: border-box;
 }
+
 /*
   2. Remove default margin
 */
 * {
   margin: 0;
 }
+
 /*
   Typographic tweaks!
   3. Add accessible line-height
@@ -21,6 +23,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+
 /*
   5. Improve media defaults
 */
@@ -32,6 +35,7 @@ svg {
   display: block;
   max-width: 100%;
 }
+
 /*
   6. Remove built-in form typography styles
 */
@@ -41,6 +45,7 @@ textarea,
 select {
   font: inherit;
 }
+
 /*
   7. Avoid text overflows
 */
@@ -53,6 +58,7 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+
 /*
   8. Create a root stacking context
 */

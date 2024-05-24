@@ -340,11 +340,11 @@ body.stats {
 
     height: 100%;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    
+
 }
 
 .path {
@@ -367,6 +367,7 @@ body.stats {
 
 .pathimg {
     cursor: pointer;
+    height: 178.91px;
 }
 
 .pathimg,
