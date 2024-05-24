@@ -27,8 +27,6 @@
                             </div>
                             <div class="col-6">
                                 <section class="pokemonstats">
-
-
                                     <p>
                                         <%= pokemon.stats[0].stat.name %>: <%= pokemon.stats[0].base_stat %>
                                     </p>
@@ -62,7 +60,7 @@
                                             stroke-linecap="round" stroke-linejoin="round" />
                                     </g>
                                 </svg>
-                                <% } %><img src=" <%=evolutionChain[i].spriteUrl %>" alt="<%= evolutionChain[i].name %>"
+                                <% } %><img src="<%= evolutionChain[i].spriteUrl %>" alt="<%= evolutionChain[i].name %>"
                                         class="pathimg"
                                         onclick="window.location.href='/pokemon/<%=evolutionChain[i].id%>'">
 
