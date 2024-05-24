@@ -337,12 +337,14 @@ body.stats {
 }
 
 .pokemonstats {
+
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
+    
 }
 
 .path {
@@ -550,6 +552,7 @@ body.stats {
     border-radius: 50%;
     transform: rotate(45deg);
 }
+
 .invisible-button {
     background: transparent;
     border: none;
@@ -559,8 +562,9 @@ body.stats {
     top: 0;
     left: 0;
     cursor: pointer;
-    color: transparent; 
+    color: transparent;
 }
+
 @media (min-width: 576px) {
 
     #catchthis {
@@ -751,30 +755,4 @@ body.stats {
     .pagination {
         margin-left: 10vw;
     }
-}
-
-.battleEnemy {
-    margin-left: 60vw;
-}
-
-.battleEnemy img {
-    width: 20vw;
-    height: auto;
-    float: right;
-}
-
-.battleYou {
-    margin-right: 60vw;
-}
-
-.battleYou img {
-    width: 20vw;
-    height: auto;
-}
-
-.attack,
-.change {
-    margin: 6px;
-    margin-left: 45vw;
-    width: 10vw;
 }

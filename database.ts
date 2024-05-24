@@ -114,7 +114,7 @@ export async function addPokemon(user: User, id: number) {
 
     //const existingPokemon = user.pokemons?.find(poke => poke.id === id);
     if (existingPokemon) {
-        return;
+        throw new Error('Pokemon already caught');
     }
     return await userCollection.updateOne(
         { _id: user._id },
@@ -127,17 +127,10 @@ export async function removePokemon(user: User, id: number) {
 export async function updateNickName(user: User, pokemonID: number, nickname: string) {
     return;
 }
-export async function updateDefense(user: User, pokemonID: number) {
-    return await userCollection.updateOne(
-        { _id: user._id, "pokemons.id": pokemonID }, { $inc: { "pokemons.$.attack": 1 } }
-    );
+export async function updateDef(user: User, pokemonID: number, nickname: string) {
+    return;
 }
-export async function updateAttack(user: User, pokemonID: number) {
-    return await userCollection.updateOne(
-        { _id: user._id, "pokemons.id": pokemonID }, { $inc: { "pokemons.$.defense": 1 } }
-    );
-}
-export async function addWin(user: User, pokemonID: number) {
+export async function updateDmg(user: User, pokemonID: number, nickname: string) {
     return;
 }
 export async function connect() {
