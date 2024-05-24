@@ -44,43 +44,60 @@
                 <p>Image not available</p>
               <% } %>
             </article>
-          </div>
-        </form>
-      </div>
-
-      <img src="../assets/platform.png" class="platformimg">
-      <img src="../assets/platform.png" class="platformimg2">
-
-      <div class="col-5 battleEnemy">
-        <form action="">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-9">
-                  <input type="text" class="form-control" name="enemy" id="pokemon" value="<%= enemy && enemy.name ? enemy.name : '' %>" placeholder="Naam">
+            <article class="pokemonimg"><img src="<%= pokemon.sprites.other.home.front_default %>" class="card-img-top"
+                alt="een afbeelding van">
+            </article>
+            <article class="card-body">
+              <h2>STATS</h2>
+              <div class="progress" role="progressbar" style="height: 30px; margin-bottom: 10px;">
+                <div class="progress-bar bg-success" style="width: 100%">
+                  HP: <%=pokemon.stats[0].base_stat%>
                 </div>
               </div>
-              <div class="pokemonstats">
-                <% if (enemy && enemy.stats) { %>
-                  HP: <%= enemy.stats[0].base_stat %><br>
-                  ATK: <%= enemy.stats[1].base_stat %><br>
-                  DEF: <%= enemy.stats[2].base_stat %>
-                <% } else { %>
-                  <p>Stats not available</p>
-                <% } %>
+              <div class="progress" role="progressbar" style="height: 40px;">
+                <div class="progress-bar bg-danger" style="width: 100%">
+                  ATK: <%=pokemon.stats[1].base_stat%>
+                </div>
+                <div class="progress-bar bg-primary" style="width: 100%">
+                  DEF: <%=pokemon.stats[2].base_stat%>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="pokemon-container">
-            <article class="pokemonimg">
-              <% if (enemy && enemy.sprites && enemy.sprites.other.home.front_default) { %>
-                <img src="<%= enemy.sprites.other.home.front_default %>" class="card-img-top" alt="een afbeelding van">
-              <% } else { %>
-                <p>Image not available</p>
-              <% } %>
             </article>
-          </div>
-        </form>
+          </section>
+        </div>
+
+        <div class="col-5">
+          <section class="card text-center card-nohover">
+            <article class="card-body">
+              <form action="">
+                <div class="row">
+                  <div class="col-9">
+                    <input type="text" class="form-control" name="enemy" id="pokemon" value="<%=enemy.name %>"
+                      placeholder="Naam">
+                  </div>
+                </div>
+            </article>
+            <article class="pokemonimg"><img src="<%= enemy.sprites.other.home.front_default %>" class="card-img-top"
+                alt="een afbeelding van">
+            </article>
+
+            <article class="card-body">
+              <h2>STATS</h2>
+              <div class="progress" role="progressbar" style="height: 30px; margin-bottom: 10px;">
+                <div class="progress-bar bg-success" style="width: 100%">
+                  HP: <%=enemy.stats[0].base_stat%>
+                </div>
+              </div>
+              <div class="progress" role="progressbar" style="height: 40px;">
+                <div class="progress-bar bg-danger" style="width: 100%; padding-right: 10px;">
+                  ATK: <%=enemy.stats[1].base_stat%>
+                </div>
+                <div class="progress-bar bg-primary" style="width: 100%; padding-left: 10px;">
+                  DEF: <%=enemy.stats[2].base_stat%>
+                </div>
+              </div>
+
+        </div>
       </div>
     </div>
   </div>

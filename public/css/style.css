@@ -552,6 +552,7 @@ body.stats {
     border-radius: 50%;
     transform: rotate(45deg);
 }
+
 .invisible-button {
     background: transparent;
     border: none;
@@ -561,8 +562,9 @@ body.stats {
     top: 0;
     left: 0;
     cursor: pointer;
-    color: transparent; 
+    color: transparent;
 }
+
 @media (min-width: 576px) {
 
     #catchthis {
@@ -753,80 +755,4 @@ body.stats {
     .pagination {
         margin-left: 10vw;
     }
-}
-
-.battleYou, .battleEnemy {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .battleYou {
-    position: absolute;
-    left: 10%;
-    bottom: 10%;
-  }
-  
-  .battleEnemy {
-    position: absolute;
-    right: 10%;
-    top: 10%;
-  }
-  
-  .platformimg {
-  
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom:50;
-    width: 50%;
-    height: 100%;
-    margin-top: 200px;
-   
-   
-  }
-  .platformimg2{
-    
-    position: fixed;
-    top: 0;
-    margin-left:680px;
-  
-    bottom:50;
-    width: 50%;
-    height: 100%;
-    margin-top: 200px;
-  }
-  
-  .pokemonimg img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .firstbattler-pokemon-img {
-    height: 700px;
-    width: 400px;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    position: relative;
-    top: 100px;
-    
-
-  }
-
-  .battler-container .card {
-    
-    width: 18rem;
-    height: 14rem;
-    border-radius: 15px;
-   
-}
-
-.firstcard{
-    margin-bottom: -223px;
-    margin-right: 200px;
-}
-.btnvecht{
-    z-index:999;
 }
