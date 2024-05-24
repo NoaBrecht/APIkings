@@ -125,13 +125,17 @@ export async function removePokemon(user: User, id: number) {
     return await userCollection.updateOne({ _id: user._id }, { $pull: { pokemons: { id: id } } });
 }
 export async function updateNickName(user: User, pokemonID: number, nickname: string) {
-    return;
+    return await userCollection.updateOne({ _id: user._id, "pokemons.id": pokemonID }, { $set: { "pokemons.$.nickname": nickname } });
 }
-export async function updateDef(user: User, pokemonID: number, nickname: string) {
-    return;
+export async function updateDefense(user: User, pokemonID: number) {
+    return await userCollection.updateOne(
+        { _id: user._id, "pokemons.id": pokemonID }, { $inc: { "pokemons.$.attack": 1 } }
+    );
 }
-export async function updateDmg(user: User, pokemonID: number, nickname: string) {
-    return;
+export async function updateAttack(user: User, pokemonID: number) {
+    return await userCollection.updateOne(
+        { _id: user._id, "pokemons.id": pokemonID }, { $inc: { "pokemons.$.defense": 1 } }
+    );
 }
 export async function connect() {
     await client.connect();

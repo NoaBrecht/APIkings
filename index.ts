@@ -1,12 +1,11 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { addPokemon, connect, login, registerUser, removePokemon, updateActive, userCollection } from "./database";
+import { addPokemon, connect, login, registerUser, removePokemon, updateActive, updateAttack, updateDefense, updateNickName } from "./database";
 import { User } from "./interfaces";
 import session from "./session";
 import { secureMiddleware } from "./middleware/secureMiddleware";
 import { battle } from "./functions";
-import { name } from "ejs";
 dotenv.config();
 
 const app: Express = express();
@@ -94,16 +93,12 @@ app.get("/all", secureMiddleware, async (req, res) => {
 });
 app.get("/catcher", secureMiddleware, async (req, res) => {
     try {
-        if (req.session.user && req.session.user.catchAttempts === undefined) {
-            req.session.user.catchAttempts = {};
-        }
         const randompok = (min: number, max: number) =>
             Math.floor(Math.random() * (max - min + 1)) + min;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0, 1100)}`);
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
-
 
         const pokemon = await response.json();
         let isgevangen = false;
@@ -134,30 +129,30 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         res.status(401).send("Gebruiker niet ingelogd");
         return;
     }
-    user.catchAttempts[pokemonId] = user.catchAttempts[pokemonId] ?? 2;
+    user.catchAttempts = user.catchAttempts || {};
+    user.catchAttempts[pokemonId] = user.catchAttempts[pokemonId] || 3;
 
-
-
-    console.log(user.catchAttempts[pokemonId]);
-    if (user.catchAttempts[pokemonId] < 0) {
+    if (user.catchAttempts[pokemonId] <= 0) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         if (response.ok) {
-
             const pokemon = await response.json();
             res.render('catcher', {
-                title: "Geen pogingen meer over",
+                title: "No Attempts Left",
                 message: "Geen pogingen meer over!",
                 user: user,
                 pokemon: pokemon
             });
         } else {
-            res.status(500).send("Gefaald om pokemon te laden");
+            res.status(500).send("Failed to fetch Pokémon data");
             res.redirect('/');
         }
         return;
     }
     try {
 
+        if (!user.pokemons) {
+            user.pokemons = [];
+        }
 
 
         const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
@@ -165,7 +160,6 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             throw new Error('Failed to fetch Pokémon');
         }
         const targetPokemon = await targetPokemonResponse.json();
-        const catchSuccess = attemptCatch(user, targetPokemon);
         //console.log("Fetched Target Pokemon:", targetPokemon);
         if (!user.pokemons || user.pokemons.length === 0) {
             res.status(400).send("Geen pokemon beschikbaar.");
@@ -181,20 +175,20 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         }
         const catchProbability = Math.max(0, Math.min(100, 100 - targetPokemon.stats.find((stat: { stat: { name: string; }; }) => stat.stat.name === 'defense').base_stat + currentPokemon.attack));
         const randomChance = Math.random() * 100;*/
-        if (user.catchAttempts[pokemonId] < 1) {
-            res.redirect('/');
-            return;
-        }
         if (action === 'catch') {
             user.catchAttempts[pokemonId]--;
             const catchSuccess = attemptCatch(user, targetPokemon);
-
             if (catchSuccess) {
                 await addPokemon(user, pokemonId);
-                user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });
-                req.session.save();
-                res.redirect('/');
-            } else {
+                user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });;
+
+                console.log(user);
+                console.log("User's Pokémon list after catching:", user.pokemons);
+                console.log('Pokemon gevangen:', pokemonId);
+                req.session.user = user;
+                res.redirect("/");
+            }
+            else {
                 res.render('catcher', {
                     title: "Catch Failed",
                     pokemon: targetPokemon,
@@ -203,7 +197,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
                     message: "Pogin gefaald, probeer opnieuw!"
                 });
             }
-            // req.session.user = user;
+
 
         } else if (action === 'release') {
             user.pokemons = user.pokemons.filter(poke => poke.id !== pokemonId);
@@ -418,7 +412,6 @@ app.get("/favorite/:id", secureMiddleware, async (req, res) => {
     }
 })
 app.get("/whothat", secureMiddleware, async (req, res) => {
-    // TODO: Checking if the pokemon the user types in is the same as the name of the pokemon
     try {
         const randompok = (min: number, max: number) =>
             Math.floor(Math.random() * (max - min + 1)) + min;
@@ -461,9 +454,36 @@ app.post("/whothat", secureMiddleware, async (req, res) => {
 
 
         if (isCorrectGuess) {
+            let user: User | undefined = req.session.user;
+            if (!user) {
+                res.redirect("/login");
+                return;
+            }
+            let id = user.activepokemon;
+            if (!id) {
+                if (!user.pokemons || user.pokemons.length === 0) {
+                    res.redirect("/starterpokemon");
+                    return;
+                }
+                id = user.pokemons[0].id;
+            }
             message = "Correct!";
             wrongGuess = false;
-
+            if (Math.random() < 0.5) {
+                updateDefense(user, id);
+                user.pokemons?.forEach(poke => {
+                    if (poke.id.toString() === id.toString()) {
+                        poke.defense = poke.defense + 1;
+                    };
+                });
+            } else {
+                updateAttack(user, id);
+                user.pokemons?.forEach(poke => {
+                    if (poke.id.toString() === id.toString()) {
+                        poke.defense = poke.defense + 1;
+                    };
+                });
+            }
         }
         else {
             message = "Niet correct probeer opnieuw!";
