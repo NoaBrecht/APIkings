@@ -42,6 +42,12 @@
                                                 pokemonDefense %>
                                     </p>
                                 </section>
+                                <form action="/catcher/<%= pokemon.id %>" method="GET">
+                                    <input type="hidden" name="action" value="release">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-primary btnloslaten" type="submit">Loslaten</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </article>
