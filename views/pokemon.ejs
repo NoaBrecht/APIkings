@@ -17,7 +17,9 @@
                                             </span>
                                             <%if (pokemon.id===user.activepokemon) { %><i class="bi bi-star-fill"></i>
                                                 <%}else if (catchedPokemon) {%>
-                                                    <a href="/favorite/<%= pokemon.id %>"><i class="bi bi-star"></i></a>
+                                                    <a href="/favorite/<%= pokemon.id %>"><i class="bi bi-star"
+                                                            data-bs-toggle="tooltip"
+                                                            data-bs-title="Markeer als favoriet"></i></a>
                                                     <%}%>
 
                                     </h1>

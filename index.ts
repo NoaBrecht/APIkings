@@ -121,7 +121,7 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
         res.status(500).send("Er is een fout opgetreden");
     }
 });
-app.get('/catcher/:id', secureMiddleware, async (req , res ) => {
+app.get('/catcher/:id', secureMiddleware, async (req, res) => {
     const pokemonId = parseInt(req.params.id);
     const user = req.session.user;
 
@@ -166,7 +166,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
 
     if (user.catchAttempts[pokemonId] <= 0) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-        
+
         if (response.ok) {
             const pokemon = await response.json();
             res.render('catcher', {
@@ -339,9 +339,14 @@ app.post("/register", (req, res) => {
             });
         } else if (password1 !== password2) {
             res.render("register", {
-                error: "Passwords do not match", title: "Register pagina",
+                error: "Wachtwoorden komen niet overeen", title: "Register pagina",
             });
-        } else {
+        } else if (password1.length < 8) {
+            res.render("register", {
+                error: "Wachtwoord moet minimaal 8 tekens lang zijn", title: "Register pagina",
+            });
+        }
+        else {
             registerUser(username, email, password1);
             res.redirect("/login");
         }

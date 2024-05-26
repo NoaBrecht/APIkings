@@ -1,6 +1,8 @@
 (() => {
     const navbarSideCollapse = document.querySelector('#navbarSideCollapse');
     const offcanvasCollapse = document.querySelector('.offcanvas-collapse');
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     if (navbarSideCollapse && offcanvasCollapse) {
         navbarSideCollapse.addEventListener('click', () => {
             offcanvasCollapse.classList.toggle('open')
