@@ -1,56 +1,55 @@
 <%- include("partials/header") %>
 
-<body>
-    <%- include("partials/nav") %>
-
-    <section class="container-fluid">
-        <div id="catchthis">
-            <article class="container-fluid row justify-content-center pokemonimg">
-                <img src="<%= pokemon.sprites.other.home.front_default %>" alt="">
-                <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
-            </article>
-        </div>
-        <form action="/catcher/<%= pokemon.id %>" method="post">
-            <section class="pokeballbody">
-                <% if(isgevangen) { %>
-                   
-                    <div class="pokeball pokeball-green">
-                        <input type="hidden" name="action" value="release">
-                       
-                    </div>
-                <% } else { %>
-                    
-                    <div class="pokeball pokeball-red">
-                        <input type="hidden" name="action" value="catch">
-                       
-                        
-                    </div>
-                <% } %>
-                <div class="pokebtn" name="pokebtn">
-                    <button type="submit" class="invisible-button">Catch Pokémon</button>
+    <body>
+        <%- include("partials/nav") %>
+            <div class="pokemonstats-rightcorner">
+                <section class="pokemonstats">
+                    <article class="container-fluid row justify-content-center card card-nohover">
+                        <div class="labelcontainer">
+                            <label class="pokemoncatcher">
+                                <%= pokemon.name %>
+                            </label>
+                        </div>
+                        <% pokemon.stats.forEach(stat=> { %>
+                            <% if (stat.stat.name==='hp' || stat.stat.name==='attack' || stat.stat.name==='defense' ) {
+                                %>
+                                <p>
+                                    <%= stat.stat.name %>: <%= stat.base_stat %>
+                                </p>
+                                <% } %>
+                                    <% }); %>
+                                        <label class="pokemoncatcher"></label>
+                    </article>
+                </section>
+            </div>
+            <section class="container-fluid">
+                <div id="catchthis">
+                    <article class="container-fluid row justify-content-center pokemonimg">
+                        <img src="<%= pokemon.sprites.other.home.front_default %>" alt="">
+                        <label class="fadedtext">Je hebt 3 kansen om deze pokemon te vangen!</label>
+                    </article>
                 </div>
-            </section>
-        </form>
-        
-        <div class="pokemonstats-rightcorner">
-            <section class="pokemonstats">
-                <article class="container-fluid row justify-content-center card">
-                    <div class="labelcontainer">
-                        <label class="pokemoncatcher">
-                            <%= pokemon.name %>
-                        </label>
-                    </div>
-                    <% pokemon.stats.forEach(stat => { %>
-                        <% if (stat.stat.name === 'hp' || stat.stat.name === 'attack' || stat.stat.name === 'defense') { %>
-                            <p>
-                                <%= stat.stat.name %>: <%= stat.base_stat %>
-                            </p>
-                        <% } %>
-                    <% }); %>
-                    <label class="pokemoncatcher"></label>
-                </article>
-            </section>
-        </div>
-</body>
+                <form action="/catcher/<%= pokemon.id %>" method="post">
+                    <section class="pokeballbody">
+                        <% if(isgevangen) { %>
 
-<%- include("partials/footer") %>
+                            <div class="pokeball pokeball-green">
+                                <input type="hidden" name="action" value="release">
+
+                            </div>
+                            <% } else { %>
+
+                                <div class="pokeball pokeball-red">
+                                    <input type="hidden" name="action" value="catch">
+
+
+                                </div>
+                                <% } %>
+                                    <div class="pokebtn" name="pokebtn">
+                                        <button type="submit" class="invisible-button">Catch Pokémon</button>
+                                    </div>
+                    </section>
+                </form>
+    </body>
+
+    <%- include("partials/footer") %>

@@ -337,14 +337,12 @@ body.stats {
 }
 
 .pokemonstats {
-
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-
 }
 
 .path {
@@ -401,19 +399,6 @@ body.stats {
     top: 450px;
 }
 
-.pokemonstats-rightcorner .pokemonstats {
-    position: fixed;
-    top: -200px;
-    right: 20px;
-    background-color: rgba(255, 255, 255, 0.441);
-    padding: 10px;
-    border-radius: 5px;
-    height: 750px;
-    z-index: 100;
-    max-width: 80%;
-
-}
-
 .blackout {
     filter: brightness(0);
     transition: filter .5s ease-out;
@@ -429,8 +414,6 @@ body.stats {
     box-sizing: border-box;
     padding: 10px;
     width: 100%;
-
-
 }
 
 .card-whothat {
@@ -481,17 +464,11 @@ body.stats {
 .pokeball {
     position: relative;
     width: 42.5%;
-
     height: 42.5%;
     border-radius: 50%;
     border: 7px #111 solid;
-    background: linear-gradient(0deg,
-            #fff 0%,
-            #fff 50%,
-            #876f74 50%,
-            #fb0d3e 100%);
+    background: linear-gradient(0deg, #fff 0%, #fff 50%, #876f74 50%, #fb0d3e 100%);
 }
-
 
 
 .pokeball-red {
@@ -564,8 +541,20 @@ body.stats {
     color: transparent;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 1000px) {
+    .pokemonstats-rightcorner .pokemonstats {
+        position: fixed;
+        top: -150px;
+        right: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        height: 750px;
+        z-index: 100;
+        max-width: 80%;
+    }
+}
 
+@media (min-width: 576px) {
     #catchthis {
         top: 850px;
 
@@ -756,6 +745,6 @@ body.stats {
     }
 }
 
-.btnloslaten{
-    margin-top:-40px;
+.btnloslaten {
+    margin-top: -40px;
 }
