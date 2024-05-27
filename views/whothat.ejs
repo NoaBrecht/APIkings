@@ -14,11 +14,20 @@
             <img src="assets/arrow.jpg" class="arrow">
           </div>
           <label>Vul naam in: </label>
+         
           <input type="text" class="text-control" id="pokemonname"  name="guessedName"  placeholder="auto-complete..."
             value="<%=pokemon.name%>"></input>
-           
-        </div>
+            <form action="/guess" method="POST">
+              <button type="submit">Check</button>
+          </form>
+            <% if (correctGuess !== undefined) { %>
+              <p class="notification <%= correctGuess ? 'success' : 'error' %>">
+                  <%= correctGuess ? 'Correct guess!' : 'Incorrect guess. Try again!' %>
+              </p>
+          <% } %>
       </form>
+      <form action="/whothat">
+        <button type="submit">Next Pokemon</button>
       </article>
 
       <%- include("partials/footer") %>

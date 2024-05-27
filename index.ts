@@ -55,9 +55,11 @@ app.get("/catcher", async (req, res) => {
         if (response.status === 400) throw new Error('Bad request');
 
         const pokemon = await response.json();
+       
         res.render('catcher', {
             title: "catching a pokemon?",
             pokemon: pokemon,
+           
             
         });
 
@@ -65,6 +67,7 @@ app.get("/catcher", async (req, res) => {
         console.error('Error:', error);
     }
 });
+
 
 app.get("/landingpagina", async (req, res) => {
     res.render('landingpage', {
@@ -159,13 +162,27 @@ app.get("/whothat", async (req, res) => {
         if (response.status === 400) throw new Error('Bad request');
 
         const pokemon = await response.json();
+        const guessedName = "";
         res.render('whothat', {
             title: "who is that pokemon?",
             pokemon: pokemon,
+            guessedName: guessedName 
         });
 
     } catch (error) {
         console.error('Error:', error);
+    }
+});
+app.post("/guess", async (req, res) => {
+    try {
+        const { guessedName, actualName } = req.body;
+        const isCorrectGuess = guessedName.toLowerCase() === actualName.toLowerCase();
+        const resultColor = isCorrectGuess ? 'green' : 'red';
+        const resultMessage = isCorrectGuess ? 'Correct guess!' : 'Incorrect guess. Try again!';
+        res.render('whothat', { pokemon: req.body.pokemon, resultColor: resultColor, resultMessage });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 app.get("/battler", async (req, res) => {
