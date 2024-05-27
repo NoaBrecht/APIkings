@@ -194,7 +194,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             throw new Error('Failed to fetch Pokémon');
         }
         const targetPokemon = await targetPokemonResponse.json();
-        //console.log("Fetched Target Pokemon:", targetPokemon);
+        
         if (!user.pokemons || user.pokemons.length === 0) {
             res.status(400).send("Geen pokemon beschikbaar.");
             return;
@@ -203,12 +203,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
 
 
 
-        /*const currentPokemon = user.pokemons[0];
-        if (!currentPokemon || currentPokemon.attack === undefined) {
-            throw new Error('Huidige data mist.');
-        }
-        const catchProbability = Math.max(0, Math.min(100, 100 - targetPokemon.stats.find((stat: { stat: { name: string; }; }) => stat.stat.name === 'defense').base_stat + currentPokemon.attack));
-        const randomChance = Math.random() * 100;*/
+        
         if (action === 'catch') {
             user.catchAttempts[pokemonId]--;
             const catchSuccess = attemptCatch(user, targetPokemon);
@@ -242,8 +237,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             await removePokemon(user, pokemonId);
             req.session.user = user;
             req.session.save();
-            // console.log("User's Pokémon list after releasing:", user.pokemons);
-            // console.log('Pokemon losgelaten:', pokemonId);
+           
             res.redirect("/");
         }
         else {
@@ -260,13 +254,13 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
 });
 function attemptCatch(user: User, targetPokemon: any): boolean {
     if (!user.pokemons) {
-        // console.log("No pokemons array found for user.");
+       
         return false;
     }
 
     const userActivePokemon = user.pokemons.find(p => Number(p.id) === user.activepokemon);
     if (!userActivePokemon) {
-        // console.log("No active pokemon found.");
+       
         return false;
     }
 
