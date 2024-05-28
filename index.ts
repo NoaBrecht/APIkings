@@ -97,7 +97,7 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
             Math.floor(Math.random() * (max - min + 1)) + min;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0, 1100)}`);
         if (response.status === 404) {
-            console.log("Pokémon not found, trying again");
+            console.log("Pokémon niet gevonden, probeer opnieuw");
             res.redirect("/catcher");
             return;
         }
@@ -114,7 +114,7 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
         }
 
         res.render('catcher', {
-            title: "catching a pokemon?",
+            title: "pokemon vangen?",
             pokemon: pokemon,
             user: user,
             isgevangen: isgevangen
@@ -144,7 +144,7 @@ app.get('/catcher/:id', secureMiddleware, async (req, res) => {
                 isgevangen = filteredPokemons.length > 0;
             }
             res.render('catcher', {
-                title: "Catch Pokémon",
+                title: "Vang Pokémon",
                 user: user,
                 pokemon: pokemon,
                 isgevangen: isgevangen
@@ -174,14 +174,14 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         if (response.ok) {
             const pokemon = await response.json();
             res.render('catcher', {
-                title: "No Attempts Left",
+                title: "Geen pogingen over",
                 message: "Geen pogingen meer over!",
                 user: user,
                 pokemon: pokemon,
                 isgevangen: false
             });
         } else {
-            res.status(500).send("Failed to fetch Pokémon data");
+            res.status(500).send("Pokemon data laden gefaald");
             res.redirect('/');
         }
         return;
@@ -195,7 +195,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
 
         const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         if (targetPokemonResponse.status >= 400) {
-            throw new Error('Failed to fetch Pokémon');
+            throw new Error('Kan geen pokemon laden');
         }
         const targetPokemon = await targetPokemonResponse.json();
 
@@ -204,10 +204,6 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             return;
         }
         const action = req.body.action;
-
-
-
-
         if (action === 'catch') {
             user.catchAttempts[pokemonId]--;
             const catchSuccess = attemptCatch(user, targetPokemon);
@@ -216,7 +212,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
                 user.pokemons.push({ id: pokemonId, nickname: "", attack: 0, defense: 0 });;
 
                 console.log(user);
-                console.log("User's Pokémon list after catching:", user.pokemons);
+                console.log("Lijst na vangen:", user.pokemons);
                 console.log('Pokemon gevangen:', pokemonId);
                 req.session.user = user;
                 req.session.save();
@@ -227,7 +223,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
                     res.redirect('/');
                 } else {
                     res.render('catcher', {
-                        title: "Catch Failed",
+                        title: "Vangen gefaald",
                         pokemon: targetPokemon,
                         user: user,
                         isgevangen: false,
@@ -246,8 +242,8 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         }
         else {
             res.render('catcher', {
-                title: "Attempt to Catch Pokémon",
-                message: "Attempt failed, try again!",
+                title: "Pogin om pokemon te vangen",
+                message: "Pogin om pokemon te vangen",
                 isgevangen: false
             });
         }
