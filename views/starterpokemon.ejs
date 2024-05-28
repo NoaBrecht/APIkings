@@ -1,23 +1,24 @@
 <%- include("partials/header") %>
 
-    <body>
-        <%- include("partials/nav") %>
-            <article class="container-fluid row justify-content-center">
-                <div class="text-center">
-                    <a  class="btn btn-danger" name="action" value="test"><i class="bi bi-check-circle-fill"></i> Kies je starterpokemon</a>
-                </div>
-                
-             
-                <% if (pokemons && pokemons.length > 0) { %>
-                    <% let starterpok = [0, 3, 6]; %>
-                    <% starterpok.forEach(index => { %>
-                        <% if (pokemons[index]) { %>
-                            <% let pokemon = pokemons[index]; %>
+<body>
+    <%- include("partials/nav") %>
+    <article class="container-fluid">
+        <div class="text-center">
+            <a class="btn btn-danger" name="action" value="test"><i class="bi bi-check-circle-fill"></i> Kies je starterpokemon</a>
+        </div>
+
+        <% if (pokemons && pokemons.length > 0) { %>
+            <% let starterpok = [0, 3, 6]; %>
+            <div class="row justify-content-center">
+                <% starterpok.forEach(index => { %>
+                    <% if (pokemons[index]) { %>
+                        <% let pokemon = pokemons[index]; %>
+                        <div class="col-md-4 col-sm-6 mb-4 cardstater">
                             <form action="/add-pokemon" method="POST">
                                 <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
                                 <input type="hidden" name="action" value="test">
                                 <section class="card text-center <%= pokemon.type %>">
-                                    <article class="card-body">
+                                    <article class="card-body ">
                                         <h1 class="card-title">
                                             <%= pokemon.name %>
                                         </h1>
@@ -31,11 +32,14 @@
                                     <img src="<%= pokemon.image %>" class="card-img-top <%= pokemon.colour %>" alt="een afbeelding van <%= pokemon.name %>">
                                 </section>
                             </form>
-                        <% } %>
-                    <% }); %>
-                <% } else { %>
-                    <p>Geen Pokémon beschikbaar.</p>
-                <% } %>
+                        </div>
+                    <% } %>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <p>Geen Pokémon beschikbaar.</p>
+        <% } %>
     </article>
-            
-            <%- include("partials/footer") %>
+
+    <%- include("partials/footer") %>
+</body>

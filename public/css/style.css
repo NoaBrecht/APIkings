@@ -787,3 +787,7 @@ body.stats {
 .btnloslaten {
     margin-top: -40px;
 }
+.cardstater{
+    margin-left:-400px;
+    margin-right:-700px;
+}
