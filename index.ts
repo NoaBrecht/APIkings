@@ -98,7 +98,7 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0, 1100)}`);
         if (response.status === 404) {
             console.log("Pokémon not found, trying again");
-            res.redirect("/whothat");
+            res.redirect("/catcher");
             return;
         }
         if (response.status === 500) throw new Error('Internal server error');
