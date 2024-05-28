@@ -23,11 +23,13 @@
                                                     <%}%>
 
                                     </h1>
-                                    <a type="button" class="card-top-right-link" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">
-                                        <span class="bi bi-pencil"> Bewerk Bijnaam</span></a>
-                                    <img src="<%=pokemon.sprites.other.home.front_default  %>" class="card-img-top"
-                                        alt="...">
+                                    <% if(catchedPokemon){%>
+                                        <a type="button" class="card-top-right-link" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            <span class="bi bi-pencil"> Bewerk Bijnaam</span></a>
+                                        <%}%>
+                                            <img src="<%=pokemon.sprites.other.home.front_default  %>"
+                                                class="card-img-top" alt="...">
                                 </section>
                             </div>
                             <div class="col">
@@ -44,12 +46,14 @@
                                                 pokemonDefense %>
                                     </p>
                                 </section>
-                                <form action="/catcher/<%= pokemon.id %>" method="GET">
-                                    <input type="hidden" name="action" value="release">
-                                    <div class="d-grid gap-2">
-                                        <button class="btn btn-primary btnloslaten" type="submit">Loslaten</button>
-                                    </div>
-                                </form>
+                                <% if(catchedPokemon){%>
+                                    <form action="/catcher/<%= pokemon.id %>" method="GET">
+                                        <input type="hidden" name="action" value="release">
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-primary btnloslaten" type="submit">Loslaten</button>
+                                        </div>
+                                    </form>
+                                    <%}%>
                             </div>
                         </div>
                     </article>
