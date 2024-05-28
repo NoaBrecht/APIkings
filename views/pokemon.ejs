@@ -7,7 +7,7 @@
                 <section class="pokemon">
                     <article class="card card-nohover text-center <%= pokemon.types[0].type.name  %>">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col">
 
                                 <section class="card-body">
                                     <h1 class="card-title">
@@ -17,18 +17,21 @@
                                             </span>
                                             <%if (pokemon.id===user.activepokemon) { %><i class="bi bi-star-fill"></i>
                                                 <%}else if (catchedPokemon) {%>
-                                                    <a href="/favorite/<%= pokemon.id %>"><i class="bi bi-star"></i></a>
+                                                    <a href="/favorite/<%= pokemon.id %>"><i class="bi bi-star"
+                                                            data-bs-toggle="tooltip"
+                                                            data-bs-title="Markeer als favoriet"></i></a>
                                                     <%}%>
 
                                     </h1>
+                                    <a type="button" class="card-top-right-link" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        <span class="bi bi-pencil"> Bewerk Bijnaam</span></a>
                                     <img src="<%=pokemon.sprites.other.home.front_default  %>" class="card-img-top"
                                         alt="...">
                                 </section>
                             </div>
-                            <div class="col-6">
+                            <div class="col">
                                 <section class="pokemonstats">
-
-
                                     <p>
                                         <%= pokemon.stats[0].stat.name %>: <%= pokemon.stats[0].base_stat %>
                                     </p>
@@ -41,6 +44,12 @@
                                                 pokemonDefense %>
                                     </p>
                                 </section>
+                                <form action="/catcher/<%= pokemon.id %>" method="GET">
+                                    <input type="hidden" name="action" value="release">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-primary btnloslaten" type="submit">Loslaten</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </article>
@@ -71,4 +80,30 @@
 
                 </section>
             </article>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Bewerk de bijnaam van <%=pokemon.name%>
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/update-nickname/<%=pokemon.id%>" method="POST">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="nickname" name="nickname"
+                                        placeholder="Enter nickname" value="<%=pokemonbijnaam%>">
+                                </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-danger">Wijzigingen opslaan</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
             <%- include("partials/footer") %>

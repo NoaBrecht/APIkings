@@ -4,7 +4,7 @@
         <%- include("partials/nav") %>
             <article class="container-fluid row justify-content-center">
                 <div class="text-center">
-                    <a href="/all" class="btn btn-danger"><i class="bi bi-check-circle"></i> Toon alle Pokémon</a>
+                    <a href="/all" class="btn btn-danger"><i class="bi bi-check-circle"></i> Toon alle Pokémon's</a>
 
                     <% if(pokemonsCount===0) {%>
                         <h1>Geen Pokémon gevonden</h1>
@@ -12,8 +12,8 @@
                         <p class="text-muted">Bezoek de starterspagina <a href="/starterpokemon">om je eerste Pokémon te
                                 kiezen</a></p>
                         <% } else { %>
-                            <h1>Jouw Pokémon</h1>
-                            <p>Je hebt <%=pokemonsCount%> Pokémon in bezit</p>
+                            <h1>Jouw Pokémon's</h1>
+                            <p>Je hebt <%=pokemonsCount%> Pokémon's in bezit</p>
                             <% } %>
                 </div>
                 <% for(let pokemon of pokemons) { %>
