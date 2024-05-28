@@ -191,8 +191,6 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
         if (!user.pokemons) {
             user.pokemons = [];
         }
-
-
         const targetPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         if (targetPokemonResponse.status >= 400) {
             throw new Error('Kan geen pokemon laden');
@@ -257,13 +255,11 @@ function attemptCatch(user: User, targetPokemon: any): boolean {
 
         return false;
     }
-
     const userActivePokemon = user.pokemons.find(p => Number(p.id) === user.activepokemon);
     if (!userActivePokemon) {
 
         return false;
     }
-
     const catchProbability = calculateCatchProbability(userActivePokemon, targetPokemon);
     return Math.random() < catchProbability;
 }
