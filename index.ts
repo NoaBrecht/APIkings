@@ -99,6 +99,7 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
         if (response.status === 404) {
             console.log("Pokémon not found, trying again");
             res.redirect("/whothat");
+            return;
         }
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
