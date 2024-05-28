@@ -96,7 +96,11 @@ app.get("/catcher", secureMiddleware, async (req, res) => {
         const randompok = (min: number, max: number) =>
             Math.floor(Math.random() * (max - min + 1)) + min;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randompok(0, 1100)}`);
-        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 404) {
+            console.log("Pokémon not found, trying again");
+            res.redirect("/catcher");
+            return;
+        }
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
 
@@ -194,7 +198,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             throw new Error('Failed to fetch Pokémon');
         }
         const targetPokemon = await targetPokemonResponse.json();
-        
+
         if (!user.pokemons || user.pokemons.length === 0) {
             res.status(400).send("Geen pokemon beschikbaar.");
             return;
@@ -203,7 +207,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
 
 
 
-        
+
         if (action === 'catch') {
             user.catchAttempts[pokemonId]--;
             const catchSuccess = attemptCatch(user, targetPokemon);
@@ -237,7 +241,7 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
             await removePokemon(user, pokemonId);
             req.session.user = user;
             req.session.save();
-           
+
             res.redirect("/");
         }
         else {
@@ -254,13 +258,13 @@ app.post('/catcher/:id', secureMiddleware, async (req, res) => {
 });
 function attemptCatch(user: User, targetPokemon: any): boolean {
     if (!user.pokemons) {
-       
+
         return false;
     }
 
     const userActivePokemon = user.pokemons.find(p => Number(p.id) === user.activepokemon);
     if (!userActivePokemon) {
-       
+
         return false;
     }
 

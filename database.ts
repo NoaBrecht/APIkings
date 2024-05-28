@@ -21,40 +21,6 @@ async function exit() {
 }
 
 async function seed() {
-    const users: User[] = [
-        {
-            username: "John Doe",
-            email: "John.Doe@gmail.com",
-            password: "123",
-            activepokemon: 2,
-            pokemons: [
-                { id: 1, nickname: "", attack: 0, defense: 0 },
-                { id: 2, nickname: "Big chungus", attack: 0, defense: 0 },
-            ],
-            catchAttempts: {}
-        },
-        {
-            username: "Jane Doe",
-            email: "Jane@gmail.com",
-            password: "321",
-            activepokemon: 25,
-            pokemons: [
-                { id: 1, nickname: "", attack: 0, defense: 0 },
-                { id: 2, nickname: "Foemp", attack: 0, defense: 0 },
-                { id: 25, nickname: "", attack: 0, defense: 0 },
-                { id: 65, nickname: "Bacon", attack: 5, defense: 10 }
-            ],
-            catchAttempts: {}
-        }
-    ];
-    if (await userCollection.countDocuments() === 0) {
-        for (let user of users) {
-            if (user.password)
-                user.password = await bcrypt.hash(user.password, saltRounds)
-        }
-        console.log('Seeding database with users');
-        await userCollection.insertMany(users);
-    }
     if (await PokemonCollection.countDocuments() === 0) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1000`);
         if (response.status === 404) throw new Error('Not found');
