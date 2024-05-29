@@ -28,7 +28,7 @@
               } else{%>text-danger<%}%>">
                 <%= pokemon1.stats[0].stat.name %>: <%= pokemon1.stats[0].base_stat %>
               </h3>
-              <h3 class="<% if (pokemon1.stats[1].base_stat > pokemon2.stats[0].base_stat) {%>
+              <h3 class="<% if (pokemon1.stats[1].base_stat > pokemon2.stats[1].base_stat) {%>
                               text-success<%
                             } else{%>text-danger<%}%>">
                 <%= pokemon1.stats[1].stat.name %>: <%= pokemon1.stats[1].base_stat%>
@@ -67,7 +67,7 @@
                             } else{%>text-danger<%}%>">
                 <%= pokemon2.stats[0].stat.name %>: <%= pokemon2.stats[0].base_stat %>
               </h3>
-              <h3 class="<% if (pokemon1.stats[1].base_stat < pokemon2.stats[0].base_stat) {%>
+              <h3 class="<% if (pokemon1.stats[1].base_stat < pokemon2.stats[1].base_stat) {%>
                                             text-success<%
                                           } else{%>text-danger<%}%>">
                 <%= pokemon2.stats[1].stat.name %>: <%= pokemon2.stats[1].base_stat%>
