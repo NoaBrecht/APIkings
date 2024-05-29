@@ -595,7 +595,10 @@ app.get("/battler", secureMiddleware, async (req, res) => {
             id = userPokemonsWithNames[0].id;
         }
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 404) {
+            res.redirect("/battler");
+            return;
+        }
         if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         const pokemon = await response.json();
@@ -607,7 +610,10 @@ app.get("/battler", secureMiddleware, async (req, res) => {
         });
         let randomNumber = Math.floor(Math.random() * 1025) + 1;
         const response2 = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`);
-        if (response2.status === 404) throw new Error('Not found');
+        if (response2.status === 404) {
+            res.redirect("/battler");
+            return;
+        }
         if (response2.status === 500) throw new Error('Internal server error');
         if (response2.status === 400) throw new Error('Bad request');
         const enemy = await response2.json();
@@ -638,7 +644,10 @@ app.post("/battler", secureMiddleware, async (req, res) => {
     let myPokemonId: string = req.body.pokemon;
     let enemyPokemonName: string = req.body.enemy.toLowerCase();
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${myPokemonId}`);
-    if (response.status === 404) throw new Error('Not found');
+    if (response.status === 404) {
+        res.redirect("/battler");
+        return;
+    }
     if (response.status === 500) throw new Error('Internal server error');
     if (response.status === 400) throw new Error('Bad request');
     const pokemon = await response.json();
@@ -688,14 +697,19 @@ app.get("/vergelijken", secureMiddleware, async (req, res) => {
         let pokemon1Name = req.query.pokemon1 || user?.activepokemon || "pikachu";
         pokemon1Name = pokemon1Name.toString().toLowerCase();
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Name}`);
-        if (response.status === 404) throw new Error('Not found');
-        if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 404) {
+            res.redirect("/vergelijken");
+            return;
+        } if (response.status === 500) throw new Error('Internal server error');
         if (response.status === 400) throw new Error('Bad request');
         const pokemon1 = await response.json();
         let pokemon2Name = req.query.pokemon2 || "ivysaur";
         pokemon2Name = pokemon2Name.toString().toLowerCase();
         const response2 = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon2Name}`);
-        if (response2.status === 404) throw new Error('Not found');
+        if (response2.status === 404) {
+            res.redirect("/vergelijken");
+            return;
+        }
         if (response2.status === 500) throw new Error('Internal server error');
         if (response2.status === 400) throw new Error('Bad request');
         const pokemon2 = await response2.json();
